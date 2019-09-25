@@ -1,0 +1,1 @@
+/usr/bin/c++   -W -Wall -fopenmp  -rdynamic CMakeFiles/cache.dir/test2.cpp.o  -o cache stxxl/lib/libstxxl_debug.a -lpthread 
