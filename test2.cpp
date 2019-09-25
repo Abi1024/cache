@@ -1,12 +1,12 @@
 #include <iostream>
-#include <stxxl>
-using namespace std;
+#include <stxxl/vector>
 const int B = 2;
 
 #define TYPE int
+typedef stxxl::VECTOR_GENERATOR<TYPE>::result vector_type;
+typedef stxxl::vector<TYPE>::iterator itr;
 
-
-void conv_RM_2_ZM_RM( TYPE *x, TYPE *xo, int n, int no )
+void conv_RM_2_ZM_RM( itr x, itr xo, int n, int no )
 {
 	if ( n <= B )
 	{
@@ -36,7 +36,7 @@ void conv_RM_2_ZM_RM( TYPE *x, TYPE *xo, int n, int no )
 }
 
 
-void conv_ZM_RM_2_RM( TYPE *x, TYPE *xo, int n, int no )
+void conv_ZM_RM_2_RM( itr x, itr xo, int n, int no )
 {
 	if ( n <= B )
 	{
@@ -64,13 +64,13 @@ void conv_ZM_RM_2_RM( TYPE *x, TYPE *xo, int n, int no )
 	}
 }
 
-void mm( TYPE *x, TYPE *u, TYPE *v, TYPE* y, int n0, int n)
+void mm( itr x, itr u, itr v, itr y, int n0, int n)
 {
 	if ( n <= B )
 	{
 		for ( int i = 0; i < n; i++ )
 		{
-			TYPE *vv = v;
+			itr vv = v;
 			for ( int j = 0; j < n; j++ )
 			{
 				TYPE t = 0;
@@ -96,7 +96,7 @@ void mm( TYPE *x, TYPE *u, TYPE *v, TYPE* y, int n0, int n)
 		int m22 = m21 + nn2;
 
     int n2 = n0;
-    TYPE* y2 = y;
+    itr y2 = y;
     while (n2 > n){
       y2 += n2*n2;
       n2 >>= 1;
@@ -119,7 +119,7 @@ void mm( TYPE *x, TYPE *u, TYPE *v, TYPE* y, int n0, int n)
 	}
 }
 
-void mm_root(TYPE *x, TYPE *u, TYPE* v, int n){
+void mm_root(itr x, itr u, itr v, int n){
   int extra_memory = 0;
   int n2 = n;
   while (n2 > B){
@@ -127,21 +127,21 @@ void mm_root(TYPE *x, TYPE *u, TYPE* v, int n){
     n2 >>= 1;
   }
   //cout << "extra_memory " << extra_memory << endl;
-  TYPE auxiliary_array[extra_memory];
+  vector_type auxiliary_array;
   for (int i = 0; i < extra_memory; i++){
-    auxiliary_array[i] = 0;
+    auxiliary_array.push_back(0);
   }
-  mm(x, u, v, auxiliary_array, n, n);
+  mm(x, u, v, auxiliary_array.begin(), n, n);
 }
 
 
-void conv_RM_2_ZM_CM( TYPE *x, TYPE *xo, int n, int no )
+void conv_RM_2_ZM_CM( itr x, itr xo, int n, int no )
 {
 	if ( n <= B )
 	{
 		for ( int i = 0; i < n; i++ )
 		{
-			TYPE *xx = x + i;
+			itr xx = x + i;
 
 			for ( int j = 0; j < n; j++ )
 			{
@@ -170,38 +170,57 @@ void conv_RM_2_ZM_CM( TYPE *x, TYPE *xo, int n, int no )
 }
 
 int main(){
-  const int n = 16;
-  TYPE array[n*n];
-  //cout << "First input array\n";
+  const int n = 4;
+  vector_type array;
+  std::cout << "First input array\n";
+	for (int i = 0; i < n*n; i++)
+	{
+		array.push_back(i);
+		std::cout << array[i] << " ";
+	}
+  std::cout << std::endl;
+
+  vector_type input_1;
+	for (int i = 0; i < n*n; i++)
+	{
+		input_1.push_back(0);
+	}
+  conv_RM_2_ZM_RM(input_1.begin(),array.begin(),n,n);
+
+	/*std::cout << "First input array in Z-MORTON\n";
+	for (int i = 0; i < n*n; i++)
+	{
+		std::cout << input_1[i] << " ";
+	}
+	std::cout << std::endl;
+	*/
+
+	vector_type array2;
+  std::cout << "Second input array\n";
+	for (int i = 0; i < n*n; i++)
+	{
+		array2.push_back(n*n-i);
+		std::cout << array2[i] << " ";
+	}
+  std::cout << std::endl;
+
+  vector_type input_2;
+	for (int i = 0; i < n*n; i++)
+	{
+		input_2.push_back(0);
+	}
+  conv_RM_2_ZM_CM(input_2.begin(),array2.begin(),n,n);
+
+  vector_type result;
   for (int i = 0 ; i < n*n; i++){
-    array[i] = i;
-    //cout << array[i] << " ";
+    result.push_back(0);
   }
-  //cout << endl;
 
-  TYPE input_1[n*n];
-  conv_RM_2_ZM_RM(input_1,array,n,n);
-
-  //cout << "Second input array\n";
+  mm_root(result.begin(),input_1.begin(),input_2.begin(),n);
+  std::cout << "Result array\n";
   for (int i = 0 ; i < n*n; i++){
-    array[i] = n*n-i;
-    //cout << array[i] << " ";
+    std::cout << result[i] << " ";
   }
-  //cout << endl;
-
-  TYPE input_2[n*n];
-  conv_RM_2_ZM_CM(input_2,array,n,n);
-
-  TYPE result[n*n];
-  for (int i = 0 ; i < n*n; i++){
-    result[i] = 0;
-  }
-
-  mm_root(result,input_1,input_2,n);
-  cout << "Result array\n";
-  for (int i = 0 ; i < n*n; i++){
-    cout << result[i] << " ";
-  }
-  cout << endl;
+  std::cout << std::endl;
   return 0;
 }
