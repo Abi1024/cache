@@ -3,11 +3,11 @@
 const int B = 2;
 
 #define TYPE int
-typedef stxxl::VECTOR_GENERATOR<TYPE>::result vector_type;
-typedef stxxl::vector<TYPE>::iterator itr;
+const int CACHE_SIZE = 64;
+typedef stxxl::VECTOR_GENERATOR<TYPE,4,CACHE_SIZE >::result vector_type;
+typedef stxxl::vector<TYPE,4,stxxl::lru_pager<CACHE_SIZE>>::iterator itr;
 
-void conv_RM_2_ZM_RM( itr x, itr xo, int n, int no )
-{
+void conv_RM_2_ZM_RM( itr x, itr xo, int n, int no ){
 	if ( n <= B )
 	{
 		for ( int i = 0; i < n; i++ )
@@ -170,18 +170,18 @@ void conv_RM_2_ZM_CM( itr x, itr xo, int n, int no )
 }
 
 int main(){
-  const int n = 4;
+  const stxxl::uint64 n = 1000;
   vector_type array;
-  std::cout << "First input array\n";
-	for (int i = 0; i < n*n; i++)
+  //std::cout << "First input array\n";
+	for (stxxl::uint64 i = 0; i < n*n; i++)
 	{
 		array.push_back(i);
-		std::cout << array[i] << " ";
+		//std::cout << array[i] << " ";
 	}
-  std::cout << std::endl;
+  //std::cout << std::endl;
 
   vector_type input_1;
-	for (int i = 0; i < n*n; i++)
+	for (stxxl::uint64 i = 0; i < n*n; i++)
 	{
 		input_1.push_back(0);
 	}
@@ -196,31 +196,31 @@ int main(){
 	*/
 
 	vector_type array2;
-  std::cout << "Second input array\n";
-	for (int i = 0; i < n*n; i++)
+  //std::cout << "Second input array\n";
+	for (stxxl::uint64 i = 0; i < n*n; i++)
 	{
 		array2.push_back(n*n-i);
-		std::cout << array2[i] << " ";
+		//std::cout << array2[i] << " ";
 	}
-  std::cout << std::endl;
+  //std::cout << std::endl;
 
   vector_type input_2;
-	for (int i = 0; i < n*n; i++)
+	for (stxxl::uint64 i = 0; i < n*n; i++)
 	{
 		input_2.push_back(0);
 	}
   conv_RM_2_ZM_CM(input_2.begin(),array2.begin(),n,n);
 
   vector_type result;
-  for (int i = 0 ; i < n*n; i++){
+  for (stxxl::uint64 i = 0 ; i < n*n; i++){
     result.push_back(0);
   }
 
   mm_root(result.begin(),input_1.begin(),input_2.begin(),n);
-  std::cout << "Result array\n";
-  for (int i = 0 ; i < n*n; i++){
-    std::cout << result[i] << " ";
+  //std::cout << "Result array\n";
+  for (stxxl::uint64 i = 0 ; i < n*n; i++){
+    //std::cout << result[i] << " ";
   }
-  std::cout << std::endl;
+  //std::cout << std::endl;
   return 0;
 }
