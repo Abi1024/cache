@@ -1,11 +1,12 @@
 #include <iostream>
 #include <stxxl/vector>
-const int B = 2;
+const int B = 64;
 
 #define TYPE int
-const int CACHE_SIZE = 64;
-typedef stxxl::VECTOR_GENERATOR<TYPE,4,CACHE_SIZE >::result vector_type;
-typedef stxxl::vector<TYPE,4,stxxl::lru_pager<CACHE_SIZE>>::iterator itr;
+const int CACHE = 8;
+const stxxl::uint64 n = 4000;
+typedef stxxl::VECTOR_GENERATOR<TYPE,4,CACHE>::result vector_type;
+typedef stxxl::vector<TYPE, 4, stxxl::lru_pager<CACHE> >::iterator itr;
 
 void conv_RM_2_ZM_RM( itr x, itr xo, int n, int no ){
 	if ( n <= B )
@@ -34,7 +35,6 @@ void conv_RM_2_ZM_RM( itr x, itr xo, int n, int no ){
 		conv_RM_2_ZM_RM( x+m22, xo + nn * no + nn, nn, no );
 	}
 }
-
 
 void conv_ZM_RM_2_RM( itr x, itr xo, int n, int no )
 {
@@ -170,8 +170,8 @@ void conv_RM_2_ZM_CM( itr x, itr xo, int n, int no )
 }
 
 int main(){
-  const stxxl::uint64 n = 1000;
   vector_type array;
+		std::cout << "running non cache_adaptive matrix multiply \n";
   //std::cout << "First input array\n";
 	for (stxxl::uint64 i = 0; i < n*n; i++)
 	{
@@ -186,7 +186,7 @@ int main(){
 		input_1.push_back(0);
 	}
   conv_RM_2_ZM_RM(input_1.begin(),array.begin(),n,n);
-
+	std::cout << "done converting first matrix\n";
 	/*std::cout << "First input array in Z-MORTON\n";
 	for (int i = 0; i < n*n; i++)
 	{
@@ -210,17 +210,18 @@ int main(){
 		input_2.push_back(0);
 	}
   conv_RM_2_ZM_CM(input_2.begin(),array2.begin(),n,n);
-
+	std::cout << "done converting second matrix\n";
   vector_type result;
   for (stxxl::uint64 i = 0 ; i < n*n; i++){
     result.push_back(0);
   }
 
   mm_root(result.begin(),input_1.begin(),input_2.begin(),n);
+	std::cout << "done multiplying matrix\n";
   //std::cout << "Result array\n";
-  for (stxxl::uint64 i = 0 ; i < n*n; i++){
-    //std::cout << result[i] << " ";
-  }
+  /*for (stxxl::uint64 i = 0 ; i < n*n; i++){
+    std::cout << result[i] << " ";
+  }*/
   //std::cout << std::endl;
   return 0;
 }

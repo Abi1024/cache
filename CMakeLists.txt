@@ -2,6 +2,7 @@
 
 project(cache)
 cmake_minimum_required(VERSION 2.8)
+option(MyOption "MyOption" OFF)
 
 # disallow in-source builds
 if("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}")
@@ -21,5 +22,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STXXL_CXX_FLAGS}")
 include_directories(${STXXL_INCLUDE_DIRS})
 
 # build a program and link it with STXXL.
-add_executable(cache test2.cpp)
+if (MyOption)
+  add_executable(cache cache_adaptive.cpp)
+else()
+  add_executable(cache non_cache_adaptive.cpp)
+endif()
+
+
 target_link_libraries(cache ${STXXL_LIBRARIES})

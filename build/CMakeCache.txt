@@ -257,6 +257,9 @@ MEMORYCHECK_COMMAND:FILEPATH=/usr/bin/valgrind
 //File that contains suppressions for the memory checker
 MEMORYCHECK_SUPPRESSIONS_FILE:FILEPATH=
 
+//MyOption
+MyOption:BOOL=OFF
+
 //Build without C++11 flags
 NO_CXX11:BOOL=OFF
 
