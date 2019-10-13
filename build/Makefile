@@ -607,32 +607,32 @@ test1/fast:
 	$(MAKE) -f stxxl/local/CMakeFiles/test1.dir/build.make stxxl/local/CMakeFiles/test1.dir/build
 .PHONY : test1/fast
 
-non_cache_adaptive.o: non_cache_adaptive.cpp.o
+test.o: test.cpp.o
 
-.PHONY : non_cache_adaptive.o
+.PHONY : test.o
 
 # target to build an object file
-non_cache_adaptive.cpp.o:
-	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/non_cache_adaptive.cpp.o
-.PHONY : non_cache_adaptive.cpp.o
+test.cpp.o:
+	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/test.cpp.o
+.PHONY : test.cpp.o
 
-non_cache_adaptive.i: non_cache_adaptive.cpp.i
+test.i: test.cpp.i
 
-.PHONY : non_cache_adaptive.i
+.PHONY : test.i
 
 # target to preprocess a source file
-non_cache_adaptive.cpp.i:
-	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/non_cache_adaptive.cpp.i
-.PHONY : non_cache_adaptive.cpp.i
+test.cpp.i:
+	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/test.cpp.i
+.PHONY : test.cpp.i
 
-non_cache_adaptive.s: non_cache_adaptive.cpp.s
+test.s: test.cpp.s
 
-.PHONY : non_cache_adaptive.s
+.PHONY : test.s
 
 # target to generate assembly for a file
-non_cache_adaptive.cpp.s:
-	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/non_cache_adaptive.cpp.s
-.PHONY : non_cache_adaptive.cpp.s
+test.cpp.s:
+	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/test.cpp.s
+.PHONY : test.cpp.s
 
 # Help Target
 help:
@@ -681,9 +681,9 @@ help:
 	@echo "... stxxl_tool"
 	@echo "... test2"
 	@echo "... test1"
-	@echo "... non_cache_adaptive.o"
-	@echo "... non_cache_adaptive.i"
-	@echo "... non_cache_adaptive.s"
+	@echo "... test.o"
+	@echo "... test.i"
+	@echo "... test.s"
 .PHONY : help
 
 
