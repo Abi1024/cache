@@ -1,0 +1,66 @@
+#15MB of memory
+echo 15728640  > /var/cgroups/cache-test/memory.limit_in_bytes
+
+#5MB of memory
+echo 5242880  > /var/cgroups/cache-test/memory.limit_in_bytes
+
+#6MB of memory
+echo 6291456 > /var/cgroups/cache-test/memory.limit_in_bytes
+
+#600MB of memory
+echo 629145600 > /var/cgroups/cache-test/memory.limit_in_bytes
+
+
+cmake . && make && cgexec -g memory:cache-test ./cache
+
+----------------------------------------------
+These notes contain my findings when setting up stxxl and cgroups to work together. I am making these notes as a future reference for a time when
+I may not remember the things which I am learning now.
+
+Firstly, if one creates a STXXL vector as follows and runs with cgroups, limiting to 5MB of memory:
+
+const int CACHE = 1;
+const stxxl::uint64 n = 16000;
+typedef stxxl::VECTOR_GENERATOR<TYPE,1,CACHE>::result vector_type;
+vector_type array;
+for (stxxl::uint64 i = 0; i < n*n; i++)
+{
+  array.push_back(i);
+}
+
+It took me about 22 seconds to create this vector. The total allocated memory was 978MB.
+My disk operated at about a bandwidth of 40MB/s while setting up this vector. Only disk writes are performed.
+This vector contains 256 million integers. Therefore the size of each integer is approximately 4 bytes.
+A total of 488 blocks were written to disk (each block is 2MB).
+
+------------------------------------------------------
+Let's consider what happens if we changed the following lines and stop using cgroups:
+
+const int CACHE = 128;
+const stxxl::uint64 n = 16000;
+typedef stxxl::VECTOR_GENERATOR<TYPE,4,CACHE>::result vector_type;
+typedef stxxl::vector<TYPE, 4, stxxl::lru_pager<CACHE> >::iterator itr;
+
+This took about 18 seconds to create. Although 978MB was allocated in total, nothing was written to disk. This is because the memory available
+is enough to store the whole vector.
+---------------------------------------
+For the case below (without cgroup):
+const int CACHE = 50;
+const stxxl::uint64 n = 16000;
+typedef stxxl::VECTOR_GENERATOR<TYPE,1,CACHE>::result vector_type;
+typedef stxxl::vector<TYPE, 1, stxxl::lru_pager<CACHE> >::iterator itr;
+
+The total size needed to store the vector is 978MB. However, the vector is designed to hold only 200MB.
+So 778MB is written to disk (389 blocks). It took 21 seconds to run.
+-----------------------------------------
+Same as above, but with cgroup (5MB):
+All statistics were the same as above, but this one took 61 seconds to run.
+--------------------------------------
+Cgroup (6MB), cache size = 200MB, size of data = 978M, data dimensions =  (16000x16000),
+but actual time needed was 58s
+-----------------
+Cgroup (6MB), cache size = 6MB, pages = 1, size of data = 978M, data dimensions =  (16000x16000),
+but actual time needed was 52s
+----------------
+It takes about 14 seconds to read 550MB of memory. 39MB/s is the average disk bandwidth.
+-----------------

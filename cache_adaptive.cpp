@@ -3,7 +3,7 @@
 const int B = 64;
 
 #define TYPE int
-const int CACHE = 8;
+const int CACHE = 2;
 const stxxl::uint64 n = 1000;
 typedef stxxl::VECTOR_GENERATOR<TYPE,4,CACHE>::result vector_type;
 typedef stxxl::vector<TYPE, 4, stxxl::lru_pager<CACHE> >::iterator itr;
@@ -141,7 +141,7 @@ void conv_RM_2_ZM_CM( itr x, itr xo, int n, int no )
 
 int main(){
   vector_type array;
-	std::cout << "running cache_adaptive matrix multiply \n";
+	std::cout << "running cache_adaptive matrix multiply with matrices of size: " << (int)n << "x" << (int)n << "\n";
   //std::cout << "First input array\n";
 	for (stxxl::uint64 i = 0; i < n*n; i++)
 	{
@@ -186,8 +186,22 @@ int main(){
     result.push_back(0);
   }
 
-  mm_root(result.begin(),input_1.begin(),input_2.begin(),n);
+	stxxl::timer start_p1;
+	start_p1.start();
+
+	stxxl::stats* Stats = stxxl::stats::get_instance();
+	stxxl::stats_data stats_begin(*Stats);
+		stxxl::block_manager * bm = stxxl::block_manager::get_instance();
+
+	mm(result.begin(),input_1.begin(),input_2.begin(),n);
+
+	start_p1.stop();
+
+
 	std::cout << "done multiplying matrix\n";
+	STXXL_MSG("[LOG] IO Statistics for sorting: "<<(stxxl::stats_data(*Stats) - stats_begin));
+	STXXL_MSG("[LOG] Max MB allocated:  " << bm->get_maximum_allocation()/(1024*1024));
+	std::cout << "[LOG] Total multiplication time: " <<(start_p1.mseconds()/1000) << "\n";
   //std::cout << "Result array\n";
   /*for (stxxl::uint64 i = 0 ; i < n*n; i++){
     std::cout << result[i] << " ";
