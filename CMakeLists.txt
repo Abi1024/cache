@@ -22,8 +22,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STXXL_CXX_FLAGS}")
 include_directories(${STXXL_INCLUDE_DIRS})
 
 # build a program and link it with STXXL.
-#add_executable(cache cache_adaptive.cpp)
-add_executable(cache non_cache_adaptive.cpp)
+add_executable(cache cache_adaptive.cpp)
+#add_executable(cache non_cache_adaptive.cpp)
 #add_executable(cache test.cpp)
 
 

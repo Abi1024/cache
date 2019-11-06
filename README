@@ -1,3 +1,5 @@
+CACHE = 4,1,1 allows memory of 24MB.
+-------------------
 #15MB of memory
 echo 15728640  > /var/cgroups/cache-test/memory.limit_in_bytes
 
@@ -64,3 +66,9 @@ but actual time needed was 52s
 ----------------
 It takes about 14 seconds to read 550MB of memory. 39MB/s is the average disk bandwidth.
 -----------------
+When setting the parameters such as below, the memory specified is allocated is for EACH vector.
+const int CACHE = 50;
+const stxxl::uint64 n = 16000;
+typedef stxxl::VECTOR_GENERATOR<TYPE,1,CACHE>::result vector_type;
+typedef stxxl::vector<TYPE, 1, stxxl::lru_pager<CACHE> >::iterator itr;
+-----------

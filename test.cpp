@@ -3,8 +3,8 @@
 const int B = 64;
 
 #define TYPE int
-const int CACHE = 1;
-const stxxl::uint64 n = 1000;
+const int CACHE = 56;
+const stxxl::uint64 n = 16000;
 typedef stxxl::VECTOR_GENERATOR<TYPE,4,CACHE>::result vector_type;
 typedef stxxl::vector<TYPE, 4, stxxl::lru_pager<CACHE> >::iterator itr;
 
@@ -17,23 +17,26 @@ int main(){
 
 	stxxl::stats* Stats = stxxl::stats::get_instance();
 	stxxl::stats_data stats_begin(*Stats);
-		stxxl::block_manager * bm = stxxl::block_manager::get_instance();
+	stxxl::block_manager * bm = stxxl::block_manager::get_instance();
 
     for (stxxl::uint64 i = 0; i < n*n; i++)
     {
       array.push_back(i);
       //array2.push_back(i);
     }
-
+    std::cout << "done setting up array\n";
     for (stxxl::uint64 i = 0; i < n*n; i++)
     {
       array[i] = 1;
     }
 
+    /*
     for (stxxl::uint64 i = 0; i < n*n; i++)
     {
       array[i] = 2;
     }
+
+    */
 
 	  start_p1.stop();
 
