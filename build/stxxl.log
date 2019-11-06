@@ -1,3 +1,74 @@
 [STXXL-MSG] STXXL v1.4.99 (prerelease/Debug) (git b9e44f0ecba7d7111fbb33f3330c3e53f2b75236) + gnu parallel(20181206)
 [STXXL-MSG] Disk '/var/tmp/stxxl' is allocated, space: 95367 MiB, I/O implementation: syscall queue=0 devid=0 unlink_on_open
-[STXXL-MSG] [LOG] Max MB allocated:  20
+[STXXL-MSG] [LOG] Cumulative IO Statistics for first conversion: STXXL I/O statistics
+ total number of reads                      : 1185 (1.157 Ki) 
+ average block size (read)                  : 4096 (4.000 KiB) 
+ number of bytes read from disks            : 4853760 (4.629 MiB) 
+ time spent in serving all read requests    : 0.513316 s @ 9.01765 MiB/s
+ time spent in reading (parallel read time) : 0.513316 s @ 9.01765 MiB/s
+ total number of writes                     : 1585 (1.548 Ki) 
+ average block size (write)                 : 4096 (4.000 KiB) 
+ number of bytes written to disks           : 6492160 (6.191 MiB) 
+ time spent in serving all write requests   : 0.226166 s @ 27.3755 MiB/s
+ time spent in writing (parallel write time): 0.226166 s @ 27.3755 MiB/s
+ time spent in I/O (parallel I/O time)      : 0.739482 s @ 14.6323 MiB/s
+ I/O wait time                              : 0.755756 s
+ I/O wait4read time                         : 0.520499 s
+ I/O wait4write time                        : 0.235257 s
+ Time since the last reset                  : 0.952871 s
+
+[STXXL-MSG] [LOG] Max KB allocated for first conversion:  1960
+[STXXL-MSG] [LOG] Cumulative IO Statistics for second conversion: STXXL I/O statistics
+ total number of reads                      : 2370 (2.314 Ki) 
+ average block size (read)                  : 4096 (4.000 KiB) 
+ number of bytes read from disks            : 9707520 (9.258 MiB) 
+ time spent in serving all read requests    : 1.07056 s @ 8.64761 MiB/s
+ time spent in reading (parallel read time) : 1.07056 s @ 8.64761 MiB/s
+ total number of writes                     : 3170 (3.096 Ki) 
+ average block size (write)                 : 4096 (4.000 KiB) 
+ number of bytes written to disks           : 12984320 (12.383 MiB) 
+ time spent in serving all write requests   : 0.654114 s @ 18.9307 MiB/s
+ time spent in writing (parallel write time): 0.654114 s @ 18.9307 MiB/s
+ time spent in I/O (parallel I/O time)      : 1.72468 s @ 12.5476 MiB/s
+ I/O wait time                              : 1.75683 s
+ I/O wait4read time                         : 1.08485 s
+ I/O wait4write time                        : 0.671985 s
+ Time since the last reset                  : 2.1759 s
+
+[STXXL-MSG] [LOG] Max KB allocated for second conversion:  3920
+[STXXL-MSG] [LOG] Cumulative IO Statistics for setting up result matrix: STXXL I/O statistics
+ total number of reads                      : 2370 (2.314 Ki) 
+ average block size (read)                  : 4096 (4.000 KiB) 
+ number of bytes read from disks            : 9707520 (9.258 MiB) 
+ time spent in serving all read requests    : 1.07056 s @ 8.64761 MiB/s
+ time spent in reading (parallel read time) : 1.07056 s @ 8.64761 MiB/s
+ total number of writes                     : 3370 (3.291 Ki) 
+ average block size (write)                 : 4096 (4.000 KiB) 
+ number of bytes written to disks           : 13803520 (13.164 MiB) 
+ time spent in serving all write requests   : 0.868662 s @ 15.1544 MiB/s
+ time spent in writing (parallel write time): 0.868662 s @ 15.1544 MiB/s
+ time spent in I/O (parallel I/O time)      : 1.93922 s @ 11.5623 MiB/s
+ I/O wait time                              : 1.97267 s
+ I/O wait4read time                         : 1.08485 s
+ I/O wait4write time                        : 0.887819 s
+ Time since the last reset                  : 2.44722 s
+
+[STXXL-MSG] [LOG] Max KB allocated for setting up result matrix:  4900
+[STXXL-MSG] [LOG] Cumulative IO Statistics for multiplying: STXXL I/O statistics
+ total number of reads                      : 4370 (4.268 Ki) 
+ average block size (read)                  : 4096 (4.000 KiB) 
+ number of bytes read from disks            : 17899520 (17.070 MiB) 
+ time spent in serving all read requests    : 2.12221 s @ 8.04365 MiB/s
+ time spent in reading (parallel read time) : 2.12221 s @ 8.04365 MiB/s
+ total number of writes                     : 5370 (5.244 Ki) 
+ average block size (write)                 : 4096 (4.000 KiB) 
+ number of bytes written to disks           : 21995520 (20.977 MiB) 
+ time spent in serving all write requests   : 1.48477 s @ 14.1279 MiB/s
+ time spent in writing (parallel write time): 1.48477 s @ 14.1279 MiB/s
+ time spent in I/O (parallel I/O time)      : 3.60698 s @ 10.5481 MiB/s
+ I/O wait time                              : 3.66587 s
+ I/O wait4read time                         : 2.14821 s
+ I/O wait4write time                        : 1.51766 s
+ Time since the last reset                  : 19.6637 s
+
+[STXXL-MSG] [LOG] Max KB allocated:  4900
