@@ -1,14 +1,25 @@
 #include <iostream>
 #include <stxxl/vector>
+#include <string>
+#include <stdlib.h>
+#include <unistd.h>
 const int B = 64;
 
 #define TYPE int
-const int CACHE = 1;
-const stxxl::uint64 n = 16;
-typedef stxxl::VECTOR_GENERATOR<TYPE,1,CACHE>::result vector_type;
-typedef stxxl::vector<TYPE, 1, stxxl::lru_pager<CACHE> >::iterator itr;
+const int CACHE = 4; //pages per cache_adaptive
+const int PAGE_SIZE = 8; //blocks per page
+const int BLOCK_SIZE_IN_BYTES = 4096; //block size in bytes
+const stxxl::uint64 length = 1024;
+typedef stxxl::VECTOR_GENERATOR<TYPE,PAGE_SIZE,CACHE,BLOCK_SIZE_IN_BYTES>::result vector_type;
+typedef stxxl::vector<TYPE, PAGE_SIZE, stxxl::lru_pager<CACHE>,BLOCK_SIZE_IN_BYTES>::iterator itr;
 
-void conv_RM_2_ZM_RM( itr x, itr xo, int n, int no ){
+const int CONV_CACHE = 128; //pages per cache_adaptive
+const int CONV_PAGE_SIZE = 4; //blocks per page
+const int CONV_BLOCK_SIZE_IN_BYTES = 4194304; //block size in bytes
+typedef stxxl::VECTOR_GENERATOR<TYPE,CONV_PAGE_SIZE,CONV_CACHE,CONV_BLOCK_SIZE_IN_BYTES>::result conv_vector_type;
+typedef stxxl::vector<TYPE, CONV_PAGE_SIZE, stxxl::lru_pager<CONV_CACHE>,CONV_BLOCK_SIZE_IN_BYTES>::iterator conv_itr;
+
+void conv_RM_2_ZM_RM( conv_itr x, conv_itr xo, int n, int no ){
 	if ( n <= B )
 	{
 		for ( int i = 0; i < n; i++ )
@@ -86,6 +97,16 @@ void mm( itr x, itr u, itr v, itr y, int n0, int n)
 	}
 	else
 	{
+		std::string depth_trace = "";
+		int n3 = length;
+		int limit = 0;
+		while (n3 > n || n3 == 1){
+			n3 /= 2;
+			depth_trace += " ";
+			limit++;
+		}
+		std::cout << depth_trace << "Running matrix multiply with depth: " << limit;
+		std::cout << " value of n: " << n << std::endl;
     //cout << "In recursive call of size: " << n << endl;
 		int nn = ( n >> 1 );
 		int nn2 = nn * nn;
@@ -119,29 +140,31 @@ void mm( itr x, itr u, itr v, itr y, int n0, int n)
 	}
 }
 
-void mm_root(itr x, itr u, itr v, int n){
+void mm_root(vector_type& array, 	stxxl::block_manager * bm, itr x, itr u, itr v, int n){
+	std::cout << "Start of root call\n";
   int extra_memory = 0;
   int n2 = n;
   while (n2 > B){
     extra_memory += n2*n2;
     n2 >>= 1;
   }
-  //cout << "extra_memory " << extra_memory << endl;
-  vector_type auxiliary_array;
+  std::cout << "extra_memory " << extra_memory << "\n";
   for (int i = 0; i < extra_memory; i++){
-    auxiliary_array.push_back(0);
+    array.push_back(0);
   }
-  mm(x, u, v, auxiliary_array.begin(), n, n);
+	std::cout << "About to multiply\n";
+		STXXL_MSG("[LOG] Max KB allocated:  " << bm->get_maximum_allocation()/(1024));
+  mm(x, u, v, x+n*n, n, n);
 }
 
 
-void conv_RM_2_ZM_CM( itr x, itr xo, int n, int no )
+void conv_RM_2_ZM_CM( conv_itr x, conv_itr xo, int n, int no )
 {
 	if ( n <= B )
 	{
 		for ( int i = 0; i < n; i++ )
 		{
-			itr xx = x + i;
+			conv_itr xx = x + i;
 
 			for ( int j = 0; j < n; j++ )
 			{
@@ -261,7 +284,7 @@ int main(){
 	stxxl::timer start_p1;
 	start_p1.start();
 
-	mm(array.begin()+2*length*length,array.begin(),array.begin()+length*length,length);
+	mm_root(array,bm,array.begin()+2*length*length,array.begin(),array.begin()+length*length,length);
 
 	start_p1.stop();
 
@@ -280,6 +303,6 @@ int main(){
     std::cout << array[i] << " ";
   }
   std::cout << std::endl;
-	*/
+*/
   return 0;
 }

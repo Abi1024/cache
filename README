@@ -77,3 +77,6 @@ Three ways to track I/O usage (other than stxxl):
 3) iotop -qqq -b -Paok -n 2 -d 30 | sort -n -k6 -r | head -n 20
 
 Just be careful to only count I/Os done during the matrix multiplication.
+-----------------------------------
+Interaction between PAGES_PER_CACHE,BLOCKS_PER_PAGE and BLOCK_SIZE_IN_BYTES
+------------------------------------
