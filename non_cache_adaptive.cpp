@@ -182,13 +182,11 @@ int main(){
 		//std::cout << array[i] << " ";
 	}
   //std::cout << std::endl;
-
-  vector_type input_1;
 	for (stxxl::uint64 i = 0; i < n*n; i++)
 	{
-		input_1.push_back(0);
+		array.push_back(0);
 	}
-  conv_RM_2_ZM_RM(input_1.begin(),array.begin(),n,n);
+  conv_RM_2_ZM_RM(array.begin()+n*n,array.begin(),n,n);
 	std::cout << "done converting first matrix\n";
 	/*std::cout << "First input array in Z-MORTON\n";
 	for (int i = 0; i < n*n; i++)
@@ -198,32 +196,28 @@ int main(){
 	std::cout << std::endl;
 	*/
 
-	vector_type array2;
   //std::cout << "Second input array\n";
 	for (stxxl::uint64 i = 0; i < n*n; i++)
 	{
-		array2.push_back(n*n-i);
+		array[i] = n*n-i;
 		//std::cout << array2[i] << " ";
 	}
   //std::cout << std::endl;
-
-  vector_type input_2;
 	for (stxxl::uint64 i = 0; i < n*n; i++)
 	{
-		input_2.push_back(0);
+		array.push_back(0);
 	}
-  conv_RM_2_ZM_CM(input_2.begin(),array2.begin(),n,n);
+  conv_RM_2_ZM_CM(array.begin()+2*n*n,array.begin(),n,n);
 	std::cout << "done converting second matrix\n";
-  vector_type result;
   for (stxxl::uint64 i = 0 ; i < n*n; i++){
-    result.push_back(0);
+    array[i] = 0;
   }
 
 	stxxl::timer start_p1;
 	start_p1.start();
 
 	STXXL_MSG("[LOG] Max MB allocated:  " << bm->get_maximum_allocation()/(1024*1024));
-  mm_root(result.begin(),input_1.begin(),input_2.begin(),n);
+  mm_root(array.begin(),array.begin()+n*n,array.begin()+n*n*2,n);
 
 	start_p1.stop();
 

@@ -1,13 +1,13 @@
 #include <iostream>
 #include <stxxl/vector>
 #include <string>
-const int B = 64;
+const int B = 2;
 
 #define TYPE int
 const int CACHE = 1; //pages per cache_adaptive
 const int PAGE_SIZE = 120; //blocks per page
 const int BLOCK_SIZE_IN_BYTES = 16384; //block size in bytes
-const stxxl::uint64 length = 500;
+const stxxl::uint64 length = 8;
 typedef stxxl::VECTOR_GENERATOR<TYPE,PAGE_SIZE,CACHE,BLOCK_SIZE_IN_BYTES>::result vector_type;
 typedef stxxl::vector<TYPE, PAGE_SIZE, stxxl::lru_pager<CACHE>,BLOCK_SIZE_IN_BYTES>::iterator itr;
 
@@ -158,58 +158,55 @@ int main(){
 		stxxl::block_manager * bm = stxxl::block_manager::get_instance();
   vector_type array;
 	std::cout << "running cache_adaptive matrix multiply with matrices of size: " << (int)length << "x" << (int)length << "\n";
-  //std::cout << "First input array\n";
+	/*
+  std::cout << "First input array\n";
 	for (stxxl::uint64 i = 0; i < length*length; i++)
 	{
 		array.push_back(i);
-		//std::cout << array[i] << " ";
+		std::cout << array[i] << " ";
 	}
-  //std::cout << std::endl;
+  std::cout << std::endl;
+	*/
 	stxxl::stats_data stats2(stxxl::stats_data(*Stats) - stats1);
 	std::cout << "===========================================\n";
 	STXXL_MSG("[LOG] First array (array) loaded: "<< stats2 );
 	std::cout << "===========================================\n";
 	STXXL_MSG("[LOG] Max KB allocated:  " << bm->get_maximum_allocation()/(1024));
-  vector_type input_1;
 	for (stxxl::uint64 i = 0; i < length*length; i++)
 	{
-		input_1.push_back(0);
+		array.push_back(0);
 	}
 	stxxl::stats_data stats3(stxxl::stats_data(*Stats) - stats2);
 	std::cout << "===========================================\n";
 	STXXL_MSG("[LOG] Second array (input_1) loaded: "<< stats3 );
 	std::cout << "===========================================\n";
-  conv_RM_2_ZM_RM(input_1.begin(),array.begin(),length,length);
+  conv_RM_2_ZM_RM(array.begin()+length*length,array.begin(),length,length);
 	stxxl::stats_data stats4(stxxl::stats_data(*Stats) - stats3);
 	std::cout << "===========================================\n";
 	STXXL_MSG("[LOG] First matrix conversion "<< stats4 );
 	std::cout << "===========================================\n";
 	STXXL_MSG("[LOG] Max KB allocated for first conversion:  " << bm->get_maximum_allocation()/(1024));
-	/*std::cout << "First input array in Z-MORTON\n";
-	for (int i = 0; i < n*n; i++)
-	{
-		std::cout << input_1[i] << " ";
-	}
-	std::cout << std::endl;
-	*/
-
-	vector_type array2;
-  //std::cout << "Second input array\n";
+	/*
+	std::cout << "First input array in Z-MORTON\n";
 	for (stxxl::uint64 i = 0; i < length*length; i++)
 	{
-		array2.push_back(length*length-i);
-		//std::cout << array2[i] << " ";
+		std::cout << array[i+length*length] << " ";
 	}
+	std::cout << std::endl;
+
+  std::cout << "Second input array\n";
+	for (stxxl::uint64 i = 0; i < length*length; i++){
+		array[i] = i;
+	}
+	*/
 	stxxl::stats_data stats5(stxxl::stats_data(*Stats) - stats4);
 	std::cout << "===========================================\n";
 	STXXL_MSG("[LOG] Third array (array2) loaded: "<< stats5 );
 	std::cout << "===========================================\n";
-  //std::cout << std::endl;
-
-  vector_type input_2;
+  std::cout << std::endl;
 	for (stxxl::uint64 i = 0; i < length*length; i++)
 	{
-		input_2.push_back(0);
+		array.push_back(0);
 	}
 	stxxl::stats_data stats6(stxxl::stats_data(*Stats) - stats5);
 	std::cout << "===========================================\n";
@@ -217,15 +214,14 @@ int main(){
 	std::cout << "===========================================\n";
 
 
-  conv_RM_2_ZM_CM(input_2.begin(),array2.begin(),length,length);
+  conv_RM_2_ZM_CM(array.begin()+2*length*length,array.begin(),length,length);
 	stxxl::stats_data stats7(stxxl::stats_data(*Stats) - stats6);
 	std::cout << "===========================================\n";
 	STXXL_MSG("[LOG] Second matrix conversion: "<< stats7 );
 	std::cout << "===========================================\n";
 	STXXL_MSG("[LOG] Max KB allocated for second conversion:  " << bm->get_maximum_allocation()/(1024));
-  vector_type result;
   for (stxxl::uint64 i = 0 ; i < length*length; i++){
-    result.push_back(0);
+    array[i] = 0;
   }
 	stxxl::stats_data stats8(stxxl::stats_data(*Stats) - stats7);
 	std::cout << "===========================================\n";
@@ -235,7 +231,7 @@ int main(){
 	stxxl::timer start_p1;
 	start_p1.start();
 
-	mm(result.begin(),input_1.begin(),input_2.begin(),length);
+	mm(array.begin(),array.begin()+length*length,array.begin()+2*length*length,length);
 
 	start_p1.stop();
 
@@ -246,10 +242,10 @@ int main(){
 	std::cout << "===========================================\n";
 	STXXL_MSG("[LOG] Max KB allocated:  " << bm->get_maximum_allocation()/(1024));
 	std::cout << "[LOG] Total multiplication time: " <<(start_p1.mseconds()/1000) << "\n";
-  //std::cout << "Result array\n";
-  /*for (stxxl::uint64 i = 0 ; i < n*n; i++){
-    std::cout << result[i] << " ";
-  }*/
-  //std::cout << std::endl;
+  /*std::cout << "Result array\n";
+  for (stxxl::uint64 i = 0 ; i < length*length; i++){
+    std::cout << array[i] << " ";
+  }
+  std::cout << std::endl;*/
   return 0;
 }

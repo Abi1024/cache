@@ -13,9 +13,9 @@
  time spent in writing (parallel write time): 0 s @ -nan MiB/s
  time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
  I/O wait time                              : 0 s
- Time since the last reset                  : 0.0344968 s
+ Time since the last reset                  : 0.000372887 s
 
-[STXXL-MSG] [LOG] Max KB allocated:  992
+[STXXL-MSG] [LOG] Max KB allocated:  16
 [STXXL-MSG] [LOG] Second array (input_1) loaded: STXXL I/O statistics
  total number of reads                      : 0 
  average block size (read)                  : 0 B 
@@ -29,7 +29,7 @@
  time spent in writing (parallel write time): 0 s @ -nan MiB/s
  time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
  I/O wait time                              : 0 s
- Time since the last reset                  : 0.0187802 s
+ Time since the last reset                  : 0.000140905 s
 
 [STXXL-MSG] [LOG] First matrix conversion STXXL I/O statistics
  total number of reads                      : 0 
@@ -44,9 +44,9 @@
  time spent in writing (parallel write time): 0 s @ -nan MiB/s
  time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
  I/O wait time                              : 0 s
- Time since the last reset                  : 0.066891 s
+ Time since the last reset                  : 0.000482082 s
 
-[STXXL-MSG] [LOG] Max KB allocated for first conversion:  1984
+[STXXL-MSG] [LOG] Max KB allocated for first conversion:  16
 [STXXL-MSG] [LOG] Third array (array2) loaded: STXXL I/O statistics
  total number of reads                      : 0 
  average block size (read)                  : 0 B 
@@ -60,7 +60,7 @@
  time spent in writing (parallel write time): 0 s @ -nan MiB/s
  time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
  I/O wait time                              : 0 s
- Time since the last reset                  : 0.0373821 s
+ Time since the last reset                  : 0.000271797 s
 
 [STXXL-MSG] [LOG] Fourth array (input_2) loaded: STXXL I/O statistics
  total number of reads                      : 0 
@@ -75,7 +75,7 @@
  time spent in writing (parallel write time): 0 s @ -nan MiB/s
  time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
  I/O wait time                              : 0 s
- Time since the last reset                  : 0.0852621 s
+ Time since the last reset                  : 0.000578165 s
 
 [STXXL-MSG] [LOG] Second matrix conversion: STXXL I/O statistics
  total number of reads                      : 0 
@@ -90,9 +90,9 @@
  time spent in writing (parallel write time): 0 s @ -nan MiB/s
  time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
  I/O wait time                              : 0 s
- Time since the last reset                  : 0.0685301 s
+ Time since the last reset                  : 0.000379801 s
 
-[STXXL-MSG] [LOG] Max KB allocated for second conversion:  3968
+[STXXL-MSG] [LOG] Max KB allocated for second conversion:  16
 [STXXL-MSG] [LOG] Final array (result) loaded: STXXL I/O statistics
  total number of reads                      : 0 
  average block size (read)                  : 0 B 
@@ -106,9 +106,9 @@
  time spent in writing (parallel write time): 0 s @ -nan MiB/s
  time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
  I/O wait time                              : 0 s
- Time since the last reset                  : 0.1036 s
+ Time since the last reset                  : 0.000670195 s
 
-[STXXL-MSG] [LOG] Max KB allocated for setting up result matrix:  4960
+[STXXL-MSG] [LOG] Max KB allocated for setting up result matrix:  16
 [STXXL-MSG] [LOG] Matrix multiplication: STXXL I/O statistics
  total number of reads                      : 0 
  average block size (read)                  : 0 B 
@@ -122,6 +122,6 @@
  time spent in writing (parallel write time): 0 s @ -nan MiB/s
  time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
  I/O wait time                              : 0 s
- Time since the last reset                  : 15.1904 s
+ Time since the last reset                  : 0.000766754 s
 
-[STXXL-MSG] [LOG] Max KB allocated:  4960
+[STXXL-MSG] [LOG] Max KB allocated:  16
