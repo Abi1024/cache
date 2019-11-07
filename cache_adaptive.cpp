@@ -1,13 +1,15 @@
 #include <iostream>
 #include <stxxl/vector>
 #include <string>
+#include <stdlib.h>
+#include <unistd.h>
 const int B = 64;
 
 #define TYPE int
-const int CACHE = 8; //pages per cache_adaptive
-const int PAGE_SIZE = 124; //blocks per page
+const int CACHE = 4; //pages per cache_adaptive
+const int PAGE_SIZE = 8; //blocks per page
 const int BLOCK_SIZE_IN_BYTES = 4096; //block size in bytes
-const stxxl::uint64 length = 512;
+const stxxl::uint64 length = 1024;
 typedef stxxl::VECTOR_GENERATOR<TYPE,PAGE_SIZE,CACHE,BLOCK_SIZE_IN_BYTES>::result vector_type;
 typedef stxxl::vector<TYPE, PAGE_SIZE, stxxl::lru_pager<CACHE>,BLOCK_SIZE_IN_BYTES>::iterator itr;
 
@@ -242,7 +244,10 @@ int main(){
 	std::cout << "===========================================\n";
 	STXXL_MSG("[LOG] Max KB allocated:  " << bm->get_maximum_allocation()/(1024));
 	std::cout << "[LOG] Total multiplication time: " <<(start_p1.mseconds()/1000) << "\n";
-
+	std::cout << "===========================================\n";
+	std::cout << "Total system I/O statistics of process:\n";
+	std::string result_log = std::string("cat /proc/") + std::to_string(getpid()) + std::string("/io");
+	system(result_log.c_str());
 	/*std::cout << "Result array\n";
   for (stxxl::uint64 i = 2*length*length ; i < 3*length*length; i++){
     std::cout << array[i] << " ";

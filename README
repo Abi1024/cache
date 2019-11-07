@@ -66,9 +66,14 @@ but actual time needed was 52s
 ----------------
 It takes about 14 seconds to read 550MB of memory. 39MB/s is the average disk bandwidth.
 -----------------
-When setting the parameters such as below, the memory specified is allocated is for EACH vector.
-const int CACHE = 50;
-const stxxl::uint64 n = 16000;
-typedef stxxl::VECTOR_GENERATOR<TYPE,1,CACHE>::result vector_type;
-typedef stxxl::vector<TYPE, 1, stxxl::lru_pager<CACHE> >::iterator itr;
------------
+non cache adaptive matrix multiply:
+Suppose we are multiplying 2N*2N matrices. We make 8 recursive calls to N*N matrix multiply.
+Then just before adding the two N*N matrices, we provide enough memory for 3*(2N*2N).
+Then after the addition, we take away this memory.
+-----------------
+Three ways to track I/O usage (other than stxxl):
+1) pidstat -d -e
+2) cat /var/proc/PID/io
+3) iotop -qqq -b -Paok -n 2 -d 30 | sort -n -k6 -r | head -n 20
+
+Just be careful to only count I/Os done during the matrix multiplication.

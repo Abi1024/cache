@@ -25,6 +25,7 @@ include_directories(${STXXL_INCLUDE_DIRS})
 add_executable(cache cache_adaptive.cpp)
 #add_executable(cache non_cache_adaptive.cpp)
 #add_executable(cache test.cpp)
+#add_executable(cache shell.cpp)
 
 
 target_link_libraries(cache ${STXXL_LIBRARIES})

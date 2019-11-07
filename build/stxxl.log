@@ -13,7 +13,7 @@
  time spent in writing (parallel write time): 0 s @ -nan MiB/s
  time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
  I/O wait time                              : 0 s
- Time since the last reset                  : 0.0376139 s
+ Time since the last reset                  : 0.087574 s
 
 [STXXL-MSG] [LOG] Max KB allocated:  4096
 [STXXL-MSG] [LOG] Second array (input_1) loaded: STXXL I/O statistics
@@ -29,7 +29,7 @@
  time spent in writing (parallel write time): 0 s @ -nan MiB/s
  time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
  I/O wait time                              : 0 s
- Time since the last reset                  : 0.0193343 s
+ Time since the last reset                  : 0.0765359 s
 
 [STXXL-MSG] [LOG] First matrix conversion STXXL I/O statistics
  total number of reads                      : 0 
@@ -44,23 +44,24 @@
  time spent in writing (parallel write time): 0 s @ -nan MiB/s
  time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
  I/O wait time                              : 0 s
- Time since the last reset                  : 0.0724108 s
+ Time since the last reset                  : 0.226237 s
 
-[STXXL-MSG] [LOG] Max KB allocated for first conversion:  4096
+[STXXL-MSG] [LOG] Max KB allocated for first conversion:  8192
 [STXXL-MSG] [LOG] Third array (array2) loaded: STXXL I/O statistics
  total number of reads                      : 0 
  average block size (read)                  : 0 B 
  number of bytes read from disks            : 0 B 
  time spent in serving all read requests    : 0 s @ -nan MiB/s
  time spent in reading (parallel read time) : 0 s @ -nan MiB/s
- total number of writes                     : 0 
- average block size (write)                 : 0 B 
- number of bytes written to disks           : 0 B 
- time spent in serving all write requests   : 0 s @ -nan MiB/s
- time spent in writing (parallel write time): 0 s @ -nan MiB/s
- time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
- I/O wait time                              : 0 s
- Time since the last reset                  : 0.0713732 s
+ total number of writes                     : 992 
+ average block size (write)                 : 4096 (4.000 KiB) 
+ number of bytes written to disks           : 4063232 (3.875 MiB) 
+ time spent in serving all write requests   : 0.0649009 s @ 59.7064 MiB/s
+ time spent in writing (parallel write time): 0.0649009 s @ 59.7064 MiB/s
+ time spent in I/O (parallel I/O time)      : 0.0649009 s @ 59.7064 MiB/s
+ I/O wait time                              : 0.0705836 s
+ I/O wait4write time                        : 0.0705836 s
+ Time since the last reset                  : 0.378896 s
 
 [STXXL-MSG] [LOG] Fourth array (input_2) loaded: STXXL I/O statistics
  total number of reads                      : 0 
@@ -75,7 +76,7 @@
  time spent in writing (parallel write time): 0 s @ -nan MiB/s
  time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
  I/O wait time                              : 0 s
- Time since the last reset                  : 0.0882938 s
+ Time since the last reset                  : 0.289668 s
 
 [STXXL-MSG] [LOG] Second matrix conversion: STXXL I/O statistics
  total number of reads                      : 0 
@@ -83,45 +84,49 @@
  number of bytes read from disks            : 0 B 
  time spent in serving all read requests    : 0 s @ -nan MiB/s
  time spent in reading (parallel read time) : 0 s @ -nan MiB/s
- total number of writes                     : 0 
- average block size (write)                 : 0 B 
- number of bytes written to disks           : 0 B 
- time spent in serving all write requests   : 0 s @ -nan MiB/s
- time spent in writing (parallel write time): 0 s @ -nan MiB/s
- time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
- I/O wait time                              : 0 s
- Time since the last reset                  : 0.104925 s
+ total number of writes                     : 992 
+ average block size (write)                 : 4096 (4.000 KiB) 
+ number of bytes written to disks           : 4063232 (3.875 MiB) 
+ time spent in serving all write requests   : 0.0649009 s @ 59.7064 MiB/s
+ time spent in writing (parallel write time): 0.0649009 s @ 59.7064 MiB/s
+ time spent in I/O (parallel I/O time)      : 0.0649009 s @ 59.7064 MiB/s
+ I/O wait time                              : 0.0705836 s
+ I/O wait4write time                        : 0.0705836 s
+ Time since the last reset                  : 0.514641 s
 
-[STXXL-MSG] [LOG] Max KB allocated for second conversion:  5120
+[STXXL-MSG] [LOG] Max KB allocated for second conversion:  12288
 [STXXL-MSG] [LOG] Final array (result) loaded: STXXL I/O statistics
  total number of reads                      : 0 
  average block size (read)                  : 0 B 
  number of bytes read from disks            : 0 B 
  time spent in serving all read requests    : 0 s @ -nan MiB/s
  time spent in reading (parallel read time) : 0 s @ -nan MiB/s
- total number of writes                     : 0 
- average block size (write)                 : 0 B 
- number of bytes written to disks           : 0 B 
- time spent in serving all write requests   : 0 s @ -nan MiB/s
- time spent in writing (parallel write time): 0 s @ -nan MiB/s
- time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
- I/O wait time                              : 0 s
- Time since the last reset                  : 0.143974 s
+ total number of writes                     : 2048 (2.000 Ki) 
+ average block size (write)                 : 4096 (4.000 KiB) 
+ number of bytes written to disks           : 8388608 (8.000 MiB) 
+ time spent in serving all write requests   : 0.131156 s @ 60.996 MiB/s
+ time spent in writing (parallel write time): 0.131156 s @ 60.996 MiB/s
+ time spent in I/O (parallel I/O time)      : 0.131156 s @ 60.996 MiB/s
+ I/O wait time                              : 0.143394 s
+ I/O wait4write time                        : 0.143394 s
+ Time since the last reset                  : 0.731296 s
 
-[STXXL-MSG] [LOG] Max KB allocated for setting up result matrix:  7168
+[STXXL-MSG] [LOG] Max KB allocated for setting up result matrix:  20480
 [STXXL-MSG] [LOG] Matrix multiplication: STXXL I/O statistics
- total number of reads                      : 0 
- average block size (read)                  : 0 B 
- number of bytes read from disks            : 0 B 
- time spent in serving all read requests    : 0 s @ -nan MiB/s
- time spent in reading (parallel read time) : 0 s @ -nan MiB/s
- total number of writes                     : 0 
- average block size (write)                 : 0 B 
- number of bytes written to disks           : 0 B 
- time spent in serving all write requests   : 0 s @ -nan MiB/s
- time spent in writing (parallel write time): 0 s @ -nan MiB/s
- time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
- I/O wait time                              : 0 s
- Time since the last reset                  : 27.1154 s
+ total number of reads                      : 40960 (40.000 Ki) 
+ average block size (read)                  : 4096 (4.000 KiB) 
+ number of bytes read from disks            : 167772160 (160.000 MiB) 
+ time spent in serving all read requests    : 8.44554 s @ 18.9449 MiB/s
+ time spent in reading (parallel read time) : 8.44554 s @ 18.9449 MiB/s
+ total number of writes                     : 41952 (40.969 Ki) 
+ average block size (write)                 : 4096 (4.000 KiB) 
+ number of bytes written to disks           : 171835392 (163.875 MiB) 
+ time spent in serving all write requests   : 8.09042 s @ 20.2554 MiB/s
+ time spent in writing (parallel write time): 8.09042 s @ 20.2554 MiB/s
+ time spent in I/O (parallel I/O time)      : 16.536 s @ 19.5861 MiB/s
+ I/O wait time                              : 17.1372 s
+ I/O wait4read time                         : 8.71596 s
+ I/O wait4write time                        : 8.42125 s
+ Time since the last reset                  : 238.459 s
 
-[STXXL-MSG] [LOG] Max KB allocated:  7168
+[STXXL-MSG] [LOG] Max KB allocated:  20480
