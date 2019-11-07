@@ -4,7 +4,7 @@ const int B = 64;
 
 #define TYPE int
 const int CACHE = 1;
-const stxxl::uint64 n = 750;
+const stxxl::uint64 n = 16;
 typedef stxxl::VECTOR_GENERATOR<TYPE,1,CACHE>::result vector_type;
 typedef stxxl::vector<TYPE, 1, stxxl::lru_pager<CACHE> >::iterator itr;
 
@@ -170,66 +170,99 @@ void conv_RM_2_ZM_CM( itr x, itr xo, int n, int no )
 }
 
 int main(){
-  vector_type array;
 	stxxl::stats* Stats = stxxl::stats::get_instance();
-	stxxl::stats_data stats_begin(*Stats);
-		stxxl::block_manager * bm = stxxl::block_manager::get_instance();
-	std::cout << "running NON cache_adaptive matrix multiply with matrices of size: " << (int)n << "x" << (int)n << "\n";
-  //std::cout << "First input array\n";
-	for (stxxl::uint64 i = 0; i < n*n; i++)
+	stxxl::stats_data stats1(*Stats);
+	stxxl::block_manager * bm = stxxl::block_manager::get_instance();
+	vector_type array;
+	std::cout << "running cache_adaptive matrix multiply with matrices of size: " << (int)length << "x" << (int)length << "\n";
+	/*
+	std::cout << "First input array\n";
+	for (stxxl::uint64 i = 0; i < length*length; i++)
 	{
 		array.push_back(i);
-		//std::cout << array[i] << " ";
-	}
-  //std::cout << std::endl;
-	for (stxxl::uint64 i = 0; i < n*n; i++)
-	{
-		array.push_back(0);
-	}
-  conv_RM_2_ZM_RM(array.begin()+n*n,array.begin(),n,n);
-	std::cout << "done converting first matrix\n";
-	/*std::cout << "First input array in Z-MORTON\n";
-	for (int i = 0; i < n*n; i++)
-	{
-		std::cout << input_1[i] << " ";
+		std::cout << array[i] << " ";
 	}
 	std::cout << std::endl;
 	*/
-
-  //std::cout << "Second input array\n";
-	for (stxxl::uint64 i = 0; i < n*n; i++)
-	{
-		array[i] = n*n-i;
-		//std::cout << array2[i] << " ";
-	}
-  //std::cout << std::endl;
-	for (stxxl::uint64 i = 0; i < n*n; i++)
+	stxxl::stats_data stats2(stxxl::stats_data(*Stats) - stats1);
+	std::cout << "===========================================\n";
+	STXXL_MSG("[LOG] First array (array) loaded: "<< stats2 );
+	std::cout << "===========================================\n";
+	STXXL_MSG("[LOG] Max KB allocated:  " << bm->get_maximum_allocation()/(1024));
+	for (stxxl::uint64 i = 0; i < length*length; i++)
 	{
 		array.push_back(0);
 	}
-  conv_RM_2_ZM_CM(array.begin()+2*n*n,array.begin(),n,n);
-	std::cout << "done converting second matrix\n";
-  for (stxxl::uint64 i = 0 ; i < n*n; i++){
-    array[i] = 0;
-  }
+	stxxl::stats_data stats3(stxxl::stats_data(*Stats) - stats2);
+	std::cout << "===========================================\n";
+	STXXL_MSG("[LOG] Second array (input_1) loaded: "<< stats3 );
+	std::cout << "===========================================\n";
+	conv_RM_2_ZM_RM(array.begin()+length*length,array.begin(),length,length);
+	stxxl::stats_data stats4(stxxl::stats_data(*Stats) - stats3);
+	std::cout << "===========================================\n";
+	STXXL_MSG("[LOG] First matrix conversion "<< stats4 );
+	std::cout << "===========================================\n";
+	STXXL_MSG("[LOG] Max KB allocated for first conversion:  " << bm->get_maximum_allocation()/(1024));
+	/*
+	std::cout << "First input array in Z-MORTON\n";
+	for (stxxl::uint64 i = 0; i < length*length; i++)
+	{
+		std::cout << array[i+length*length] << " ";
+	}
+	std::cout << std::endl;
 
+	std::cout << "Second input array\n";
+	for (stxxl::uint64 i = 0; i < length*length; i++){
+		array[i] = i;
+	}
+	*/
+	stxxl::stats_data stats5(stxxl::stats_data(*Stats) - stats4);
+	std::cout << "===========================================\n";
+	STXXL_MSG("[LOG] Third array (array2) loaded: "<< stats5 );
+	std::cout << "===========================================\n";
+	std::cout << std::endl;
+	for (stxxl::uint64 i = 0; i < length*length; i++)
+	{
+		array.push_back(0);
+	}
+	stxxl::stats_data stats6(stxxl::stats_data(*Stats) - stats5);
+	std::cout << "===========================================\n";
+	STXXL_MSG("[LOG] Fourth array (input_2) loaded: "<< stats6 );
+	std::cout << "===========================================\n";
+
+
+	conv_RM_2_ZM_CM(array.begin()+2*length*length,array.begin(),length,length);
+	stxxl::stats_data stats7(stxxl::stats_data(*Stats) - stats6);
+	std::cout << "===========================================\n";
+	STXXL_MSG("[LOG] Second matrix conversion: "<< stats7 );
+	std::cout << "===========================================\n";
+	STXXL_MSG("[LOG] Max KB allocated for second conversion:  " << bm->get_maximum_allocation()/(1024));
+	for (stxxl::uint64 i = 0 ; i < length*length; i++){
+		array[i] = 0;
+	}
+	stxxl::stats_data stats8(stxxl::stats_data(*Stats) - stats7);
+	std::cout << "===========================================\n";
+	STXXL_MSG("[LOG] Final array (result) loaded: "<< stats8 );
+	std::cout << "===========================================\n";
+	STXXL_MSG("[LOG] Max KB allocated for setting up result matrix:  " << bm->get_maximum_allocation()/(1024));
 	stxxl::timer start_p1;
 	start_p1.start();
 
-	STXXL_MSG("[LOG] Max MB allocated:  " << bm->get_maximum_allocation()/(1024*1024));
-  mm_root(array.begin(),array.begin()+n*n,array.begin()+n*n*2,n);
+	mm_root(array.begin(),array.begin()+length*length,array.begin()+2*length*length,length);
 
 	start_p1.stop();
 
 
-	std::cout << "done multiplying matrix\n";
-	//STXXL_MSG("[LOG] IO Statistics for sorting: "<<(stxxl::stats_data(*Stats) - stats_begin));
-	STXXL_MSG("[LOG] Max MB allocated:  " << bm->get_maximum_allocation()/(1024*1024));
+	stxxl::stats_data stats9(stxxl::stats_data(*Stats) - stats8);
+	std::cout << "===========================================\n";
+	STXXL_MSG("[LOG] Matrix multiplication: "<< stats9 );
+	std::cout << "===========================================\n";
+	STXXL_MSG("[LOG] Max KB allocated:  " << bm->get_maximum_allocation()/(1024));
 	std::cout << "[LOG] Total multiplication time: " <<(start_p1.mseconds()/1000) << "\n";
-  //std::cout << "Result array\n";
-  /*for (stxxl::uint64 i = 0 ; i < n*n; i++){
-    std::cout << result[i] << " ";
-  }*/
-  //std::cout << std::endl;
-  return 0;
+	/*std::cout << "Result array\n";
+	for (stxxl::uint64 i = 0 ; i < length*length; i++){
+		std::cout << array[i] << " ";
+	}
+	std::cout << std::endl;*/
+	return 0;
 }

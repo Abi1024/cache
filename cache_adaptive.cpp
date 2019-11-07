@@ -1,17 +1,27 @@
 #include <iostream>
 #include <stxxl/vector>
 #include <string>
-const int B = 2;
+const int B = 16;
 
 #define TYPE int
-const int CACHE = 1; //pages per cache_adaptive
-const int PAGE_SIZE = 120; //blocks per page
-const int BLOCK_SIZE_IN_BYTES = 16384; //block size in bytes
-const stxxl::uint64 length = 8;
+const int CACHE = 2; //pages per cache_adaptive
+const int PAGE_SIZE = 124; //blocks per page
+const int BLOCK_SIZE_IN_BYTES = 4096; //block size in bytes
+const stxxl::uint64 length = 512;
 typedef stxxl::VECTOR_GENERATOR<TYPE,PAGE_SIZE,CACHE,BLOCK_SIZE_IN_BYTES>::result vector_type;
 typedef stxxl::vector<TYPE, PAGE_SIZE, stxxl::lru_pager<CACHE>,BLOCK_SIZE_IN_BYTES>::iterator itr;
 
 void conv_RM_2_ZM_RM( itr x, itr xo, int n, int no ){
+	std::string depth_trace = "";
+	int n3 = length;
+	int limit = 0;
+	while (n3 > n || n3 == 1){
+		n3 /= 2;
+		depth_trace += " ";
+		limit++;
+	}
+	std::cout << depth_trace << "Running conv with depth: " << limit;
+	std::cout << " value of n: " << n << std::endl;
 	if ( n <= B )
 	{
 		for ( int i = 0; i < n; i++ )
@@ -36,34 +46,6 @@ void conv_RM_2_ZM_RM( itr x, itr xo, int n, int no ){
 		conv_RM_2_ZM_RM( x+m12, xo + nn, nn, no );
 		conv_RM_2_ZM_RM( x+m21, xo + nn * no, nn, no );
 		conv_RM_2_ZM_RM( x+m22, xo + nn * no + nn, nn, no );
-	}
-}
-
-void conv_ZM_RM_2_RM( TYPE *x, TYPE *xo, int n, int no )
-{
-	if ( n <= B )
-	{
-		for ( int i = 0; i < n; i++ )
-		{
-			for ( int j = 0; j < n; j++ )
-				( *xo++ ) = ( *x++ );
-
-			xo += ( no - n );
-		}
-	}
-	else
-	{
-		int nn = ( n >> 1 );
-		int nn2 = nn * nn;
-		const int m11 = 0;
-		int m12 = m11 + nn2;
-		int m21 = m12 + nn2;
-		int m22 = m21 + nn2;
-
-		conv_ZM_RM_2_RM( x, xo, nn, no );
-		conv_ZM_RM_2_RM( x+ m12, xo + nn, nn, no );
-		conv_ZM_RM_2_RM( x+ m21, xo + nn * no, nn, no );
-		conv_ZM_RM_2_RM( x+ m22, xo + nn * no + nn, nn, no );
 	}
 }
 
@@ -158,15 +140,16 @@ int main(){
 		stxxl::block_manager * bm = stxxl::block_manager::get_instance();
   vector_type array;
 	std::cout << "running cache_adaptive matrix multiply with matrices of size: " << (int)length << "x" << (int)length << "\n";
-	/*
-  std::cout << "First input array\n";
+
+  //std::cout << "First input array\n";
+
 	for (stxxl::uint64 i = 0; i < length*length; i++)
 	{
 		array.push_back(i);
-		std::cout << array[i] << " ";
+		//std::cout << array[i] << " ";
 	}
-  std::cout << std::endl;
-	*/
+  //std::cout << std::endl;
+
 	stxxl::stats_data stats2(stxxl::stats_data(*Stats) - stats1);
 	std::cout << "===========================================\n";
 	STXXL_MSG("[LOG] First array (array) loaded: "<< stats2 );
@@ -203,7 +186,6 @@ int main(){
 	std::cout << "===========================================\n";
 	STXXL_MSG("[LOG] Third array (array2) loaded: "<< stats5 );
 	std::cout << "===========================================\n";
-  std::cout << std::endl;
 	for (stxxl::uint64 i = 0; i < length*length; i++)
 	{
 		array.push_back(0);
