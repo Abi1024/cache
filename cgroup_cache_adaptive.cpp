@@ -7,8 +7,8 @@
 const int B = 64;
 
 #define TYPE int
-const int CACHE = 24; //pages per cache_adaptive
-const int PAGE_SIZE = 2048; //blocks per page
+const int CACHE = 16; //pages per cache_adaptive
+const int PAGE_SIZE = 1024; //blocks per page
 const int BLOCK_SIZE_IN_BYTES = 4096; //block size in bytes
 const stxxl::uint64 length = 1024;
 typedef stxxl::VECTOR_GENERATOR<TYPE,PAGE_SIZE,CACHE,BLOCK_SIZE_IN_BYTES>::result vector_type;
@@ -71,9 +71,15 @@ void print_io_data(std::vector<int>& data, std::string header){
 }
 
 void limit_memory(const char* string1, const char* string2){
-  std::string command = std::string("echo ") + string1 + std::string(" > /var/cgroups/") + string2 + std::string("/memory.limit_in_bytes");
-  system(command.c_str());
-  //system("sleep 10");
+  int memory_in_bytes = (int)atof(string1)*1024*1024;
+  std::string string = std::to_string(memory_in_bytes);
+  std::string command = std::string("echo ") + string + std::string(" > /var/cgroups/") + string2 + std::string("/memory.limit_in_bytes");
+  int return_code = system(command.c_str());
+  if (return_code != 0){
+    std::cout << "Error. Unable to set cgroup memory " << string << "\n";
+    exit(1);
+  }
+  std::cout << "Limiting cgroup memory: " << string << " bytes\n";
 }
 
 void conv_RM_2_ZM_RM( conv_itr x, conv_itr xo, int n, int no ){
@@ -206,7 +212,6 @@ int main(int argc, char *argv[]){\
     std::cout << "Insufficient arguments! Usage: cgroup_cache_adaptive <memory_limit> <cgroup_name>\n";
     exit(1);
   }
-  limit_memory(argv[1],argv[2]);
 	std::cout << "Running cache_adaptive matrix multiply with matrices of size: " << (int)length << "x" << (int)length << "\n";
   std::vector<int> io_stats = {0,0};
   print_io_data(io_stats, "Printing I/O statistics at program start @@@@@ \n");

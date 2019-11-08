@@ -80,3 +80,9 @@ Just be careful to only count I/Os done during the matrix multiplication.
 -----------------------------------
 Interaction between PAGES_PER_CACHE,BLOCKS_PER_PAGE and BLOCK_SIZE_IN_BYTES
 ------------------------------------
+sudo cgdelete memory:cache-test && sudo cgcreate -g "memory:cache-test" -t abiyaz:abiyaz
+-----
+This error gets thrown for very low cgroup memory settings:
+[STXXL-ERRMSG] io_error thrown in ~vector(): Error in virtual void stxxl::syscall_file::serve(void*, stxxl::file::offset_type, stxxl::file::size_type, stxxl::request_interface::request_type) :  this=0x56307a31f8f0 call=::write(fd,buffer,bytes) path=/var/tmp/stxxl fd=5 offset=0 buffer=0x7f27b52b3000 bytes=4194304 type=WRITE rc=-1 : Cannot allocate memory: iostream error: iostream error
+----
+https://stackoverflow.com/questions/33759054/using-cgexec-vs-cgroup-procs-for-memory-accounting-using-cgroups
