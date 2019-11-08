@@ -607,32 +607,32 @@ test1/fast:
 	$(MAKE) -f stxxl/local/CMakeFiles/test1.dir/build.make stxxl/local/CMakeFiles/test1.dir/build
 .PHONY : test1/fast
 
-non_cache_adaptive.o: non_cache_adaptive.cpp.o
+cgroup_cache_adaptive.o: cgroup_cache_adaptive.cpp.o
 
-.PHONY : non_cache_adaptive.o
+.PHONY : cgroup_cache_adaptive.o
 
 # target to build an object file
-non_cache_adaptive.cpp.o:
-	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/non_cache_adaptive.cpp.o
-.PHONY : non_cache_adaptive.cpp.o
+cgroup_cache_adaptive.cpp.o:
+	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/cgroup_cache_adaptive.cpp.o
+.PHONY : cgroup_cache_adaptive.cpp.o
 
-non_cache_adaptive.i: non_cache_adaptive.cpp.i
+cgroup_cache_adaptive.i: cgroup_cache_adaptive.cpp.i
 
-.PHONY : non_cache_adaptive.i
+.PHONY : cgroup_cache_adaptive.i
 
 # target to preprocess a source file
-non_cache_adaptive.cpp.i:
-	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/non_cache_adaptive.cpp.i
-.PHONY : non_cache_adaptive.cpp.i
+cgroup_cache_adaptive.cpp.i:
+	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/cgroup_cache_adaptive.cpp.i
+.PHONY : cgroup_cache_adaptive.cpp.i
 
-non_cache_adaptive.s: non_cache_adaptive.cpp.s
+cgroup_cache_adaptive.s: cgroup_cache_adaptive.cpp.s
 
-.PHONY : non_cache_adaptive.s
+.PHONY : cgroup_cache_adaptive.s
 
 # target to generate assembly for a file
-non_cache_adaptive.cpp.s:
-	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/non_cache_adaptive.cpp.s
-.PHONY : non_cache_adaptive.cpp.s
+cgroup_cache_adaptive.cpp.s:
+	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/cgroup_cache_adaptive.cpp.s
+.PHONY : cgroup_cache_adaptive.cpp.s
 
 # Help Target
 help:
@@ -681,9 +681,9 @@ help:
 	@echo "... stxxl_tool"
 	@echo "... test2"
 	@echo "... test1"
-	@echo "... non_cache_adaptive.o"
-	@echo "... non_cache_adaptive.i"
-	@echo "... non_cache_adaptive.s"
+	@echo "... cgroup_cache_adaptive.o"
+	@echo "... cgroup_cache_adaptive.i"
+	@echo "... cgroup_cache_adaptive.s"
 .PHONY : help
 
 

@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/cache.dir/non_cache_adaptive.cpp.o"
+  "CMakeFiles/cache.dir/cgroup_cache_adaptive.cpp.o"
   "cache.pdb"
   "cache"
 )

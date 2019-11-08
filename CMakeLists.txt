@@ -23,7 +23,8 @@ include_directories(${STXXL_INCLUDE_DIRS})
 
 # build a program and link it with STXXL.
 #add_executable(cache cache_adaptive.cpp)
-add_executable(cache non_cache_adaptive.cpp)
+add_executable(cache cgroup_cache_adaptive.cpp)
+#add_executable(cache non_cache_adaptive.cpp)
 #add_executable(cache test.cpp)
 #add_executable(cache shell.cpp)
 

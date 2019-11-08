@@ -3,13 +3,13 @@
 #include <string>
 #include <stdlib.h>
 #include <unistd.h>
-const int B = 64;
+const int B = 4;
 
 #define TYPE int
 const int CACHE = 4; //pages per cache_adaptive
 const int PAGE_SIZE = 64; //blocks per page
 const int BLOCK_SIZE_IN_BYTES = 4096; //block size in bytes
-const stxxl::uint64 length = 1024;
+const stxxl::uint64 length = 8;
 typedef stxxl::VECTOR_GENERATOR<TYPE,PAGE_SIZE,CACHE,BLOCK_SIZE_IN_BYTES>::result vector_type;
 typedef stxxl::vector<TYPE, PAGE_SIZE, stxxl::lru_pager<CACHE>,BLOCK_SIZE_IN_BYTES>::iterator itr;
 
@@ -20,7 +20,7 @@ typedef stxxl::VECTOR_GENERATOR<TYPE,CONV_PAGE_SIZE,CONV_CACHE,CONV_BLOCK_SIZE_I
 typedef stxxl::vector<TYPE, CONV_PAGE_SIZE, stxxl::lru_pager<CONV_CACHE>,CONV_BLOCK_SIZE_IN_BYTES>::iterator conv_itr;
 
 void conv_RM_2_ZM_RM( conv_itr x, conv_itr xo, int n, int no ){
-	std::string depth_trace = "";
+	/*std::string depth_trace = "";
 	int n3 = length;
 	int limit = 0;
 	while (n3 > n || n3 == 1){
@@ -30,6 +30,7 @@ void conv_RM_2_ZM_RM( conv_itr x, conv_itr xo, int n, int no ){
 	}
 	std::cout << depth_trace << "Running conv with depth: " << limit;
 	std::cout << " value of n: " << n << std::endl;
+	*/
 	if ( n <= B )
 	{
 		for ( int i = 0; i < n; i++ )
