@@ -60,39 +60,113 @@ CMAKE_SOURCE_DIR = /home/abiyaz/cache
 CMAKE_BINARY_DIR = /home/abiyaz/cache/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/cache.dir
+# Target rules for target CMakeFiles/non_cache_adaptive.dir
 
 # All Build rule for target.
-CMakeFiles/cache.dir/all: stxxl/lib/CMakeFiles/stxxl.dir/all
-	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/depend
-	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/abiyaz/cache/build/CMakeFiles --progress-num=1,2 "Built target cache"
-.PHONY : CMakeFiles/cache.dir/all
+CMakeFiles/non_cache_adaptive.dir/all: stxxl/lib/CMakeFiles/stxxl.dir/all
+	$(MAKE) -f CMakeFiles/non_cache_adaptive.dir/build.make CMakeFiles/non_cache_adaptive.dir/depend
+	$(MAKE) -f CMakeFiles/non_cache_adaptive.dir/build.make CMakeFiles/non_cache_adaptive.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/abiyaz/cache/build/CMakeFiles --progress-num=3,4 "Built target non_cache_adaptive"
+.PHONY : CMakeFiles/non_cache_adaptive.dir/all
 
 # Include target in all.
-all: CMakeFiles/cache.dir/all
+all: CMakeFiles/non_cache_adaptive.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/cache.dir/rule: cmake_check_build_system
+CMakeFiles/non_cache_adaptive.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/abiyaz/cache/build/CMakeFiles 39
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/cache.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/non_cache_adaptive.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/abiyaz/cache/build/CMakeFiles 0
-.PHONY : CMakeFiles/cache.dir/rule
+.PHONY : CMakeFiles/non_cache_adaptive.dir/rule
 
 # Convenience name for target.
-cache: CMakeFiles/cache.dir/rule
+non_cache_adaptive: CMakeFiles/non_cache_adaptive.dir/rule
 
-.PHONY : cache
-
-# clean rule for target.
-CMakeFiles/cache.dir/clean:
-	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/clean
-.PHONY : CMakeFiles/cache.dir/clean
+.PHONY : non_cache_adaptive
 
 # clean rule for target.
-clean: CMakeFiles/cache.dir/clean
+CMakeFiles/non_cache_adaptive.dir/clean:
+	$(MAKE) -f CMakeFiles/non_cache_adaptive.dir/build.make CMakeFiles/non_cache_adaptive.dir/clean
+.PHONY : CMakeFiles/non_cache_adaptive.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/non_cache_adaptive.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/cache_adaptive.dir
+
+# All Build rule for target.
+CMakeFiles/cache_adaptive.dir/all: stxxl/lib/CMakeFiles/stxxl.dir/all
+	$(MAKE) -f CMakeFiles/cache_adaptive.dir/build.make CMakeFiles/cache_adaptive.dir/depend
+	$(MAKE) -f CMakeFiles/cache_adaptive.dir/build.make CMakeFiles/cache_adaptive.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/abiyaz/cache/build/CMakeFiles --progress-num=1,2 "Built target cache_adaptive"
+.PHONY : CMakeFiles/cache_adaptive.dir/all
+
+# Include target in all.
+all: CMakeFiles/cache_adaptive.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/cache_adaptive.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/abiyaz/cache/build/CMakeFiles 39
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/cache_adaptive.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/abiyaz/cache/build/CMakeFiles 0
+.PHONY : CMakeFiles/cache_adaptive.dir/rule
+
+# Convenience name for target.
+cache_adaptive: CMakeFiles/cache_adaptive.dir/rule
+
+.PHONY : cache_adaptive
+
+# clean rule for target.
+CMakeFiles/cache_adaptive.dir/clean:
+	$(MAKE) -f CMakeFiles/cache_adaptive.dir/build.make CMakeFiles/cache_adaptive.dir/clean
+.PHONY : CMakeFiles/cache_adaptive.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/cache_adaptive.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test.dir
+
+# All Build rule for target.
+CMakeFiles/test.dir/all: stxxl/lib/CMakeFiles/stxxl.dir/all
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/depend
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/abiyaz/cache/build/CMakeFiles --progress-num=52,53 "Built target test"
+.PHONY : CMakeFiles/test.dir/all
+
+# Include target in all.
+all: CMakeFiles/test.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/abiyaz/cache/build/CMakeFiles 39
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/test.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/abiyaz/cache/build/CMakeFiles 0
+.PHONY : CMakeFiles/test.dir/rule
+
+# Convenience name for target.
+test: CMakeFiles/test.dir/rule
+
+.PHONY : test
+
+# clean rule for target.
+CMakeFiles/test.dir/clean:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/clean
+.PHONY : CMakeFiles/test.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/test.dir/clean
 
 .PHONY : clean
 
@@ -1075,7 +1149,7 @@ stxxl/lib/preinstall:
 stxxl/lib/CMakeFiles/stxxl.dir/all:
 	$(MAKE) -f stxxl/lib/CMakeFiles/stxxl.dir/build.make stxxl/lib/CMakeFiles/stxxl.dir/depend
 	$(MAKE) -f stxxl/lib/CMakeFiles/stxxl.dir/build.make stxxl/lib/CMakeFiles/stxxl.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/abiyaz/cache/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39 "Built target stxxl"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/abiyaz/cache/build/CMakeFiles --progress-num=5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41 "Built target stxxl"
 .PHONY : stxxl/lib/CMakeFiles/stxxl.dir/all
 
 # Include target in all.
@@ -1135,7 +1209,7 @@ stxxl/tools/preinstall: stxxl/tools/extras/preinstall
 stxxl/tools/CMakeFiles/stxxl_tool.dir/all: stxxl/lib/CMakeFiles/stxxl.dir/all
 	$(MAKE) -f stxxl/tools/CMakeFiles/stxxl_tool.dir/build.make stxxl/tools/CMakeFiles/stxxl_tool.dir/depend
 	$(MAKE) -f stxxl/tools/CMakeFiles/stxxl_tool.dir/build.make stxxl/tools/CMakeFiles/stxxl_tool.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/abiyaz/cache/build/CMakeFiles --progress-num=40,41,42,43,44,45,46,47,48,49 "Built target stxxl_tool"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/abiyaz/cache/build/CMakeFiles --progress-num=42,43,44,45,46,47,48,49,50,51 "Built target stxxl_tool"
 .PHONY : stxxl/tools/CMakeFiles/stxxl_tool.dir/all
 
 # Include target in all.
@@ -1570,7 +1644,7 @@ stxxl/local/preinstall:
 stxxl/local/CMakeFiles/test2.dir/all: stxxl/lib/CMakeFiles/stxxl.dir/all
 	$(MAKE) -f stxxl/local/CMakeFiles/test2.dir/build.make stxxl/local/CMakeFiles/test2.dir/depend
 	$(MAKE) -f stxxl/local/CMakeFiles/test2.dir/build.make stxxl/local/CMakeFiles/test2.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/abiyaz/cache/build/CMakeFiles --progress-num=52,53 "Built target test2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/abiyaz/cache/build/CMakeFiles --progress-num=56,57 "Built target test2"
 .PHONY : stxxl/local/CMakeFiles/test2.dir/all
 
 # Include target in all.
@@ -1607,7 +1681,7 @@ clean: stxxl/local/CMakeFiles/test2.dir/clean
 stxxl/local/CMakeFiles/test1.dir/all: stxxl/lib/CMakeFiles/stxxl.dir/all
 	$(MAKE) -f stxxl/local/CMakeFiles/test1.dir/build.make stxxl/local/CMakeFiles/test1.dir/depend
 	$(MAKE) -f stxxl/local/CMakeFiles/test1.dir/build.make stxxl/local/CMakeFiles/test1.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/abiyaz/cache/build/CMakeFiles --progress-num=50,51 "Built target test1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/abiyaz/cache/build/CMakeFiles --progress-num=54,55 "Built target test1"
 .PHONY : stxxl/local/CMakeFiles/test1.dir/all
 
 # Include target in all.

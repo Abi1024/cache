@@ -68,18 +68,6 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -91,6 +79,27 @@ install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # Special rule for the target package
 package: preinstall
@@ -114,6 +123,18 @@ package_source/fast: package_source
 
 .PHONY : package_source/fast
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -124,27 +145,6 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -179,17 +179,43 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named cache
+# Target rules for targets named non_cache_adaptive
 
 # Build rule for target.
-cache: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 cache
-.PHONY : cache
+non_cache_adaptive: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 non_cache_adaptive
+.PHONY : non_cache_adaptive
 
 # fast build rule for target.
-cache/fast:
-	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/build
-.PHONY : cache/fast
+non_cache_adaptive/fast:
+	$(MAKE) -f CMakeFiles/non_cache_adaptive.dir/build.make CMakeFiles/non_cache_adaptive.dir/build
+.PHONY : non_cache_adaptive/fast
+
+#=============================================================================
+# Target rules for targets named cache_adaptive
+
+# Build rule for target.
+cache_adaptive: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cache_adaptive
+.PHONY : cache_adaptive
+
+# fast build rule for target.
+cache_adaptive/fast:
+	$(MAKE) -f CMakeFiles/cache_adaptive.dir/build.make CMakeFiles/cache_adaptive.dir/build
+.PHONY : cache_adaptive/fast
+
+#=============================================================================
+# Target rules for targets named test
+
+# Build rule for target.
+test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test
+.PHONY : test
+
+# fast build rule for target.
+test/fast:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
+.PHONY : test/fast
 
 #=============================================================================
 # Target rules for targets named ContinuousSubmit
@@ -607,32 +633,86 @@ test1/fast:
 	$(MAKE) -f stxxl/local/CMakeFiles/test1.dir/build.make stxxl/local/CMakeFiles/test1.dir/build
 .PHONY : test1/fast
 
-cgroup_cache_adaptive.o: cgroup_cache_adaptive.cpp.o
+cache_adaptive.o: cache_adaptive.cpp.o
 
-.PHONY : cgroup_cache_adaptive.o
+.PHONY : cache_adaptive.o
 
 # target to build an object file
-cgroup_cache_adaptive.cpp.o:
-	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/cgroup_cache_adaptive.cpp.o
-.PHONY : cgroup_cache_adaptive.cpp.o
+cache_adaptive.cpp.o:
+	$(MAKE) -f CMakeFiles/cache_adaptive.dir/build.make CMakeFiles/cache_adaptive.dir/cache_adaptive.cpp.o
+.PHONY : cache_adaptive.cpp.o
 
-cgroup_cache_adaptive.i: cgroup_cache_adaptive.cpp.i
+cache_adaptive.i: cache_adaptive.cpp.i
 
-.PHONY : cgroup_cache_adaptive.i
+.PHONY : cache_adaptive.i
 
 # target to preprocess a source file
-cgroup_cache_adaptive.cpp.i:
-	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/cgroup_cache_adaptive.cpp.i
-.PHONY : cgroup_cache_adaptive.cpp.i
+cache_adaptive.cpp.i:
+	$(MAKE) -f CMakeFiles/cache_adaptive.dir/build.make CMakeFiles/cache_adaptive.dir/cache_adaptive.cpp.i
+.PHONY : cache_adaptive.cpp.i
 
-cgroup_cache_adaptive.s: cgroup_cache_adaptive.cpp.s
+cache_adaptive.s: cache_adaptive.cpp.s
 
-.PHONY : cgroup_cache_adaptive.s
+.PHONY : cache_adaptive.s
 
 # target to generate assembly for a file
-cgroup_cache_adaptive.cpp.s:
-	$(MAKE) -f CMakeFiles/cache.dir/build.make CMakeFiles/cache.dir/cgroup_cache_adaptive.cpp.s
-.PHONY : cgroup_cache_adaptive.cpp.s
+cache_adaptive.cpp.s:
+	$(MAKE) -f CMakeFiles/cache_adaptive.dir/build.make CMakeFiles/cache_adaptive.dir/cache_adaptive.cpp.s
+.PHONY : cache_adaptive.cpp.s
+
+non_cache_adaptive.o: non_cache_adaptive.cpp.o
+
+.PHONY : non_cache_adaptive.o
+
+# target to build an object file
+non_cache_adaptive.cpp.o:
+	$(MAKE) -f CMakeFiles/non_cache_adaptive.dir/build.make CMakeFiles/non_cache_adaptive.dir/non_cache_adaptive.cpp.o
+.PHONY : non_cache_adaptive.cpp.o
+
+non_cache_adaptive.i: non_cache_adaptive.cpp.i
+
+.PHONY : non_cache_adaptive.i
+
+# target to preprocess a source file
+non_cache_adaptive.cpp.i:
+	$(MAKE) -f CMakeFiles/non_cache_adaptive.dir/build.make CMakeFiles/non_cache_adaptive.dir/non_cache_adaptive.cpp.i
+.PHONY : non_cache_adaptive.cpp.i
+
+non_cache_adaptive.s: non_cache_adaptive.cpp.s
+
+.PHONY : non_cache_adaptive.s
+
+# target to generate assembly for a file
+non_cache_adaptive.cpp.s:
+	$(MAKE) -f CMakeFiles/non_cache_adaptive.dir/build.make CMakeFiles/non_cache_adaptive.dir/non_cache_adaptive.cpp.s
+.PHONY : non_cache_adaptive.cpp.s
+
+test.o: test.cpp.o
+
+.PHONY : test.o
+
+# target to build an object file
+test.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.o
+.PHONY : test.cpp.o
+
+test.i: test.cpp.i
+
+.PHONY : test.i
+
+# target to preprocess a source file
+test.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.i
+.PHONY : test.cpp.i
+
+test.s: test.cpp.s
+
+.PHONY : test.s
+
+# target to generate assembly for a file
+test.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.s
+.PHONY : test.cpp.s
 
 # Help Target
 help:
@@ -641,14 +721,16 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
-	@echo "... install/local"
 	@echo "... install"
-	@echo "... package"
-	@echo "... cache"
-	@echo "... package_source"
-	@echo "... edit_cache"
-	@echo "... rebuild_cache"
 	@echo "... list_install_components"
+	@echo "... rebuild_cache"
+	@echo "... non_cache_adaptive"
+	@echo "... cache_adaptive"
+	@echo "... package"
+	@echo "... package_source"
+	@echo "... install/local"
+	@echo "... test"
+	@echo "... edit_cache"
 	@echo "... ContinuousSubmit"
 	@echo "... ContinuousMemCheck"
 	@echo "... ContinuousConfigure"
@@ -681,9 +763,15 @@ help:
 	@echo "... stxxl_tool"
 	@echo "... test2"
 	@echo "... test1"
-	@echo "... cgroup_cache_adaptive.o"
-	@echo "... cgroup_cache_adaptive.i"
-	@echo "... cgroup_cache_adaptive.s"
+	@echo "... cache_adaptive.o"
+	@echo "... cache_adaptive.i"
+	@echo "... cache_adaptive.s"
+	@echo "... non_cache_adaptive.o"
+	@echo "... non_cache_adaptive.i"
+	@echo "... non_cache_adaptive.s"
+	@echo "... test.o"
+	@echo "... test.i"
+	@echo "... test.s"
 .PHONY : help
 
 

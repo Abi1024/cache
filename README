@@ -86,3 +86,8 @@ This error gets thrown for very low cgroup memory settings:
 [STXXL-ERRMSG] io_error thrown in ~vector(): Error in virtual void stxxl::syscall_file::serve(void*, stxxl::file::offset_type, stxxl::file::size_type, stxxl::request_interface::request_type) :  this=0x56307a31f8f0 call=::write(fd,buffer,bytes) path=/var/tmp/stxxl fd=5 offset=0 buffer=0x7f27b52b3000 bytes=4194304 type=WRITE rc=-1 : Cannot allocate memory: iostream error: iostream error
 ----
 https://stackoverflow.com/questions/33759054/using-cgexec-vs-cgroup-procs-for-memory-accounting-using-cgroups
+------------------
+1) why is it that with cgroup (3rd experiment in spreadsheet), the writes are not counted? or are they even done at all?
+2) memory profile for non-cache cache_adaptive
+3) taking the memory profile frin the above and feeding it to the cache cache_adaptive <-- shell script
+------------------------

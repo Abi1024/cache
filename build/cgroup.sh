@@ -14,3 +14,4 @@ fi
 #echo 200000000 > $"/var/cgroups/$2/memory.limit_in_bytes"
 sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
 cgexec -g memory:cache-test ./cache $1 $2
+echo "done running test"

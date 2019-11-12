@@ -1,0 +1,1 @@
+/usr/bin/c++   -W -Wall -fopenmp  -rdynamic CMakeFiles/cache_adaptive.dir/cache_adaptive.cpp.o  -o cache_adaptive stxxl/lib/libstxxl_debug.a -lpthread 
