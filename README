@@ -91,3 +91,5 @@ https://stackoverflow.com/questions/33759054/using-cgexec-vs-cgroup-procs-for-me
 2) memory profile for non-cache cache_adaptive
 3) taking the memory profile frin the above and feeding it to the cache cache_adaptive <-- shell script
 ------------------------
+sudo cmake ./build && sudo make --directory=./build && sudo ./cache.sh 0 100 cache-test
+---------------

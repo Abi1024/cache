@@ -1,0 +1,84 @@
+==23580== Invalid read of size 4
+==23580==    at 0x4E45FA0: pthread_mutex_lock (pthread_mutex_lock.c:65)
+==23580==    by 0x150A02: stxxl::mutex::lock() (mutex.h:83)
+==23580==    by 0x150CE5: stxxl::scoped_mutex_lock::scoped_mutex_lock(stxxl::mutex&) (mutex.h:136)
+==23580==    by 0x16280F: stxxl::stats::wait_started(stxxl::stats::wait_op_type) (iostats.cpp:256)
+==23580==    by 0x186BE1: stxxl::stats::scoped_wait_timer::start() (iostats.h:247)
+==23580==    by 0x186B88: stxxl::stats::scoped_wait_timer::scoped_wait_timer(stxxl::stats::wait_op_type, bool) (iostats.h:234)
+==23580==    by 0x18675D: stxxl::request_with_state::wait(bool) (request_with_state.cpp:45)
+==23580==    by 0x15234E: void stxxl::wait_all<stxxl::counting_ptr<stxxl::request>*>(stxxl::counting_ptr<stxxl::request>*, stxxl::counting_ptr<stxxl::request>*) (in /home/abiyaz/cache/build/test)
+==23580==    by 0x15160B: stxxl::wait_all(stxxl::counting_ptr<stxxl::request>*, unsigned long) (in /home/abiyaz/cache/build/test)
+==23580==    by 0x1588DD: stxxl::vector<int, 1024u, stxxl::lru_pager<128u>, 16384u, stxxl::RC, unsigned long long>::write_page(long long, long long) const (in /home/abiyaz/cache/build/test)
+==23580==    by 0x160690: stxxl::vector<int, 1024u, stxxl::lru_pager<128u>, 16384u, stxxl::RC, unsigned long long>::flush() const (in /home/abiyaz/cache/build/test)
+==23580==    by 0x16012A: stxxl::vector<int, 1024u, stxxl::lru_pager<128u>, 16384u, stxxl::RC, unsigned long long>::~vector() (in /home/abiyaz/cache/build/test)
+==23580==  Address 0x15f is not stack'd, malloc'd or (recently) free'd
+==23580==
+==23580==
+==23580== Process terminating with default action of signal 11 (SIGSEGV)
+==23580==  Access not within mapped region at address 0x15F
+==23580==    at 0x4E45FA0: pthread_mutex_lock (pthread_mutex_lock.c:65)
+==23580==    by 0x150A02: stxxl::mutex::lock() (mutex.h:83)
+==23580==    by 0x150CE5: stxxl::scoped_mutex_lock::scoped_mutex_lock(stxxl::mutex&) (mutex.h:136)
+==23580==    by 0x16280F: stxxl::stats::wait_started(stxxl::stats::wait_op_type) (iostats.cpp:256)
+==23580==    by 0x186BE1: stxxl::stats::scoped_wait_timer::start() (iostats.h:247)
+==23580==    by 0x186B88: stxxl::stats::scoped_wait_timer::scoped_wait_timer(stxxl::stats::wait_op_type, bool) (iostats.h:234)
+==23580==    by 0x18675D: stxxl::request_with_state::wait(bool) (request_with_state.cpp:45)
+==23580==    by 0x15234E: void stxxl::wait_all<stxxl::counting_ptr<stxxl::request>*>(stxxl::counting_ptr<stxxl::request>*, stxxl::counting_ptr<stxxl::request>*) (in /home/abiyaz/cache/build/test)
+==23580==    by 0x15160B: stxxl::wait_all(stxxl::counting_ptr<stxxl::request>*, unsigned long) (in /home/abiyaz/cache/build/test)
+==23580==    by 0x1588DD: stxxl::vector<int, 1024u, stxxl::lru_pager<128u>, 16384u, stxxl::RC, unsigned long long>::write_page(long long, long long) const (in /home/abiyaz/cache/build/test)
+==23580==    by 0x160690: stxxl::vector<int, 1024u, stxxl::lru_pager<128u>, 16384u, stxxl::RC, unsigned long long>::flush() const (in /home/abiyaz/cache/build/test)
+==23580==    by 0x16012A: stxxl::vector<int, 1024u, stxxl::lru_pager<128u>, 16384u, stxxl::RC, unsigned long long>::~vector() (in /home/abiyaz/cache/build/test)
+==23580==  If you believe this happened as a result of a stack
+==23580==  overflow in your program's main thread (unlikely but
+==23580==  possible), you can try to increase the size of the
+==23580==  main thread stack using the --main-stacksize= flag.
+==23580==  The main thread stack size used in this run was 8388608.
+==23580==
+==23580== HEAP SUMMARY:
+==23580==     in use at exit: 2,148,078,836 bytes in 2,207 blocks
+==23580==   total heap usage: 80,668 allocs, 78,461 frees, 6,445,079,246 bytes allocated
+==23580==
+==23580== 288 bytes in 1 blocks are possibly lost in loss record 19 of 34
+==23580==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==23580==    by 0x40134A6: allocate_dtv (dl-tls.c:286)
+==23580==    by 0x40134A6: _dl_allocate_tls (dl-tls.c:530)
+==23580==    by 0x4E44227: allocate_stack (allocatestack.c:627)
+==23580==    by 0x4E44227: pthread_create@@GLIBC_2.2.5 (pthread_create.c:644)
+==23580==    by 0x186091: stxxl::request_queue_impl_worker::start_thread(void* (*)(void*), void*, unsigned long&, stxxl::state<stxxl::request_queue_impl_worker::thread_state>&) (request_queue_impl_worker.cpp:43)
+==23580==    by 0x184666: stxxl::request_queue_impl_qwqr::request_queue_impl_qwqr(int) (request_queue_impl_qwqr.cpp:49)
+==23580==    by 0x17DE0D: stxxl::disk_queues::add_request(stxxl::counting_ptr<stxxl::request>&, long long) (disk_queues.h:69)
+==23580==    by 0x1836AC: stxxl::disk_queued_file::awrite(void*, unsigned long long, unsigned long long, stxxl::completion_handler const&) (disk_queued_file.cpp:47)
+==23580==    by 0x15ACEA: stxxl::typed_block<16384u, int, 0u, void>::write(stxxl::BID<16384u> const&, stxxl::completion_handler) (in /home/abiyaz/cache/build/test)
+==23580==    by 0x1587EE: stxxl::vector<int, 1024u, stxxl::lru_pager<128u>, 16384u, stxxl::RC, unsigned long long>::write_page(long long, long long) const (in /home/abiyaz/cache/build/test)
+==23580==    by 0x160690: stxxl::vector<int, 1024u, stxxl::lru_pager<128u>, 16384u, stxxl::RC, unsigned long long>::flush() const (in /home/abiyaz/cache/build/test)
+==23580==    by 0x16012A: stxxl::vector<int, 1024u, stxxl::lru_pager<128u>, 16384u, stxxl::RC, unsigned long long>::~vector() (in /home/abiyaz/cache/build/test)
+==23580==    by 0x59DD040: __run_exit_handlers (exit.c:108)
+==23580==
+==23580== 2,147,487,760 bytes in 1 blocks are possibly lost in loss record 34 of 34
+==23580==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==23580==    by 0x159784: void* stxxl::aligned_alloc<4096ul>(unsigned long, unsigned long) (aligned_alloc.h:58)
+==23580==    by 0x15997A: void* stxxl::aligned_alloc<4096ul>(unsigned long, unsigned long) (aligned_alloc.h:98)
+==23580==    by 0x157609: stxxl::typed_block<16384u, int, 0u, void>::operator new[](unsigned long) (in /home/abiyaz/cache/build/test)
+==23580==    by 0x155DBA: stxxl::simple_vector<stxxl::typed_block<16384u, int, 0u, void> >::simple_vector(unsigned long) (in /home/abiyaz/cache/build/test)
+==23580==    by 0x15464E: stxxl::vector<int, 1024u, stxxl::lru_pager<128u>, 16384u, stxxl::RC, unsigned long long>::allocate_page_cache() const (in /home/abiyaz/cache/build/test)
+==23580==    by 0x152B71: stxxl::vector<int, 1024u, stxxl::lru_pager<128u>, 16384u, stxxl::RC, unsigned long long>::vector(unsigned long long, unsigned long long) (in /home/abiyaz/cache/build/test)
+==23580==    by 0x15018E: __static_initialization_and_destruction_0(int, int) (in /home/abiyaz/cache/build/test)
+==23580==    by 0x1501FE: _GLOBAL__sub_I_array (in /home/abiyaz/cache/build/test)
+==23580==    by 0x188E0C: __libc_csu_init (in /home/abiyaz/cache/build/test)
+==23580==    by 0x59BBB27: (below main) (libc-start.c:266)
+==23580==
+==23580== LEAK SUMMARY:
+==23580==    definitely lost: 0 bytes in 0 blocks
+==23580==    indirectly lost: 0 bytes in 0 blocks
+==23580==      possibly lost: 2,147,488,048 bytes in 2 blocks
+==23580==    still reachable: 590,788 bytes in 2,205 blocks
+==23580==                       of which reachable via heuristic:
+==23580==                         newarray           : 8,200 bytes in 1 blocks
+==23580==                         multipleinheritance: 136 bytes in 1 blocks
+==23580==         suppressed: 0 bytes in 0 blocks
+==23580== Reachable blocks (those to which a pointer was found) are not shown.
+==23580== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==23580==
+==23580== For counts of detected and suppressed errors, rerun with: -v
+==23580== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
+./cache.sh: line 30: 23580 Segmentation fault      (core dumped) valgrind --leak-check=full ./build/test $2 $3

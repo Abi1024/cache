@@ -5,6 +5,7 @@ if [ $# -ne 3 ]
 then
 	echo "Must supply 3 arguments. \n \
 	Usage: sudo ./cache.sh <program> <cgroup_memory_in_mebibytes> <cgroup_name> \n \
+	The possible values for <program> are: \n \
 	0 = test program \n \
 	1 = cache_adaptive matrix multiply \n \
 	2 = non_cache_adaptive matrix multiply \n"
@@ -25,16 +26,21 @@ then
 fi
 
 cgcreate -g "memory:$3" -t abiyaz:abiyaz
+#sudo bash -c "echo 10 > /var/cgroups/$3/memory.swappiness"
 
 case "$1" in
 
 0)	cgexec -g memory:$3 ./build/test $2 $3
+		echo "Done"
+		#valgrind --leak-check=full ./build/test $2 $3
 		;;
 
 1)	cgexec -g memory:$3 ./build/cache_adaptive $2 $3
+		echo "Done"
 		;;
 
 2)	cgexec -g memory:$3 ./build/cache_non_adaptive $2 $3
+		echo "Done"
 		;;
 esac
 

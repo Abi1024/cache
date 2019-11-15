@@ -13,6 +13,7 @@ const stxxl::uint64 length = 1024;
 typedef stxxl::VECTOR_GENERATOR<TYPE,PAGE_SIZE,CACHE,BLOCK_SIZE_IN_BYTES>::result vector_type;
 typedef stxxl::vector<TYPE, PAGE_SIZE, stxxl::lru_pager<CACHE>,BLOCK_SIZE_IN_BYTES>::iterator itr;
 const bool mem_profile = false;
+char* cgroup_name = "";
 
 const int CONV_CACHE = 128; //pages per cache_adaptive
 const int CONV_PAGE_SIZE = 4; //blocks per page
@@ -195,7 +196,11 @@ void mm( itr x, itr u, itr v, itr y, int n0, int n)
 		mm( y2 + m12, u + m12, v + m22, y, n0, nn );
 		mm( y2 + m21, u + m22, v + m21, y, n0, nn );
 		mm( y2 + m22, u + m22, v + m22, y, n0, nn );
-
+    /*
+		if (mem_profile){
+				limit_memory(,arg)
+		}
+    */
     for (int i = 0; i < n*n; i++){
       x[i] += y2[i];
 			y2[i] = 0;
@@ -260,6 +265,7 @@ int main(int argc, char *argv[]){
     std::cout << "Insufficient arguments! Usage: cgroup_cache_adaptive <memory_limit> <cgroup_name>\n";
     exit(1);
   }
+	strncpy(cgroup_name,argv[2],strlen(argv[2]));
 	std::cout << "Running cache_adaptive matrix multiply with matrices of size: " << (int)length << "x" << (int)length << "\n";
   std::vector<int> io_stats = {0,0};
   print_io_data(io_stats, "Printing I/O statistics at program start @@@@@ \n");
@@ -336,8 +342,7 @@ int main(int argc, char *argv[]){
 	stxxl::timer start_p1;
 	start_p1.start();
 
-	mm(array.begin()+2*length*length,array.begin(),array.begin()+length*length,length);
-
+  mm_root(array,bm,array.begin()+2*length*length,array.begin(),array.begin()+length*length,length);
 	start_p1.stop();
 
 	stxxl::stats_data stats3(stxxl::stats_data(*Stats) - stats2);

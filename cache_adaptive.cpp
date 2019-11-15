@@ -12,7 +12,7 @@ const int PAGE_SIZE = 256; //blocks per page
 const int BLOCK_SIZE_IN_BYTES = 4096; //block size in bytes
 const stxxl::uint64 length = 1024;
 typedef stxxl::VECTOR_GENERATOR<TYPE,PAGE_SIZE,CACHE,BLOCK_SIZE_IN_BYTES>::result vector_type;
-TYpedef stxxl::vector<TYPE, PAGE_SIZE, stxxl::lru_pager<CACHE>,BLOCK_SIZE_IN_BYTES>::iterator itr;
+typedef stxxl::vector<TYPE, PAGE_SIZE, stxxl::lru_pager<CACHE>,BLOCK_SIZE_IN_BYTES>::iterator itr;
 
 const int CONV_CACHE = 128; //pages per cache_adaptive
 const int CONV_PAGE_SIZE = 4; //blocks per page

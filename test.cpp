@@ -10,10 +10,10 @@ const int B = 64;
 const int CACHE = 128; //pages per cache_adaptive
 const int PAGE_SIZE = 1024; //blocks per page
 const int BLOCK_SIZE_IN_BYTES = 16384; //block size in bytes
-const stxxl::uint64 length = 16000;
+const stxxl::uint64 length = 32000;
 typedef stxxl::VECTOR_GENERATOR<TYPE,PAGE_SIZE,CACHE,BLOCK_SIZE_IN_BYTES>::result vector_type;
 typedef stxxl::vector<TYPE, PAGE_SIZE, stxxl::lru_pager<CACHE>,BLOCK_SIZE_IN_BYTES>::iterator itr;
-vector_type array;
+//vector_type array;
 
 std::string exec(std::string cmd) {
     std::array<char, 128> buffer;
@@ -75,7 +75,8 @@ void limit_memory(const char* string1, const char* string2){
     exit(1);
   }
   std::cout << "Limiting cgroup memory: " << string << " bytes\n";
-  /*command = std::string("echo ") + string + std::string(" > /var/cgroups/") + string2 + std::string("/memory.memsw.limit_in_bytes");
+  /*string = std::to_string(memory_in_bytes + 500*1024*1024);
+  command = std::string("echo ") + string + std::string(" > /var/cgroups/") + string2 + std::string("/memory.memsw.limit_in_bytes");
   return_code = system(command.c_str());
   if (return_code != 0){
     std::cout << "Error. Unable to set cgroup swap memory " << string << "\n";
@@ -91,7 +92,8 @@ int main(int argc, char *argv[]){
     exit(1);
   }
     std::vector<long long> io_stats = {0,0};
-  {
+    {
+      vector_type array;
     //MODIFY MEMORY WITH CGROUP
     limit_memory(argv[1],argv[2]);
     print_io_data(io_stats, "Printing I/O statistics at program start @@@@@ \n");
