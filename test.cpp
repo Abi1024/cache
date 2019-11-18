@@ -7,9 +7,16 @@
 const int B = 64;
 
 #define TYPE int
+/*
 const int CACHE = 128; //pages per cache_adaptive
 const int PAGE_SIZE = 1024; //blocks per page
 const int BLOCK_SIZE_IN_BYTES = 16384; //block size in bytes
+*/
+const int CACHE = 128; //pages per cache_adaptive
+const int PAGE_SIZE = 256; //blocks per page
+const int BLOCK_SIZE_IN_BYTES = 16384; //block size in bytes
+
+
 const stxxl::uint64 length = 16000;
 typedef stxxl::VECTOR_GENERATOR<TYPE,PAGE_SIZE,CACHE,BLOCK_SIZE_IN_BYTES>::result vector_type;
 typedef stxxl::vector<TYPE, PAGE_SIZE, stxxl::lru_pager<CACHE>,BLOCK_SIZE_IN_BYTES>::iterator itr;

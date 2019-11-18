@@ -17,7 +17,7 @@ then
 	git clone git@github.com:stxxl/stxxl.git
 fi
 
-cmake ./build && make ./build
+cmake ./build && make --directory=./build
 sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
 
 if [ -d  "/var/cgroups/$3" ]
