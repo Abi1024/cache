@@ -93,3 +93,4 @@ https://stackoverflow.com/questions/33759054/using-cgexec-vs-cgroup-procs-for-me
 ------------------------
 sudo cmake ./build && sudo make --directory=./build && sudo ./cache.sh 0 100 cache-test
 ---------------
+2048x2048: Data: 3578789888

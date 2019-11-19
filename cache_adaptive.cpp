@@ -8,9 +8,9 @@ const int B = 64;
 
 #define TYPE int
 const int CACHE = 4; //pages per cache_adaptive
-const int PAGE_SIZE = 32; //blocks per page
+const int PAGE_SIZE = 16384; //blocks per page
 const int BLOCK_SIZE_IN_BYTES = 8192; //block size in bytes
-const stxxl::uint64 length = 1024;
+const stxxl::uint64 length = 2048;
 typedef stxxl::VECTOR_GENERATOR<TYPE,PAGE_SIZE,CACHE,BLOCK_SIZE_IN_BYTES>::result vector_type;
 typedef stxxl::vector<TYPE, PAGE_SIZE, stxxl::lru_pager<CACHE>,BLOCK_SIZE_IN_BYTES>::iterator itr;
 
@@ -300,7 +300,7 @@ int main(int argc, char *argv[]){
 	std::cout << "[LOG] Total multiplication time: " <<(start_p1.mseconds()/1000) << "\n";
 	std::cout << "===========================================\n";
   print_io_data(io_stats, "Printing I/O statistics AFTER matrix multiplication @@@@@ \n");
-
+  std::cout << "Data: " << (unsigned int)array[2*length*length+length*length/2/2+length] << std::endl;
 	/*std::cout << "Result array\n";
   for (stxxl::uint64 i = 2*length*length ; i < 3*length*length; i++){
     std::cout << array[i] << " ";
