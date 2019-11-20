@@ -1,0 +1,2 @@
+disk=/tmp/stxxl-local,10G,syscall autogrow delete direct=try
+

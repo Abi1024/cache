@@ -1,0 +1,1 @@
+/usr/bin/c++   -W -Wall -pedantic -Wno-long-long -Wextra -ftemplate-depth=1024 -std=c++11 -fopenmp -g     -rdynamic CMakeFiles/sort-DB.dir/sort-DB.cpp.o  -o sort-DB ../lib/libstxxl_debug.a -lpthread 

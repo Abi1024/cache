@@ -1,0 +1,4 @@
+Cannot generate into /home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/local
+It is already used for project /home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL
+
+Please either delete it manually or select another generation directory

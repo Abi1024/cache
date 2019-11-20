@@ -1,0 +1,2 @@
+disk=/home/data_nfs/cache*/cgroups/,1T,syscall autogrow delete direct=try
+

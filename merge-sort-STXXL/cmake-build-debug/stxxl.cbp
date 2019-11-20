@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="stxxl"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\misc\;CMake Files\misc\cmake\;CMake Files\..\;CMake Files\..\.git\;CMake Files\..\.git\refs\;CMake Files\..\.git\refs\heads\;CMake Files\include\;CMake Files\include\stxxl\;CMake Files\include\stxxl\bits\;CMake Files\lib\;CMake Files\tools\;CMake Files\tools\benchmarks\;CMake Files\tools\extras\;CMake Files\examples\;CMake Files\examples\algo\;CMake Files\examples\applications\;CMake Files\examples\common\;CMake Files\examples\containers\;CMake Files\examples\stream\;CMake Files\tests\;CMake Files\tests\algo\;CMake Files\tests\common\;CMake Files\tests\containers\;CMake Files\tests\containers\btree\;CMake Files\tests\io\;CMake Files\tests\mng\;CMake Files\tests\stream\;CMake Files\local\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Nightly">
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 Nightly"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="package_source">
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 package_source"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Experimental">
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 Experimental"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Continuous">
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 Continuous"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="package">
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 package"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test">
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 test"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stxxl">
+				<Option output="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/lib/libstxxl_debug.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/lib"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D_LARGEFILE_SOURCE"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-D_LARGE_FILES"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/include"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 stxxl"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stxxl/fast">
+				<Option output="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/lib/libstxxl_debug.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/lib"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D_LARGEFILE_SOURCE"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-D_LARGE_FILES"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/include"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 stxxl/fast"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stxxl_tool">
+				<Option output="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/tools/stxxl_tool" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/tools"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D_LARGEFILE_SOURCE"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-D_LARGE_FILES"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/include"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 stxxl_tool"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stxxl_tool/fast">
+				<Option output="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/tools/stxxl_tool" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/tools"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D_LARGEFILE_SOURCE"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-D_LARGE_FILES"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/include"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 stxxl_tool/fast"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test1">
+				<Option output="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/test1" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D_LARGEFILE_SOURCE"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-D_LARGE_FILES"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/include"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 test1"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test1/fast">
+				<Option output="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/test1" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D_LARGEFILE_SOURCE"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-D_LARGE_FILES"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/include"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 test1/fast"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="merge_sort_strings">
+				<Option output="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/merge_sort_strings" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D_LARGEFILE_SOURCE"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-D_LARGE_FILES"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/include"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 merge_sort_strings"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="merge_sort_strings/fast">
+				<Option output="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/merge_sort_strings" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D_LARGEFILE_SOURCE"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-D_LARGE_FILES"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/include"/>
+					<Add directory="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 merge_sort_strings/fast"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug/local/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/algo/async_schedule.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/common/cmdline.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/common/exithandler.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/common/log.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/common/rand.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/common/seed.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/common/utils.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/common/verbose.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/common/version.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/boostfd_file.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/create_file.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/disk_queued_file.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/file.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/fileperblock_file.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/iostats.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/mem_file.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/mmap_file.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/request.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/request_queue_impl_1q.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/request_queue_impl_qwqr.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/request_queue_impl_worker.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/request_with_state.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/request_with_waiters.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/serving_request.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/simdisk_file.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/syscall_file.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/ufs_file_base.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/wbtl_file.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/wfs_file_base.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/io/wincall_file.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/mng/block_manager.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/mng/config.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/mng/disk_allocator.cpp">
+			<Option target="stxxl"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/local/merge_sort_strings.cpp">
+			<Option target="merge_sort_strings"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/local/test1.cpp">
+			<Option target="test1"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tools/benchmark_disks.cpp">
+			<Option target="stxxl_tool"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tools/benchmark_disks_random.cpp">
+			<Option target="stxxl_tool"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tools/benchmark_files.cpp">
+			<Option target="stxxl_tool"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tools/benchmark_pqueue.cpp">
+			<Option target="stxxl_tool"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tools/benchmark_sort.cpp">
+			<Option target="stxxl_tool"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tools/create_files.cpp">
+			<Option target="stxxl_tool"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tools/mallinfo.cpp">
+			<Option target="stxxl_tool"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tools/mlock.cpp">
+			<Option target="stxxl_tool"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tools/stxxl_tool.cpp">
+			<Option target="stxxl_tool"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/misc/cmake/GetGitRevisionDescription.cmake">
+			<Option virtualFolder="CMake Files\misc\cmake\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/misc/cmake/GetGitRevisionDescription.cmake.in">
+			<Option virtualFolder="CMake Files\misc\cmake\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/misc/cmake/TestLargeFiles.cmake">
+			<Option virtualFolder="CMake Files\misc\cmake\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/misc/cmake/stxxl-config.cmake.in">
+			<Option virtualFolder="CMake Files\misc\cmake\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/misc/cmake/stxxl-version.cmake.in">
+			<Option virtualFolder="CMake Files\misc\cmake\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/misc/cmake/stxxl.pc">
+			<Option virtualFolder="CMake Files\misc\cmake\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/../.git/HEAD">
+			<Option virtualFolder="CMake Files\..\.git\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/../.git/refs/heads/master">
+			<Option virtualFolder="CMake Files\..\.git\refs\heads\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/include/stxxl/bits/config.h.in">
+			<Option virtualFolder="CMake Files\include\stxxl\bits\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/lib/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\lib\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tools/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\tools\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tools/benchmarks/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\tools\benchmarks\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tools/extras/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\tools\extras\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/examples/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\examples\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/examples/algo/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\examples\algo\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/examples/applications/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\examples\applications\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/examples/common/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\examples\common\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/examples/containers/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\examples\containers\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/examples/stream/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\examples\stream\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tests/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\tests\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tests/algo/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\tests\algo\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tests/common/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\tests\common\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tests/containers/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\tests\containers\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tests/containers/btree/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\tests\containers\btree\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tests/io/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\tests\io\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tests/mng/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\tests\mng\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/tests/stream/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\tests\stream\"/>
+		</Unit>
+		<Unit filename="/home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/local/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\local\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

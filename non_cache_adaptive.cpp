@@ -13,6 +13,7 @@ const stxxl::uint64 length = 2048;
 typedef stxxl::VECTOR_GENERATOR<TYPE,PAGE_SIZE,CACHE,BLOCK_SIZE_IN_BYTES>::result vector_type;
 typedef stxxl::vector<TYPE, PAGE_SIZE, stxxl::lru_pager<CACHE>,BLOCK_SIZE_IN_BYTES>::iterator itr;
 const bool mem_profile = false;
+char* cgroup_name = NULL;
 
 const int CONV_CACHE = 128; //pages per cache_adaptive
 const int CONV_PAGE_SIZE = 4; //blocks per page
@@ -196,9 +197,9 @@ void mm( itr x, itr u, itr v, itr y, int n0, int n)
 		mm( y2 + m21, u + m22, v + m21, y, n0, nn );
 		mm( y2 + m22, u + m22, v + m22, y, n0, nn );
 
-		/*if (mem_profile){
-				limit_memory(,arg)
-		}*/
+		if (mem_profile && limit < 3){
+				limit_memory(,cgroup_name);
+		}
 
     for (int i = 0; i < n*n; i++){
       x[i] += y2[i];

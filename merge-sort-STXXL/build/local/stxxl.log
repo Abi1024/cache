@@ -1,0 +1,24 @@
+[STXXL-MSG] [LOG] MERGESORT: 500 MB, DB USED: ../../../database_sample/DB_5G
+[STXXL-MSG] STXXL v1.4.99 (prerelease/Debug) (git 6ceeb17a433dbc1daac583ea26a514390a3f53ba)
+[STXXL-MSG] Disk '/tmp/stxxl-local' is allocated, space: 9536 MiB, I/O implementation: syscall autogrow delete_on_exit queue=0
+[STXXL-MSG] [LOG] Total initializing time: 305.203
+[STXXL-MSG] [LOG] IO Statistics for sorting: STXXL I/O statistics
+ total number of reads                      : 24419 (23.847 Ki) 
+ average block size (read)                  : 397312 (388.000 KiB) 
+ number of bytes read from disks            : 9701961728 (9.036 GiB) 
+ time spent in serving all read requests    : 182.324 s @ 50.7477 MiB/s
+ time spent in reading (parallel read time) : 182.324 s @ 50.7477 MiB/s
+ total number of writes                     : 24426 (23.854 Ki) 
+ average block size (write)                 : 397312 (388.000 KiB) 
+ number of bytes written to disks           : 9704742912 (9.038 GiB) 
+ time spent in serving all write requests   : 95.2075 s @ 97.2104 MiB/s
+ time spent in writing (parallel write time): 95.2075 s @ 97.2104 MiB/s
+ time spent in I/O (parallel I/O time)      : 277.531 s @ 66.6868 MiB/s
+ I/O wait time                              : 250.893 s
+ I/O wait4read time                         : 249.372 s
+ I/O wait4write time                        : 1.52048 s
+ Time since the last reset                  : 278.606 s
+
+[STXXL-MSG] [LOG] Max MB allocated:  9251
+[STXXL-MSG] [LOG] Total sorting time: 278.606
+[STXXL-MSG] [LOG] Total process time: 583.81

@@ -1,0 +1,1 @@
+/usr/bin/c++   -W -Wall -pedantic -Wno-long-long -Wextra -ftemplate-depth=1024 -std=c++11 -fopenmp -g    -rdynamic CMakeFiles/merge_sort_strings.dir/merge_sort_strings.cpp.o  -o merge_sort_strings ../lib/libstxxl_debug.a -lpthread 

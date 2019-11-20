@@ -1,0 +1,15 @@
+/home/abiyaz/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/191.7141.37/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL
+-- Detected git refspec refs/heads/master sha 4209cffcf17003bc67500c92183fdcfcd462617d
+-- Using POSIX pthread library functions.
+CMake Warning at CMakeLists.txt:636 (export):
+  Cannot create package registry file:
+
+    /home/abiyaz/.cmake/packages/stxxl/0df6a9adabe11a491fa39dbf64671f43
+
+  Permission denied
+
+
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/abiyaz/cache-adaptive-vs-oblivious/merge-sort-STXXL/cmake-build-debug

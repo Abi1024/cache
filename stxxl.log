@@ -2,18 +2,20 @@
 [STXXL-MSG] Disk '/home/abiyaz/data01/stxxl' is allocated, space: 95367 MiB, I/O implementation: syscall queue=0 devid=0 unlink_on_open
 [STXXL-MSG] [LOG] Max KB allocated for one matrix:  16384
 [STXXL-MSG] [LOG] Matrix multiplication: STXXL I/O statistics
- total number of reads                      : 0 
- average block size (read)                  : 0 B 
- number of bytes read from disks            : 0 B 
- time spent in serving all read requests    : 0 s @ -nan MiB/s
- time spent in reading (parallel read time) : 0 s @ -nan MiB/s
- total number of writes                     : 0 
- average block size (write)                 : 0 B 
- number of bytes written to disks           : 0 B 
- time spent in serving all write requests   : 0 s @ -nan MiB/s
- time spent in writing (parallel write time): 0 s @ -nan MiB/s
- time spent in I/O (parallel I/O time)      : 0 s @ -nan MiB/s
- I/O wait time                              : 0 s
- Time since the last reset                  : 1063.43 s
+ total number of reads                      : 20480 (20.000 Ki) 
+ average block size (read)                  : 8192 (8.000 KiB) 
+ number of bytes read from disks            : 167772160 (160.000 MiB) 
+ time spent in serving all read requests    : 3.03862 s @ 52.6555 MiB/s
+ time spent in reading (parallel read time) : 3.03862 s @ 52.6555 MiB/s
+ total number of writes                     : 20480 (20.000 Ki) 
+ average block size (write)                 : 8192 (8.000 KiB) 
+ number of bytes written to disks           : 167772160 (160.000 MiB) 
+ time spent in serving all write requests   : 2.05831 s @ 77.7339 MiB/s
+ time spent in writing (parallel write time): 2.05831 s @ 77.7339 MiB/s
+ time spent in I/O (parallel I/O time)      : 5.09692 s @ 62.783 MiB/s
+ I/O wait time                              : 5.24072 s
+ I/O wait4read time                         : 3.10911 s
+ I/O wait4write time                        : 2.13161 s
+ Time since the last reset                  : 1710.8 s
 
 [STXXL-MSG] [LOG] Max KB allocated:  81920

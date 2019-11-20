@@ -1,0 +1,3 @@
+[STXXL-MSG] [LOG] MERGESORT: 6000 MB, DB USED: /home/abiyaz/cache/5G
+[STXXL-MSG] STXXL v1.4.99 (prerelease/Debug) (git 828b46e38a78a0551b418f7f1ae31683e1524cdf)
+[STXXL-MSG] Disk '/home/abiyaz/data01/stxxl' is allocated, space: 95367 MiB, I/O implementation: syscall queue=0 unlink_on_open
