@@ -1,4 +1,4 @@
-# Install script for directory: /home/abiyaz/cache/stxxl/tools
+# Install script for directory: /home/arghya/cache/stxxl/tools
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/stxxl_tool"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/abiyaz/cache/build/stxxl/tools/stxxl_tool")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/arghya/cache/build/stxxl/tools/stxxl_tool")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/stxxl_tool" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/stxxl_tool")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -55,8 +55,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/abiyaz/cache/build/stxxl/tools/benchmarks/cmake_install.cmake")
-  include("/home/abiyaz/cache/build/stxxl/tools/extras/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/tools/benchmarks/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/tools/extras/cmake_install.cmake")
 
 endif()
 

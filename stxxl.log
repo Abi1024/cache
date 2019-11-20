@@ -1,2 +1,21 @@
 [STXXL-MSG] STXXL v1.4.99 (prerelease/Debug) (git b9e44f0ecba7d7111fbb33f3330c3e53f2b75236) + gnu parallel(20181206)
 [STXXL-MSG] Disk '/home/abiyaz/data01/stxxl' is allocated, space: 95367 MiB, I/O implementation: syscall queue=0 devid=0 unlink_on_open
+[STXXL-MSG] [LOG] Max KB allocated for one matrix:  4096
+[STXXL-MSG] [LOG] Matrix multiplication: STXXL I/O statistics
+ total number of reads                      : 5120 (5.000 Ki) 
+ average block size (read)                  : 4096 (4.000 KiB) 
+ number of bytes read from disks            : 20971520 (20.000 MiB) 
+ time spent in serving all read requests    : 0.548964 s @ 36.4323 MiB/s
+ time spent in reading (parallel read time) : 0.548964 s @ 36.4323 MiB/s
+ total number of writes                     : 5120 (5.000 Ki) 
+ average block size (write)                 : 4096 (4.000 KiB) 
+ number of bytes written to disks           : 20971520 (20.000 MiB) 
+ time spent in serving all write requests   : 0.387573 s @ 51.6032 MiB/s
+ time spent in writing (parallel write time): 0.387573 s @ 51.6032 MiB/s
+ time spent in I/O (parallel I/O time)      : 0.936537 s @ 42.7106 MiB/s
+ I/O wait time                              : 0.971588 s
+ I/O wait4read time                         : 0.566409 s
+ I/O wait4write time                        : 0.405179 s
+ Time since the last reset                  : 212.929 s
+
+[STXXL-MSG] [LOG] Max KB allocated:  20480

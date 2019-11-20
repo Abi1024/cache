@@ -6,5 +6,5 @@ CXX_FLAGS =  -W -Wall -fopenmp
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/abiyaz/cache/stxxl/include -I/home/abiyaz/cache/build/stxxl/include 
+CXX_INCLUDES = -I/home/arghya/cache/stxxl/include -I/home/arghya/cache/build/stxxl/include 
 

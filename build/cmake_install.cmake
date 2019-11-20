@@ -1,4 +1,4 @@
-# Install script for directory: /home/abiyaz/cache
+# Install script for directory: /home/arghya/cache
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/abiyaz/cache/build/stxxl/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/cmake_install.cmake")
 
 endif()
 
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/abiyaz/cache/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/arghya/cache/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/abiyaz/cache
+CMAKE_SOURCE_DIR = /home/arghya/cache
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/abiyaz/cache/build
+CMAKE_BINARY_DIR = /home/arghya/cache/build
 
 # Utility rule file for ContinuousStart.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/abiyaz/cache/build
 include stxxl/CMakeFiles/ContinuousStart.dir/progress.make
 
 stxxl/CMakeFiles/ContinuousStart:
-	cd /home/abiyaz/cache/build/stxxl && /usr/bin/ctest -D ContinuousStart
+	cd /home/arghya/cache/build/stxxl && /usr/bin/ctest -D ContinuousStart
 
 ContinuousStart: stxxl/CMakeFiles/ContinuousStart
 ContinuousStart: stxxl/CMakeFiles/ContinuousStart.dir/build.make
@@ -67,10 +67,10 @@ stxxl/CMakeFiles/ContinuousStart.dir/build: ContinuousStart
 .PHONY : stxxl/CMakeFiles/ContinuousStart.dir/build
 
 stxxl/CMakeFiles/ContinuousStart.dir/clean:
-	cd /home/abiyaz/cache/build/stxxl && $(CMAKE_COMMAND) -P CMakeFiles/ContinuousStart.dir/cmake_clean.cmake
+	cd /home/arghya/cache/build/stxxl && $(CMAKE_COMMAND) -P CMakeFiles/ContinuousStart.dir/cmake_clean.cmake
 .PHONY : stxxl/CMakeFiles/ContinuousStart.dir/clean
 
 stxxl/CMakeFiles/ContinuousStart.dir/depend:
-	cd /home/abiyaz/cache/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/abiyaz/cache /home/abiyaz/cache/stxxl /home/abiyaz/cache/build /home/abiyaz/cache/build/stxxl /home/abiyaz/cache/build/stxxl/CMakeFiles/ContinuousStart.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/arghya/cache/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/arghya/cache /home/arghya/cache/stxxl /home/arghya/cache/build /home/arghya/cache/build/stxxl /home/arghya/cache/build/stxxl/CMakeFiles/ContinuousStart.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : stxxl/CMakeFiles/ContinuousStart.dir/depend
 

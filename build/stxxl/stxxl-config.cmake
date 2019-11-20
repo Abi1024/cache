@@ -7,7 +7,7 @@
 
 # compute paths from current cmake file path
 get_filename_component(STXXL_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
-set(STXXL_INCLUDE_DIRS "/home/abiyaz/cache/stxxl/include/;/home/abiyaz/cache/build/stxxl/include/")
+set(STXXL_INCLUDE_DIRS "/home/arghya/cache/stxxl/include/;/home/arghya/cache/build/stxxl/include/")
 
 # additional compiler flags. these often include -fopenmp!
 set(STXXL_CXX_FLAGS "-fopenmp")

@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
-# Source directory: /home/abiyaz/cache/stxxl
-# Build directory: /home/abiyaz/cache/build/stxxl
+# Source directory: /home/arghya/cache/stxxl
+# Build directory: /home/arghya/cache/build/stxxl
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.

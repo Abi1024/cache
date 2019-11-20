@@ -1,4 +1,4 @@
-# Install script for directory: /home/abiyaz/cache/stxxl
+# Install script for directory: /home/arghya/cache/stxxl
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,25 +38,25 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES "/home/abiyaz/cache/stxxl/include/stxxl.h")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES "/home/arghya/cache/stxxl/include/stxxl.h")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/abiyaz/cache/stxxl/include/stxxl")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/arghya/cache/stxxl/include/stxxl")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/stxxl/bits" TYPE FILE FILES "/home/abiyaz/cache/build/stxxl/include/stxxl/bits/config.h")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/stxxl/bits" TYPE FILE FILES "/home/arghya/cache/build/stxxl/include/stxxl/bits/config.h")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/abiyaz/cache/build/stxxl/stxxl_debug.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/arghya/cache/build/stxxl/stxxl_debug.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/stxxl" TYPE FILE FILES
-    "/home/abiyaz/cache/build/stxxl/stxxl-version.cmake"
-    "/home/abiyaz/cache/build/stxxl/CMakeFiles/stxxl-config.cmake"
+    "/home/arghya/cache/build/stxxl/stxxl-version.cmake"
+    "/home/arghya/cache/build/stxxl/CMakeFiles/stxxl-config.cmake"
     )
 endif()
 
@@ -64,7 +64,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/stxxl/stxxl-targets.cmake")
     file(DIFFERENT EXPORT_FILE_CHANGED FILES
          "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/stxxl/stxxl-targets.cmake"
-         "/home/abiyaz/cache/build/stxxl/CMakeFiles/Export/lib/cmake/stxxl/stxxl-targets.cmake")
+         "/home/arghya/cache/build/stxxl/CMakeFiles/Export/lib/cmake/stxxl/stxxl-targets.cmake")
     if(EXPORT_FILE_CHANGED)
       file(GLOB OLD_CONFIG_FILES "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/stxxl/stxxl-targets-*.cmake")
       if(OLD_CONFIG_FILES)
@@ -73,19 +73,19 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
       endif()
     endif()
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/stxxl" TYPE FILE FILES "/home/abiyaz/cache/build/stxxl/CMakeFiles/Export/lib/cmake/stxxl/stxxl-targets.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/stxxl" TYPE FILE FILES "/home/arghya/cache/build/stxxl/CMakeFiles/Export/lib/cmake/stxxl/stxxl-targets.cmake")
   if("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/stxxl" TYPE FILE FILES "/home/abiyaz/cache/build/stxxl/CMakeFiles/Export/lib/cmake/stxxl/stxxl-targets-debug.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/stxxl" TYPE FILE FILES "/home/arghya/cache/build/stxxl/CMakeFiles/Export/lib/cmake/stxxl/stxxl-targets-debug.cmake")
   endif()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/abiyaz/cache/build/stxxl/lib/cmake_install.cmake")
-  include("/home/abiyaz/cache/build/stxxl/tools/cmake_install.cmake")
-  include("/home/abiyaz/cache/build/stxxl/examples/cmake_install.cmake")
-  include("/home/abiyaz/cache/build/stxxl/tests/cmake_install.cmake")
-  include("/home/abiyaz/cache/build/stxxl/local/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/lib/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/tools/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/examples/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/tests/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/local/cmake_install.cmake")
 
 endif()
 

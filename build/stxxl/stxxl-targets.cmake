@@ -48,7 +48,7 @@ add_library(stxxl STATIC IMPORTED)
 set_property(TARGET stxxl APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
 set_target_properties(stxxl PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "CXX"
-  IMPORTED_LOCATION_DEBUG "/home/abiyaz/cache/build/stxxl/lib/libstxxl_debug.a"
+  IMPORTED_LOCATION_DEBUG "/home/arghya/cache/build/stxxl/lib/libstxxl_debug.a"
   )
 
 # This file does not depend on other imported targets which have

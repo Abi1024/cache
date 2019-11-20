@@ -6,5 +6,5 @@ CXX_FLAGS =  -W -Wall -W -Wall -pedantic -Wno-long-long -Wextra -ftemplate-depth
 
 CXX_DEFINES = -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES
 
-CXX_INCLUDES = -I/home/abiyaz/cache/stxxl/include -I/home/abiyaz/cache/build/stxxl/include 
+CXX_INCLUDES = -I/home/arghya/cache/stxxl/include -I/home/arghya/cache/build/stxxl/include 
 

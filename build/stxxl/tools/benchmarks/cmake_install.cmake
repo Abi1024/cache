@@ -1,4 +1,4 @@
-# Install script for directory: /home/abiyaz/cache/stxxl/tools/benchmarks
+# Install script for directory: /home/arghya/cache/stxxl/tools/benchmarks
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -1,4 +1,4 @@
-# Install script for directory: /home/abiyaz/cache/stxxl/examples
+# Install script for directory: /home/arghya/cache/stxxl/examples
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,11 +39,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/abiyaz/cache/build/stxxl/examples/algo/cmake_install.cmake")
-  include("/home/abiyaz/cache/build/stxxl/examples/applications/cmake_install.cmake")
-  include("/home/abiyaz/cache/build/stxxl/examples/common/cmake_install.cmake")
-  include("/home/abiyaz/cache/build/stxxl/examples/containers/cmake_install.cmake")
-  include("/home/abiyaz/cache/build/stxxl/examples/stream/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/examples/algo/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/examples/applications/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/examples/common/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/examples/containers/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/examples/stream/cmake_install.cmake")
 
 endif()
 

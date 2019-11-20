@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/abiyaz/cache
+CMAKE_SOURCE_DIR = /home/arghya/cache
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/abiyaz/cache/build
+CMAKE_BINARY_DIR = /home/arghya/cache/build
 
 # Utility rule file for NightlyConfigure.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/abiyaz/cache/build
 include stxxl/CMakeFiles/NightlyConfigure.dir/progress.make
 
 stxxl/CMakeFiles/NightlyConfigure:
-	cd /home/abiyaz/cache/build/stxxl && /usr/bin/ctest -D NightlyConfigure
+	cd /home/arghya/cache/build/stxxl && /usr/bin/ctest -D NightlyConfigure
 
 NightlyConfigure: stxxl/CMakeFiles/NightlyConfigure
 NightlyConfigure: stxxl/CMakeFiles/NightlyConfigure.dir/build.make
@@ -67,10 +67,10 @@ stxxl/CMakeFiles/NightlyConfigure.dir/build: NightlyConfigure
 .PHONY : stxxl/CMakeFiles/NightlyConfigure.dir/build
 
 stxxl/CMakeFiles/NightlyConfigure.dir/clean:
-	cd /home/abiyaz/cache/build/stxxl && $(CMAKE_COMMAND) -P CMakeFiles/NightlyConfigure.dir/cmake_clean.cmake
+	cd /home/arghya/cache/build/stxxl && $(CMAKE_COMMAND) -P CMakeFiles/NightlyConfigure.dir/cmake_clean.cmake
 .PHONY : stxxl/CMakeFiles/NightlyConfigure.dir/clean
 
 stxxl/CMakeFiles/NightlyConfigure.dir/depend:
-	cd /home/abiyaz/cache/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/abiyaz/cache /home/abiyaz/cache/stxxl /home/abiyaz/cache/build /home/abiyaz/cache/build/stxxl /home/abiyaz/cache/build/stxxl/CMakeFiles/NightlyConfigure.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/arghya/cache/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/arghya/cache /home/arghya/cache/stxxl /home/arghya/cache/build /home/arghya/cache/build/stxxl /home/arghya/cache/build/stxxl/CMakeFiles/NightlyConfigure.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : stxxl/CMakeFiles/NightlyConfigure.dir/depend
 

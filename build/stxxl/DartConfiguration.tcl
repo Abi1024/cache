@@ -4,8 +4,8 @@
 
 
 # Configuration directories and files
-SourceDirectory: /home/abiyaz/cache/stxxl
-BuildDirectory: /home/abiyaz/cache/build/stxxl
+SourceDirectory: /home/arghya/cache/stxxl
+BuildDirectory: /home/arghya/cache/build/stxxl
 
 # Where to place the cost data store
 CostDataFile: 
@@ -36,7 +36,7 @@ ScpCommand: /usr/bin/scp
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/usr/bin/cmake" "/home/abiyaz/cache/stxxl"
+ConfigureCommand: "/usr/bin/cmake" "/home/arghya/cache/stxxl"
 MakeCommand: /usr/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 

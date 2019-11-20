@@ -1,4 +1,4 @@
-# Install script for directory: /home/abiyaz/cache/stxxl/tests/containers
+# Install script for directory: /home/arghya/cache/stxxl/tests/containers
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,9 +39,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/abiyaz/cache/build/stxxl/tests/containers/btree/cmake_install.cmake")
-  include("/home/abiyaz/cache/build/stxxl/tests/containers/hash_map/cmake_install.cmake")
-  include("/home/abiyaz/cache/build/stxxl/tests/containers/ppq/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/tests/containers/btree/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/tests/containers/hash_map/cmake_install.cmake")
+  include("/home/arghya/cache/build/stxxl/tests/containers/ppq/cmake_install.cmake")
 
 endif()
 

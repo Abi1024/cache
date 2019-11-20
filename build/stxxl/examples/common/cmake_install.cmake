@@ -1,4 +1,4 @@
-# Install script for directory: /home/abiyaz/cache/stxxl/examples/common
+# Install script for directory: /home/arghya/cache/stxxl/examples/common
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
