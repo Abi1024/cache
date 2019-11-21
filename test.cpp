@@ -13,7 +13,7 @@ const int PAGE_SIZE = 1024; //blocks per page
 const int BLOCK_SIZE_IN_BYTES = 16384; //block size in bytes
 */
 const int CACHE = 128; //pages per cache_adaptive
-const int PAGE_SIZE = 256; //blocks per page
+const int PAGE_SIZE = 1024; //blocks per page
 const int BLOCK_SIZE_IN_BYTES = 16384; //block size in bytes
 
 
@@ -122,7 +122,7 @@ int main(int argc, char *argv[]){
 
       for (stxxl::uint64 i = 0; i < length*length; i++)
       {
-        array[i] = i;
+        array[i] = 1;
       }
 
         print_io_data(io_stats, "Printing I/O statistics after first write @@@@@ \n");
@@ -130,7 +130,7 @@ int main(int argc, char *argv[]){
 
       for (stxxl::uint64 i = 1; i < length*length; i++)
       {
-        array[i] = array[i-1]+1;
+        array[i] = 2;
       }
 
   	  start_p1.stop();

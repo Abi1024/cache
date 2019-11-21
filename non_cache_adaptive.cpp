@@ -1,19 +1,24 @@
 #include <iostream>
+#include <fstream>
 #include <stxxl/vector>
 #include <string>
 #include <stdlib.h>
 #include <unistd.h>
 const int B = 64;
+std::ofstream out;
+stxxl::timer start_p1;
 
 #define TYPE int
 const int CACHE = 4; //pages per cache_adaptive
-const int PAGE_SIZE = 32; //blocks per page
+const int PAGE_SIZE = 16384; //blocks per page
 const int BLOCK_SIZE_IN_BYTES = 8192; //block size in bytes
 const stxxl::uint64 length = 2048;
 typedef stxxl::VECTOR_GENERATOR<TYPE,PAGE_SIZE,CACHE,BLOCK_SIZE_IN_BYTES>::result vector_type;
 typedef stxxl::vector<TYPE, PAGE_SIZE, stxxl::lru_pager<CACHE>,BLOCK_SIZE_IN_BYTES>::iterator itr;
-const bool mem_profile = false;
-char* cgroup_name = NULL;
+const bool mem_profile = true;
+const int mem_profile_depth = 2;
+char* cgroup_name;
+int starting_memory = -1;
 
 const int CONV_CACHE = 128; //pages per cache_adaptive
 const int CONV_PAGE_SIZE = 4; //blocks per page
@@ -71,8 +76,8 @@ void print_io_data(std::vector<int>& data, std::string header){
   }
 }
 
-void limit_memory(const char* string1, const char* string2){
-  int memory_in_bytes = (int)atof(string1)*1024*1024;
+//limits the memory, memory in bytes and
+void limit_memory(int memory_in_bytes, const char* string2){
   std::string string = std::to_string(memory_in_bytes);
   std::string command = std::string("echo ") + string + std::string(" > /var/cgroups/") + string2 + std::string("/memory.limit_in_bytes");
   int return_code = system(command.c_str());
@@ -165,7 +170,7 @@ void mm( itr x, itr u, itr v, itr y, int n0, int n)
 		int n3 = length;
 		int limit = 0;
 		while (n3 > n || n3 == 1){
-			n3 /= 2;
+			n3 >>= 1;
 			depth_trace += " ";
 			limit++;
 		}
@@ -197,14 +202,21 @@ void mm( itr x, itr u, itr v, itr y, int n0, int n)
 		mm( y2 + m21, u + m22, v + m21, y, n0, nn );
 		mm( y2 + m22, u + m22, v + m22, y, n0, nn );
 
-		if (mem_profile && limit < 3){
-				limit_memory(,cgroup_name);
+		if (mem_profile && limit < mem_profile_depth){
+        out << start_p1.seconds() << " " << 3*n*n*4 << std::endl;
+				limit_memory(3*n*n*4,cgroup_name);
 		}
 
     for (int i = 0; i < n*n; i++){
       x[i] += y2[i];
 			y2[i] = 0;
     }
+
+    if (mem_profile && limit < mem_profile_depth){
+        out << start_p1.seconds() << " " << starting_memory << std::endl;
+				limit_memory(starting_memory,cgroup_name);
+		}
+
 	}
 }
 
@@ -260,11 +272,15 @@ void conv_RM_2_ZM_CM( conv_itr x, conv_itr xo, int n, int no )
 	}
 }
 
-int main(int argc, char *argv[]){
+int main(int argc, char** argv){
   if (argc < 3){
     std::cout << "Insufficient arguments! Usage: cgroup_cache_adaptive <memory_limit> <cgroup_name>\n";
     exit(1);
   }
+  cgroup_name = strdup(argv[2]);
+  starting_memory = (int)(atof(argv[1])*1024*1024);
+  out = std::ofstream("mem_profile.txt", std::ofstream::out);
+
 	std::cout << "Running cache_adaptive matrix multiply with matrices of size: " << (int)length << "x" << (int)length << "\n";
   std::vector<int> io_stats = {0,0};
   print_io_data(io_stats, "Printing I/O statistics at program start @@@@@ \n");
@@ -336,9 +352,8 @@ int main(int argc, char *argv[]){
 	std::cout << "===========================================\n";
 
   //MODIFY MEMORY WITH CGROUP
-  limit_memory(argv[1],argv[2]);
+  limit_memory(starting_memory,argv[2]);
 
-	stxxl::timer start_p1;
 	start_p1.start();
 
   mm_root(array,bm,array.begin()+2*length*length,array.begin(),array.begin()+length*length,length);
@@ -352,7 +367,7 @@ int main(int argc, char *argv[]){
 	std::cout << "[LOG] Total multiplication time: " <<(start_p1.mseconds()/1000) << "\n";
 	std::cout << "===========================================\n";
   print_io_data(io_stats, "Printing I/O statistics AFTER matrix multiplication @@@@@ \n");
-
+  out.close();
 	/*std::cout << "Result array\n";
   for (stxxl::uint64 i = 2*length*length ; i < 3*length*length; i++){
     std::cout << array[i] << " ";
