@@ -34,14 +34,15 @@ STATUS=$(ps ax|grep "$PID"|wc -l)
 X=0
 CURRENT=0
 while [ $STATUS -gt 1 ] && [ $X -lt "${#XYZ[@]}" ]; do
-  DIFF=$(echo "${XYZ[X]}" - "$CURRENT" )|bc -l
-  echo "DIFF"
-  echo $DIFF
-  CURRENT=${XYZ[$X]}
-  bash -c "sleep $DIFF"
+	VAL=${XYZ[$X]}
+  sleep $(calc "($VAL - $CURRENT) /1000")
+  CURRENT=$VAL
+	#bash -c "sleep $DIFF"
   let X+=1
   #echo 10000000 > /var/cgroups/$3/memory.limit_in_bytes
-  echo "${XYZ[X]}" > /var/cgroups/$3/memory.limit_in_bytes
+  echo $((XYZ[X])) > /var/cgroups/$3/memory.limit_in_bytes
   let X+=1
   STATUS=$(ps ax|grep "$PID"|wc -l)
 done
+
+echo "Success!

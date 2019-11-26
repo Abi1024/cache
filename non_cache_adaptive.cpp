@@ -1,30 +1,28 @@
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
 #include <iostream>
+#include <array>
+#include <vector>
+#include <ctime>
+#include <memory>
+#include <cstring>
 #include <fstream>
-#include <stxxl/vector>
 #include <string>
 #include <stdlib.h>
 #include <unistd.h>
+
 const int B = 64;
 std::ofstream out;
-stxxl::timer start_p1;
+std::clock_t start;
+double duration;
 
 #define TYPE int
-const int CACHE = 4; //pages per cache_adaptive
-const int PAGE_SIZE = 16384; //blocks per page
-const int BLOCK_SIZE_IN_BYTES = 8192; //block size in bytes
-const stxxl::uint64 length = 2048;
-typedef stxxl::VECTOR_GENERATOR<TYPE,PAGE_SIZE,CACHE,BLOCK_SIZE_IN_BYTES>::result vector_type;
-typedef stxxl::vector<TYPE, PAGE_SIZE, stxxl::lru_pager<CACHE>,BLOCK_SIZE_IN_BYTES>::iterator itr;
+const unsigned long length = 8192;
 const bool mem_profile = true;
-const int mem_profile_depth = 2;
+const int mem_profile_depth = 3;
 char* cgroup_name;
-int starting_memory = -1;
-
-const int CONV_CACHE = 128; //pages per cache_adaptive
-const int CONV_PAGE_SIZE = 4; //blocks per page
-const int CONV_BLOCK_SIZE_IN_BYTES = 4194304; //block size in bytes
-typedef stxxl::VECTOR_GENERATOR<TYPE,CONV_PAGE_SIZE,CONV_CACHE,CONV_BLOCK_SIZE_IN_BYTES>::result conv_vector_type;
-typedef stxxl::vector<TYPE, CONV_PAGE_SIZE, stxxl::lru_pager<CONV_CACHE>,CONV_BLOCK_SIZE_IN_BYTES>::iterator conv_itr;
+long starting_memory = -1;
 
 std::string exec(std::string cmd) {
     std::array<char, 128> buffer;
@@ -59,25 +57,24 @@ std::vector<std::string> split(std::string mystring, std::string delimiter)
     return subStringList;
 }
 
-void print_io_data(std::vector<int>& data, std::string header){
+void print_io_data(std::vector<long>& data, std::string header){
   std::cout << header;
   std::string command = std::string("cat /proc/") + std::to_string(getpid()) + std::string("/io");
   std::string command_output = exec(command);
   std::vector<std::string> splitted_output = split(command_output, " ");
   for (unsigned int i = 0; i < splitted_output.size(); ++i){
     if ( splitted_output[i].find(std::string("read_bytes:")) != std::string::npos) {
-      std::cout << "Bytes read: " << (std::stoi(splitted_output[i+1]) - data[0]);
-      data[0] = std::stoi(splitted_output[i+1]);
+      std::cout << "Bytes read: " << (std::stol(splitted_output[i+1]) - data[0]);
+      data[0] = std::stol(splitted_output[i+1]);
     }else if ( splitted_output[i].find(std::string("write_bytes:")) != std::string::npos) {
-      std::cout << ", Bytes written: " << (std::stoi(splitted_output[i+1]) - data[1]) << "\n\n";
-      data[1] = std::stoi(splitted_output[i+1]);
+      std::cout << ", Bytes written: " << (std::stol(splitted_output[i+1]) - data[1]) << "\n\n";
+      data[1] = std::stol(splitted_output[i+1]);
       break;
     }
   }
 }
-
 //limits the memory, memory in bytes and
-void limit_memory(int memory_in_bytes, const char* string2){
+void limit_memory(long memory_in_bytes, const char* string2){
   std::string string = std::to_string(memory_in_bytes);
   std::string command = std::string("echo ") + string + std::string(" > /var/cgroups/") + string2 + std::string("/memory.limit_in_bytes");
   int return_code = system(command.c_str());
@@ -88,7 +85,8 @@ void limit_memory(int memory_in_bytes, const char* string2){
   std::cout << "Limiting cgroup memory: " << string << " bytes\n";
 }
 
-void conv_RM_2_ZM_RM( conv_itr x, conv_itr xo, int n, int no ){
+//x is output, xo is input
+void conv_RM_2_ZM_RM( TYPE* x, TYPE* xo, int n, int no ){
 	if ( n <= B )
 	{
 		for ( int i = 0; i < n; i++ )
@@ -116,7 +114,8 @@ void conv_RM_2_ZM_RM( conv_itr x, conv_itr xo, int n, int no ){
 	}
 }
 
-void conv_ZM_RM_2_RM( itr x, itr xo, int n, int no )
+//x is output, xo is input
+void conv_ZM_RM_2_RM( TYPE* x, TYPE* xo, int n, int no )
 {
 	if ( n <= B )
 	{
@@ -144,13 +143,14 @@ void conv_ZM_RM_2_RM( itr x, itr xo, int n, int no )
 	}
 }
 
-void mm( itr x, itr u, itr v, itr y, int n0, int n)
+//x is output, y is auxiiliary memory, u and v are inputs
+void mm( TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n0, int n)
 {
 	if ( n <= B )
 	{
 		for ( int i = 0; i < n; i++ )
 		{
-			itr vv = v;
+			TYPE* vv = v;
 			for ( int j = 0; j < n; j++ )
 			{
 				TYPE t = 0;
@@ -186,7 +186,7 @@ void mm( itr x, itr u, itr v, itr y, int n0, int n)
 		int m22 = m21 + nn2;
 
     int n2 = n0;
-    itr y2 = y;
+    TYPE* y2 = y;
     while (n2 > n){
       y2 += n2*n2;
       n2 >>= 1;
@@ -203,8 +203,13 @@ void mm( itr x, itr u, itr v, itr y, int n0, int n)
 		mm( y2 + m22, u + m22, v + m22, y, n0, nn );
 
 		if (mem_profile && limit < mem_profile_depth){
-        out << start_p1.seconds() << " " << 3*n*n*4 << std::endl;
+        //std::cout << "Depth: " << limit << std::endl;
+        duration = (int)(1000.0 * (std::clock() - start) / CLOCKS_PER_SEC);
+        //std::cout << "Duration: " << duration << std::endl;
+        out << duration << " " << 3*n*n*4 << std::endl;
+        //std::cout << "Writing the output \n";
 				limit_memory(3*n*n*4,cgroup_name);
+        //std::cout << "Limited the memory" << std::endl;
 		}
 
     for (int i = 0; i < n*n; i++){
@@ -213,14 +218,18 @@ void mm( itr x, itr u, itr v, itr y, int n0, int n)
     }
 
     if (mem_profile && limit < mem_profile_depth){
-        out << start_p1.seconds() << " " << starting_memory << std::endl;
+        //std::cout << "Depth2: " << limit << std::endl;
+        duration = (int)(1000.0 * (std::clock() - start) / CLOCKS_PER_SEC);
+        //std::cout << "Duration: " << duration << std::endl;
+        out << duration << " " << starting_memory << std::endl;
 				limit_memory(starting_memory,cgroup_name);
 		}
 
 	}
 }
 
-void mm_root(vector_type& array, 	stxxl::block_manager * bm, itr x, itr u, itr v, int n){
+//y is auxiliary memory
+void mm_root(TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n){
 	std::cout << "Start of root call\n";
   int extra_memory = 0;
   int n2 = n;
@@ -230,21 +239,20 @@ void mm_root(vector_type& array, 	stxxl::block_manager * bm, itr x, itr u, itr v
   }
   std::cout << "extra_memory " << extra_memory << "\n";
   for (int i = 0; i < extra_memory; i++){
-    array.push_back(0);
+    y[i] = 0;
   }
 	std::cout << "About to multiply\n";
-		STXXL_MSG("[LOG] Max KB allocated:  " << bm->get_maximum_allocation()/(1024));
-  mm(x, u, v, x+n*n, n, n);
+  mm(x, u, v, y, n, n);
 }
 
-
-void conv_RM_2_ZM_CM( conv_itr x, conv_itr xo, int n, int no )
+//x is output, xo is input
+void conv_RM_2_ZM_CM( TYPE* x, TYPE* xo, int n, int no )
 {
 	if ( n <= B )
 	{
 		for ( int i = 0; i < n; i++ )
 		{
-			conv_itr xx = x + i;
+			TYPE* xx = x + i;
 
 			for ( int j = 0; j < n; j++ )
 			{
@@ -272,51 +280,35 @@ void conv_RM_2_ZM_CM( conv_itr x, conv_itr xo, int n, int no )
 	}
 }
 
-int main(int argc, char** argv){
+int main(int argc, char *argv[]){
+  TYPE* dst;
+
   if (argc < 3){
     std::cout << "Insufficient arguments! Usage: cgroup_cache_adaptive <memory_limit> <cgroup_name>\n";
     exit(1);
   }
-  cgroup_name = strdup(argv[2]);
-  starting_memory = (int)(atof(argv[1])*1024*1024);
-  out = std::ofstream("mem_profile.txt", std::ofstream::out);
 
+  cgroup_name = new char[strlen(argv[2]) + 1]();
+  strncpy(cgroup_name,argv[2],strlen(argv[2]));
+  out = std::ofstream("mem_profile.txt", std::ofstream::out);
 	std::cout << "Running cache_adaptive matrix multiply with matrices of size: " << (int)length << "x" << (int)length << "\n";
-  std::vector<int> io_stats = {0,0};
+  std::vector<long> io_stats = {0,0};
   print_io_data(io_stats, "Printing I/O statistics at program start @@@@@ \n");
 
-	stxxl::stats* Stats = stxxl::stats::get_instance();
-	stxxl::stats_data stats1(*Stats);
-	stxxl::block_manager * bm = stxxl::block_manager::get_instance();
-  conv_vector_type conv_array;
+  if (((dst = (TYPE*) mmap(0, sizeof(TYPE)*length*length*5, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS , -1, 0)) == (TYPE*)MAP_FAILED)){
+       printf ("mmap error for output with code");
+       return 0;
+   }
 
   //std::cout << "First input array\n";
-	for (stxxl::uint64 i = 0; i < length*length; i++)
+	for (unsigned int i = 0; i < length*length; i++)
 	{
-		conv_array.push_back(i);
+		dst[i] = i;
 		//std::cout << array[i] << " ";
 	}
   print_io_data(io_stats, "Printing I/O statistics AFTER loading first matrix @@@@@\n");
-  //std::cout << std::endl;
-	STXXL_MSG("[LOG] Max KB allocated for one matrix:  " << bm->get_maximum_allocation()/(1024));
-
-	for (stxxl::uint64 i = 0; i < length*length; i++){
-		conv_array.push_back(0);
-	}
-
-  print_io_data(io_stats, "Printing I/O statistics AFTER loading second matrix @@@@@  \n");
-
-  conv_RM_2_ZM_RM(conv_array.begin()+length*length,conv_array.begin(),length,length);
-
+  conv_RM_2_ZM_RM(dst+length*length,dst,length,length);
 	print_io_data(io_stats, "Printing I/O statistics AFTER first conversion @@@@@\n");
-
-	vector_type array;
-	for (stxxl::uint64 i = 0; i < length*length; i++)
-	{
-		array.push_back(conv_array[i+length*length]);
-	}
-  print_io_data(io_stats, "Printing I/O statistics AFTER copying result of first conversion to cache @@@@@\n");
-
 	/*std::cout << "First input array in Z-MORTON\n";
 	for (stxxl::uint64 i = 0; i < length*length; i++)
 	{
@@ -325,54 +317,40 @@ int main(int argc, char** argv){
 	std::cout << std::endl;
 */
   std::cout << "Second input array\n";
-	for (stxxl::uint64 i = 0; i < length*length; i++){
-		conv_array[i] = i;
-	}
-  print_io_data(io_stats, "Printing I/O statistics AFTER loading third matrix @@@@@ \n");
-	for (stxxl::uint64 i = 0; i < length*length; i++)
-	{
-		conv_array[i+length*length] = 0;
-	}
   print_io_data(io_stats, "Printing I/O statistics AFTER loading fourth matrix @@@@@ \n");
-  conv_RM_2_ZM_CM(conv_array.begin()+length*length,conv_array.begin(),length,length);
-  print_io_data(io_stats, "Printing I/O statistics AFTER second conversion @@@@@ \n");
-	for (stxxl::uint64 i = 0; i < length*length; i++)
-	{
-		array.push_back(conv_array[i+length*length]);
-	}
+  conv_RM_2_ZM_CM(dst+2*length*length,dst,length,length);
   print_io_data(io_stats, "Printing I/O statistics AFTER copying result of second conversion to cache @@@@@ \n");
 
-  for (stxxl::uint64 i = 0 ; i < length*length; i++){
-    array.push_back(0);
+  for (unsigned int i = 0 ; i < length*length; i++){
+    dst[i] = 0;
   }
   print_io_data(io_stats, "Printing I/O statistics AFTER loading output matrix to cache @@@@@ \n");
 
-	stxxl::stats_data stats2(stxxl::stats_data(*Stats) - stats1);
 
 	std::cout << "===========================================\n";
 
   //MODIFY MEMORY WITH CGROUP
+  starting_memory = std::stol(argv[1])*1024*1024;
   limit_memory(starting_memory,argv[2]);
 
-	start_p1.start();
+  double duration;
+	start = std::clock();
+	mm_root(dst,dst+length*length,dst+length*length*2,dst+length*length*3,length);
 
-  mm_root(array,bm,array.begin()+2*length*length,array.begin(),array.begin()+length*length,length);
-	start_p1.stop();
+	duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
 
-	stxxl::stats_data stats3(stxxl::stats_data(*Stats) - stats2);
 	std::cout << "===========================================\n";
-	STXXL_MSG("[LOG] Matrix multiplication: "<< stats3 );
+	std::cout << "Total multiplication time: " << duration << "\n";
 	std::cout << "===========================================\n";
-	STXXL_MSG("[LOG] Max KB allocated:  " << bm->get_maximum_allocation()/(1024));
-	std::cout << "[LOG] Total multiplication time: " <<(start_p1.mseconds()/1000) << "\n";
-	std::cout << "===========================================\n";
+  std::cout << "Data: " << (unsigned int)dst[length*length/2/2+length] << std::endl;
   print_io_data(io_stats, "Printing I/O statistics AFTER matrix multiplication @@@@@ \n");
-  out.close();
 	/*std::cout << "Result array\n";
-  for (stxxl::uint64 i = 2*length*length ; i < 3*length*length; i++){
-    std::cout << array[i] << " ";
+  for (unsigned int i = 0 ; i < length*length; i++){
+    std::cout << dst[i] << " ";
   }
   std::cout << std::endl;
-	*/
+  */
+  delete cgroup_name;
+  out.close();
   return 0;
 }
