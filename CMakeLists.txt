@@ -33,3 +33,6 @@ target_link_libraries(non_cache_adaptive ${STXXL_LIBRARIES})
 
 add_executable(cache_adaptive cache_adaptive.cpp)
 target_link_libraries(cache_adaptive ${STXXL_LIBRARIES})
+
+add_executable(cgroup_test cgroup_test.cpp)
+target_link_libraries(cgroup_test ${STXXL_LIBRARIES})

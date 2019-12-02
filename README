@@ -103,8 +103,8 @@ data: Wq)b
 Create file of size 2GB.
 Write file
 --------------
-sudo bash -c "echo 15000000000 > /var/cgroups/cache-test/memory.memsw.limit_in_bytes"
-sudo bash -c "echo 1000000000 > /var/cgroups/cache-test/memory.limit_in_bytes"
+sudo bash -c "echo 501000000 > /var/cgroups/cache-test/memory.memsw.limit_in_bytes"
+sudo bash -c "echo 500000000 > /var/cgroups/cache-test/memory.limit_in_bytes"
 cat /var/cgroups/cache-test/memory.memsw.limit_in_bytes
 sudo cgexec -g memory:cache-test ./a.out nullbytes
 -------------------

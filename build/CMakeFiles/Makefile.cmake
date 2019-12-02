@@ -118,6 +118,7 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/non_cache_adaptive.dir/DependInfo.cmake"
   "CMakeFiles/cache_adaptive.dir/DependInfo.cmake"
   "CMakeFiles/test.dir/DependInfo.cmake"
+  "CMakeFiles/cgroup_test.dir/DependInfo.cmake"
   "stxxl/CMakeFiles/ContinuousSubmit.dir/DependInfo.cmake"
   "stxxl/CMakeFiles/ContinuousMemCheck.dir/DependInfo.cmake"
   "stxxl/CMakeFiles/ContinuousConfigure.dir/DependInfo.cmake"

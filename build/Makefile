@@ -101,6 +101,17 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
@@ -134,17 +145,6 @@ install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -216,6 +216,19 @@ test: cmake_check_build_system
 test/fast:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
 .PHONY : test/fast
+
+#=============================================================================
+# Target rules for targets named cgroup_test
+
+# Build rule for target.
+cgroup_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cgroup_test
+.PHONY : cgroup_test
+
+# fast build rule for target.
+cgroup_test/fast:
+	$(MAKE) -f CMakeFiles/cgroup_test.dir/build.make CMakeFiles/cgroup_test.dir/build
+.PHONY : cgroup_test/fast
 
 #=============================================================================
 # Target rules for targets named ContinuousSubmit
@@ -660,6 +673,33 @@ cache_adaptive.cpp.s:
 	$(MAKE) -f CMakeFiles/cache_adaptive.dir/build.make CMakeFiles/cache_adaptive.dir/cache_adaptive.cpp.s
 .PHONY : cache_adaptive.cpp.s
 
+cgroup_test.o: cgroup_test.cpp.o
+
+.PHONY : cgroup_test.o
+
+# target to build an object file
+cgroup_test.cpp.o:
+	$(MAKE) -f CMakeFiles/cgroup_test.dir/build.make CMakeFiles/cgroup_test.dir/cgroup_test.cpp.o
+.PHONY : cgroup_test.cpp.o
+
+cgroup_test.i: cgroup_test.cpp.i
+
+.PHONY : cgroup_test.i
+
+# target to preprocess a source file
+cgroup_test.cpp.i:
+	$(MAKE) -f CMakeFiles/cgroup_test.dir/build.make CMakeFiles/cgroup_test.dir/cgroup_test.cpp.i
+.PHONY : cgroup_test.cpp.i
+
+cgroup_test.s: cgroup_test.cpp.s
+
+.PHONY : cgroup_test.s
+
+# target to generate assembly for a file
+cgroup_test.cpp.s:
+	$(MAKE) -f CMakeFiles/cgroup_test.dir/build.make CMakeFiles/cgroup_test.dir/cgroup_test.cpp.s
+.PHONY : cgroup_test.cpp.s
+
 non_cache_adaptive.o: non_cache_adaptive.cpp.o
 
 .PHONY : non_cache_adaptive.o
@@ -724,13 +764,14 @@ help:
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... edit_cache"
 	@echo "... non_cache_adaptive"
 	@echo "... cache_adaptive"
 	@echo "... package"
 	@echo "... package_source"
 	@echo "... install/local"
 	@echo "... test"
-	@echo "... edit_cache"
+	@echo "... cgroup_test"
 	@echo "... ContinuousSubmit"
 	@echo "... ContinuousMemCheck"
 	@echo "... ContinuousConfigure"
@@ -766,6 +807,9 @@ help:
 	@echo "... cache_adaptive.o"
 	@echo "... cache_adaptive.i"
 	@echo "... cache_adaptive.s"
+	@echo "... cgroup_test.o"
+	@echo "... cgroup_test.i"
+	@echo "... cgroup_test.s"
 	@echo "... non_cache_adaptive.o"
 	@echo "... non_cache_adaptive.i"
 	@echo "... non_cache_adaptive.s"

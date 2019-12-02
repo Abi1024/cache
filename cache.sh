@@ -43,6 +43,9 @@ case "$1" in
 2)	cgexec -g memory:$3 ./build/non_cache_adaptive $2 $3
 		echo "Done"
 		;;
+3)  cgexec -g memory:$3 ./build/cgroup_test $2 $3
+		echo "Done"
+		;;
 esac
 
 echo "Success"
