@@ -19,6 +19,8 @@ array
 -
 vector
 -
+fcntl.h
+-
 ctime
 -
 memory
@@ -26,6 +28,8 @@ memory
 cstring
 -
 fstream
+-
+cstdlib
 -
 string
 -

@@ -32,7 +32,7 @@ int main (int argc, char *argv[])
   int mode = 0x0777;
 
   if (argc != 2)
-  err_quit (("usage: a.out <tofile>"));
+  err_quit (("usage: a.out nullbytes"));
 
   if ((fdout = open (argv[1], O_RDWR, mode )) < 0){
     printf ("can't create %s for writing\n", argv[1]);
@@ -58,7 +58,7 @@ int main (int argc, char *argv[])
   if ((dst = (char*)mmap (0,  length*num+num, PROT_READ | PROT_WRITE, MAP_SHARED , fdout, 0)) == (char*)MAP_FAILED){
        printf ("mmap error for output with code");
        return 0;
-   }
+  }
 
   for (unsigned long long i = 0; i < num ; i++){
     //std::cout << "i: " << i << std::endl;

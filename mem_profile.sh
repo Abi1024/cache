@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -x
 
 IFS=$'\r\n ' GLOBIGNORE='*' command eval  'XYZ=($(cat mem_profile.txt))'
 

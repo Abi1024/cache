@@ -4,10 +4,12 @@
 #include <iostream>
 #include <array>
 #include <vector>
+#include <fcntl.h>
 #include <ctime>
 #include <memory>
 #include <cstring>
 #include <fstream>
+#include <cstdlib>
 #include <string>
 #include <stdlib.h>
 #include <unistd.h>
@@ -19,8 +21,9 @@ double duration;
 
 #define TYPE int
 const unsigned long length = 8192;
-const bool mem_profile = true;
-const int mem_profile_depth = 3;
+const bool mem_profile = false;
+const int mem_profile_depth = 5;
+const int progress_depth = 3;
 char* cgroup_name;
 long starting_memory = -1;
 
@@ -79,8 +82,8 @@ void limit_memory(long memory_in_bytes, const char* string2){
   std::string command = std::string("echo ") + string + std::string(" > /var/cgroups/") + string2 + std::string("/memory.limit_in_bytes");
   int return_code = system(command.c_str());
   if (return_code != 0){
-    std::cout << "Error. Unable to set cgroup memory " << string << "\n";
-    exit(1);
+    std::cout << "Error. Unable to set cgroup memory " << string << " Code: " << return_code << "\n";
+    std::cout << "Memory usage: " << exec(std::string("cat /var/cgroups/") + string2 + std::string("/memory.usage_in_bytes")) << std::endl;
   }
   std::cout << "Limiting cgroup memory: " << string << " bytes\n";
 }
@@ -174,9 +177,10 @@ void mm( TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n0, int n)
 			depth_trace += " ";
 			limit++;
 		}
-		std::cout << depth_trace << "Running matrix multiply with depth: " << limit;
-		std::cout << " value of n: " << n << std::endl;
-    //cout << "In recursive call of size: " << n << endl;
+    if (limit < progress_depth){
+      std::cout << depth_trace << "Running matrix multiply with depth: " << limit;
+  		std::cout << " value of n: " << n << std::endl;
+    }
 		int nn = ( n >> 1 );
 		int nn2 = nn * nn;
 
@@ -208,7 +212,7 @@ void mm( TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n0, int n)
         //std::cout << "Duration: " << duration << std::endl;
         out << duration << " " << 3*n*n*4 << std::endl;
         //std::cout << "Writing the output \n";
-				limit_memory(3*n*n*4,cgroup_name);
+				limit_memory(3*n*n*4+10000,cgroup_name);
         //std::cout << "Limited the memory" << std::endl;
 		}
 
@@ -283,19 +287,33 @@ void conv_RM_2_ZM_CM( TYPE* x, TYPE* xo, int n, int no )
 int main(int argc, char *argv[]){
   TYPE* dst;
 
+
   if (argc < 3){
     std::cout << "Insufficient arguments! Usage: cgroup_cache_adaptive <memory_limit> <cgroup_name>\n";
     exit(1);
   }
 
+  int fdout;
+
+  if ((fdout = open ("nullbytes", O_RDWR, 0x0777 )) < 0){
+    printf ("can't create nullbytes for writing\n");
+    return 0;
+  }
+
+  starting_memory = std::stol(argv[1])*1024*1024;
   cgroup_name = new char[strlen(argv[2]) + 1]();
   strncpy(cgroup_name,argv[2],strlen(argv[2]));
   out = std::ofstream("mem_profile.txt", std::ofstream::out);
+  //limit_memory(starting_memory+10000,argv[2]);
+
 	std::cout << "Running cache_adaptive matrix multiply with matrices of size: " << (int)length << "x" << (int)length << "\n";
   std::vector<long> io_stats = {0,0};
   print_io_data(io_stats, "Printing I/O statistics at program start @@@@@ \n");
 
-  if (((dst = (TYPE*) mmap(0, sizeof(TYPE)*length*length*5, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS , -1, 0)) == (TYPE*)MAP_FAILED)){
+
+
+if (((dst = (TYPE*) mmap(0, sizeof(TYPE)*length*length*5, PROT_READ | PROT_WRITE, MAP_SHARED , fdout, 0)) == (TYPE*)MAP_FAILED)){
+  //if (((dst = (TYPE*) mmap(0, sizeof(TYPE)*length*length*5, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS , -1, 0)) == (TYPE*)MAP_FAILED)){
        printf ("mmap error for output with code");
        return 0;
    }
@@ -330,8 +348,8 @@ int main(int argc, char *argv[]){
 	std::cout << "===========================================\n";
 
   //MODIFY MEMORY WITH CGROUP
-  starting_memory = std::stol(argv[1])*1024*1024;
-  limit_memory(starting_memory,argv[2]);
+
+  limit_memory(starting_memory+10000,argv[2]);
 
   double duration;
 	start = std::clock();

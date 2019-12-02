@@ -1,0 +1,47 @@
++ '[' 3 -ne 3 ']'
++ '[' '!' -d ./stxxl/lib ']'
++ cmake ./build
+Defaulting CMAKE_BUILD_TYPE to Debug
+-- Detected git refspec 1.4.1-387-gb9e44f0e sha b9e44f0ecba7d7111fbb33f3330c3e53f2b75236
+-- OpenMP found, enabling built-in parallel algorithms.
+-- Using POSIX pthread library functions.
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/abiyaz/cache/build
++ make --directory=./build
+make: Entering directory '/home/abiyaz/cache/build'
+make[1]: Entering directory '/home/abiyaz/cache/build'
+make[2]: Entering directory '/home/abiyaz/cache/build'
+make[2]: Leaving directory '/home/abiyaz/cache/build'
+[ 64%] Built target stxxl
+make[2]: Entering directory '/home/abiyaz/cache/build'
+Scanning dependencies of target non_cache_adaptive
+make[2]: Leaving directory '/home/abiyaz/cache/build'
+make[2]: Entering directory '/home/abiyaz/cache/build'
+[ 66%] Building CXX object CMakeFiles/non_cache_adaptive.dir/non_cache_adaptive.cpp.o
+[ 68%] Linking CXX executable non_cache_adaptive
+make[2]: Leaving directory '/home/abiyaz/cache/build'
+[ 68%] Built target non_cache_adaptive
+make[2]: Entering directory '/home/abiyaz/cache/build'
+make[2]: Leaving directory '/home/abiyaz/cache/build'
+[ 71%] Built target cache_adaptive
+make[2]: Entering directory '/home/abiyaz/cache/build'
+make[2]: Leaving directory '/home/abiyaz/cache/build'
+[ 75%] Built target test
+make[2]: Entering directory '/home/abiyaz/cache/build'
+make[2]: Leaving directory '/home/abiyaz/cache/build'
+[ 92%] Built target stxxl_tool
+make[2]: Entering directory '/home/abiyaz/cache/build'
+make[2]: Leaving directory '/home/abiyaz/cache/build'
+[ 96%] Built target test2
+make[2]: Entering directory '/home/abiyaz/cache/build'
+make[2]: Leaving directory '/home/abiyaz/cache/build'
+[100%] Built target test1
+make[1]: Leaving directory '/home/abiyaz/cache/build'
+make: Leaving directory '/home/abiyaz/cache/build'
++ sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure'
++ '[' -d /var/cgroups/cache-test ']'
++ cgdelete memory:cache-test
++ cgcreate -g memory:cache-test -t abiyaz:abiyaz
++ case "$1" in
++ cgexec -g memory:cache-test ./build/non_cache_adaptive 10 cache-test

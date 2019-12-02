@@ -13,11 +13,15 @@ sys/stat.h
 -
 sys/mman.h
 -
+fcntl.h
+-
 iostream
 -
 array
 -
 ctime
+-
+cstdlib
 -
 vector
 -

@@ -1,9 +1,11 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
+#include <fcntl.h>
 #include <iostream>
 #include <array>
 #include <ctime>
+#include <cstdlib>
 #include <vector>
 #include <memory>
 #include <string>
@@ -13,6 +15,7 @@ const int B = 64;
 
 #define TYPE int
 const unsigned long length = 8192;
+const int progress_depth = 3;
 
 std::string exec(std::string cmd) {
     std::array<char, 128> buffer;
@@ -149,8 +152,10 @@ void mm( TYPE* x, TYPE* u, TYPE* v, int n )
 			depth_trace += " ";
 			limit++;
 		}
-		std::cout << depth_trace << "Running matrix multiply with depth: " << limit;
-		std::cout << " value of n: " << n << std::endl;
+    if (limit < progress_depth){
+      std::cout << depth_trace << "Running matrix multiply with depth: " << limit;
+  		std::cout << " value of n: " << n << std::endl;
+    }
 		int nn = ( n >> 1 );
 		int nn2 = nn * nn;
 
@@ -216,7 +221,14 @@ int main(int argc, char *argv[]){
   std::vector<long> io_stats = {0,0};
   print_io_data(io_stats, "Printing I/O statistics at program start @@@@@ \n");
 
-  if (((dst = (TYPE*) mmap(0, sizeof(TYPE)*length*length*3, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS , -1, 0)) == (TYPE*)MAP_FAILED)){
+  int fdout;
+
+  if ((fdout = open ("nullbytes", O_RDWR, 0x0777 )) < 0){
+    printf ("can't create nullbytes for writing\n");
+    return 0;
+  }
+
+  if (((dst = (TYPE*) mmap(0, sizeof(TYPE)*length*length*3, PROT_READ | PROT_WRITE, MAP_SHARED , fdout, 0)) == (TYPE*)MAP_FAILED)){
        printf ("mmap error for output with code");
        return 0;
    }

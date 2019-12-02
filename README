@@ -102,3 +102,10 @@ data: Wq)b
 ---------------------------------
 Create file of size 2GB.
 Write file
+--------------
+sudo bash -c "echo 15000000000 > /var/cgroups/cache-test/memory.memsw.limit_in_bytes"
+sudo bash -c "echo 1000000000 > /var/cgroups/cache-test/memory.limit_in_bytes"
+cat /var/cgroups/cache-test/memory.memsw.limit_in_bytes
+sudo cgexec -g memory:cache-test ./a.out nullbytes
+-------------------
+https://serverfault.com/questions/255661/linux-oom-disk-i-o-also-swap-what-is-it-good-for

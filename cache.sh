@@ -26,6 +26,7 @@ then
 fi
 
 cgcreate -g "memory:$3" -t abiyaz:abiyaz
+sudo bash -c "echo 1 > /var/cgroups/$3/memory.oom_control"
 #sudo bash -c "echo 10 > /var/cgroups/$3/memory.swappiness"
 
 case "$1" in
