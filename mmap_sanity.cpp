@@ -55,7 +55,7 @@ int main (int argc, char *argv[])
       return 0;
   }
   */
-  if ((dst = (char*)mmap (0,  length*num+num, PROT_READ | PROT_WRITE, MAP_PRIVATE , fdout, 0)) == (char*)MAP_FAILED){
+  if ((dst = (char*)mmap (0,  length*num+num, PROT_READ | PROT_WRITE, MAP_SHARED , fdout, 0)) == (char*)MAP_FAILED){
        printf ("mmap error for output with code");
        return 0;
   }
