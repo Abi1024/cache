@@ -69,12 +69,15 @@ void print_io_data(std::vector<long>& data, std::string header){
 
 //limits the memory, memory in bytes and
 void limit_memory(long memory_in_bytes, const char* string2){
+  std::cout << "Entering limit memory function\n";
   std::string string = std::to_string(memory_in_bytes);
-  std::string command = std::string("echo ") + string + std::string(" > /var/cgroups/") + string2 + std::string("/memory.limit_in_bytes");
+  std::string command = std::string("bash -c \"echo ") + string + std::string(" > /var/cgroups/") + string2 + std::string("/memory.limit_in_bytes\"");
+  std::cout << "Command: " << command << std::endl;
   int return_code = system(command.c_str());
+  //std::cout << "Memory usage: " << exec(std::string("cat /var/cgroups/") + string2 + std::string("/memory.usage_in_bytes")) << std::endl;
   if (return_code != 0){
-    std::cout << "Error. Unable to set cgroup memory " << string << "\n";
-    exit(1);
+    std::cout << "Error. Unable to set cgroup memory " << string << " Code: " << return_code << "\n";
+    std::cout << "Memory usage: " << exec(std::string("cat /var/cgroups/") + string2 + std::string("/memory.usage_in_bytes")) << std::endl;
   }
   std::cout << "Limiting cgroup memory: " << string << " bytes\n";
 }

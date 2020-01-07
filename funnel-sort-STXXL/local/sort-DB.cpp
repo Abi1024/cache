@@ -46,7 +46,7 @@ int main(int argc, char** argv)
 	in.open(argv[1]);
 
 	stxxl::timer start_t, sort_start_t;
- 	
+
 	ofstream out;
 	out.open(argv[2], ios::trunc);
 	start_t.start();
@@ -78,7 +78,7 @@ int main(int argc, char** argv)
 	STXXL_MSG("[LOG] FunnelSort. DB Used: "<<argv[1]);
 	STXXL_MSG("[LOG] Total initializing time: "<<(start_t.mseconds()/1000));
 	sort_start_t.start();
-	//FunnelSort::sort<class record, class record_comparator>(&records[0], &records[record_counter], comp);
+	FunnelSort::sort<class record, class record_comparator>(&records[0], &records[record_counter], comp);
 	STXXL_MSG("[LOG] IO Statistics for sorting: "<<(stxxl::stats_data(*Stats) - stats_begin));
 	STXXL_MSG("[LOG] Max MB allocated: " << bm->get_maximum_allocation()/(1024*1024));  // max. number of bytes allocated until now
 
@@ -87,7 +87,7 @@ int main(int argc, char** argv)
 	STXXL_MSG("[LOG] Total process time: "<<(start_t.mseconds()/1000 + sort_start_t.mseconds()/1000));
 
 	std::cout << "Done with sort\n";
-	/*	
+	/*
 	for(int i = 0 ; i < record_counter ; i ++)
 		out<<"Post-sort Record: "<<i<<" | KEY: "<<records[i].key<<endl;
 	*/
@@ -95,4 +95,3 @@ int main(int argc, char** argv)
 	out.close();
 	return 0;
 }
-

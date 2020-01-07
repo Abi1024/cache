@@ -21,11 +21,12 @@ double duration;
 
 #define TYPE int
 const unsigned long length = 8192;
-const bool mem_profile = false;
+const bool mem_profile = true;
 const int mem_profile_depth = 5;
 const int progress_depth = 3;
 char* cgroup_name;
 long starting_memory = -1;
+std::vector<long> io_stats = {0,0};
 
 std::string exec(std::string cmd) {
     std::array<char, 128> buffer;
@@ -78,9 +79,12 @@ void print_io_data(std::vector<long>& data, std::string header){
 }
 //limits the memory, memory in bytes and
 void limit_memory(long memory_in_bytes, const char* string2){
+  std::cout << "Entering limit memory function\n";
   std::string string = std::to_string(memory_in_bytes);
-  std::string command = std::string("echo ") + string + std::string(" > /var/cgroups/") + string2 + std::string("/memory.limit_in_bytes");
+  std::string command = std::string("bash -c \"echo ") + string + std::string(" > /var/cgroups/") + string2 + std::string("/memory.limit_in_bytes\"");
+  std::cout << "Command: " << command << std::endl;
   int return_code = system(command.c_str());
+  //std::cout << "Memory usage: " << exec(std::string("cat /var/cgroups/") + string2 + std::string("/memory.usage_in_bytes")) << std::endl;
   if (return_code != 0){
     std::cout << "Error. Unable to set cgroup memory " << string << " Code: " << return_code << "\n";
     std::cout << "Memory usage: " << exec(std::string("cat /var/cgroups/") + string2 + std::string("/memory.usage_in_bytes")) << std::endl;
@@ -245,6 +249,7 @@ void mm_root(TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n){
   for (int i = 0; i < extra_memory; i++){
     y[i] = 0;
   }
+  print_io_data(io_stats, "Printing I/O statistics AFTER loading output matrix to cache @@@@@ \n");
 	std::cout << "About to multiply\n";
   mm(x, u, v, y, n, n);
 }
@@ -307,7 +312,6 @@ int main(int argc, char *argv[]){
   //limit_memory(starting_memory+10000,argv[2]);
 
 	std::cout << "Running cache_adaptive matrix multiply with matrices of size: " << (int)length << "x" << (int)length << "\n";
-  std::vector<long> io_stats = {0,0};
   print_io_data(io_stats, "Printing I/O statistics at program start @@@@@ \n");
 
 
