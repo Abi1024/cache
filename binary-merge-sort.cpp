@@ -76,26 +76,38 @@ void printArray(int A[], int size) {
 	cout << endl; 
 } 
 
-void rootMergeSort(int num_elements, int base_case) {
-	int arr[num_elements];
-	int temp_arr[num_elements];
-	for (unsigned long long i = 0; i < num_elements; i++) {
-		arr[i] = rand() % 1000;
-  	}
-  	printf("Given array is \n"); 
-	printArray(arr, num_elements); 
-	mergeSort(arr, 0, num_elements - 1, temp_arr, base_case); 
-	printf("\nSorted array is \n"); 
-	printArray(arr, num_elements);
+//void rootMergeSort(int arr[], int num_elements, int base_case) {
+//	int temp_arr[num_elements];
+//	mergeSort(arr, 0, num_elements - 1, temp_arr, base_case); 
+//}
+
+void rootMergeSort(int arr[], int *arr_first, int *arr_last, int base_case) {
+	int num_elements = arr_last - arr_first;
+	//int temp_arr[num_elements];
+
+	int* temp_arr = NULL;
+	temp_arr = new int[num_elements];
+
+	mergeSort(arr, 0, num_elements - 1, temp_arr, base_case);
+	delete [] temp_arr; temp_arr = NULL; // to deallocate memory for temp array
 }
 
 /* Driver program to test above functions */
 int main() 
 { 
-	cout << "say hi" << endl;
-	const unsigned long long num_elements = 128;
+	cout << "say hola" << endl;
+	const unsigned long long num_elements = 256;
 	const unsigned long long base_case = 32;
-	rootMergeSort(num_elements, base_case);
+	int arr[num_elements];
+	for (unsigned long long i = 0; i < num_elements; i++) {
+		arr[i] = rand() % 1000;
+  	}
+  	cout << "given array is" << endl;  
+	printArray(arr, num_elements);
+	//rootMergeSort(arr, num_elements, base_case);
+	rootMergeSort(arr, &arr[0], &arr[num_elements - 1], base_case);
+	cout << "sorted array is" << endl;  
+	printArray(arr, num_elements);
 	return 0; 
 } 
 
