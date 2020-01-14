@@ -11,15 +11,30 @@ endif("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}")
 # enable warnings (always good)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall")
 
+# include the STXXL library in my-project
+add_subdirectory(stxxl)
+
 # apply STXXL CXXFLAGS to our configuration
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STXXL_CXX_FLAGS}")
+
+# add STXXL includes path
+include_directories(${STXXL_INCLUDE_DIRS})
 
 # build a program and link it with STXXL.
 #add_executable(cache cache_adaptive.cpp)
 #add_executable(cache non_cache_adaptive.cpp)
 #add_executable(cache shell.cpp)
 
+add_executable(test test.cpp)
+target_link_libraries(test ${STXXL_LIBRARIES})
+
 add_executable(non_cache_adaptive non_cache_adaptive.cpp)
+target_link_libraries(non_cache_adaptive ${STXXL_LIBRARIES})
+
 add_executable(cache_adaptive cache_adaptive.cpp)
+target_link_libraries(cache_adaptive ${STXXL_LIBRARIES})
+
 add_executable(cgroup_test cgroup_test.cpp)
-add_executable(mmap_sanity mmap_sanity.cpp)
+target_link_libraries(cgroup_test ${STXXL_LIBRARIES})
+
+add_executable(funnel_sort funnel_sort.cpp)

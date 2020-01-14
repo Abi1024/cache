@@ -1,1 +1,1 @@
-/usr/bin/c++   -W -Wall -fopenmp  -rdynamic CMakeFiles/test.dir/test.cpp.o  -o test 
+/usr/bin/c++   -W -Wall -fopenmp  -rdynamic CMakeFiles/test.dir/test.cpp.o  -o test stxxl/lib/libstxxl_debug.a -lpthread 

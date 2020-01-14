@@ -90,6 +90,7 @@ non_cache_adaptive_EXTERNAL_OBJECTS =
 
 non_cache_adaptive: CMakeFiles/non_cache_adaptive.dir/non_cache_adaptive.cpp.o
 non_cache_adaptive: CMakeFiles/non_cache_adaptive.dir/build.make
+non_cache_adaptive: stxxl/lib/libstxxl_debug.a
 non_cache_adaptive: CMakeFiles/non_cache_adaptive.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/abiyaz/cache/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable non_cache_adaptive"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/non_cache_adaptive.dir/link.txt --verbose=$(VERBOSE)

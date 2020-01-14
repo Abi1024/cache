@@ -12,6 +12,11 @@ then
 	exit
 fi
 
+if [ ! -d  "./stxxl/lib" ]
+then
+	git clone git@github.com:stxxl/stxxl.git
+fi
+
 cmake ./build && make --directory=./build
 sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
 
@@ -41,7 +46,7 @@ case "$1" in
 3)  cgexec -g memory:$3 ./build/cgroup_test $2 $3
 		echo "Done"
 		;;
-4)  cgexec -g memory:cache-test ./build/mmap_sanity $2
+4) cgexec -g memory:$3 ./build/funnel_sort $2 $3
 		echo "Done"
 		;;
 esac

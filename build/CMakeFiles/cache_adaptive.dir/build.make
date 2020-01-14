@@ -90,6 +90,7 @@ cache_adaptive_EXTERNAL_OBJECTS =
 
 cache_adaptive: CMakeFiles/cache_adaptive.dir/cache_adaptive.cpp.o
 cache_adaptive: CMakeFiles/cache_adaptive.dir/build.make
+cache_adaptive: stxxl/lib/libstxxl_debug.a
 cache_adaptive: CMakeFiles/cache_adaptive.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/abiyaz/cache/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable cache_adaptive"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cache_adaptive.dir/link.txt --verbose=$(VERBOSE)
