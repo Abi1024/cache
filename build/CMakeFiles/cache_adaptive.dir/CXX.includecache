@@ -6,7 +6,23 @@
 
 #IncludeRegexTransform: 
 
+/home/abiyaz/cache/CacheHelper.h
+string
+-
+sys/types.h
+-
+iostream
+-
+memory
+-
+vector
+-
+unistd.h
+-
+
 /home/abiyaz/cache/cache_adaptive.cpp
+CacheHelper.h
+/home/abiyaz/cache/CacheHelper.h
 sys/types.h
 -
 sys/stat.h
@@ -15,22 +31,6 @@ sys/mman.h
 -
 fcntl.h
 -
-iostream
--
-array
--
 ctime
--
-cstdlib
--
-vector
--
-memory
--
-string
--
-stdlib.h
--
-unistd.h
 -
 
