@@ -93,8 +93,11 @@ https://stackoverflow.com/questions/33759054/using-cgexec-vs-cgroup-procs-for-me
 ------------------------
 sudo cmake ./build && sudo make --directory=./build && sudo ./cache.sh 0 100 cache-test
 ---------------
+1024x1024: Data: 1163132928
 2048x2048: Data: 3578789888
-8192*8192: Data: 1426063360
+4096x4096: Data: 1430257664 (non-adaptive)
+8192*8192: Data: 1426063360 (adaptive)
+16384x16384: Data: 4259840000 (non-adaptive)
 --------------------
 stxxk disk configuration direct = off/try/on
 --------------------
@@ -103,9 +106,14 @@ data: Wq)b
 Create file of size 2GB.
 Write file
 --------------
-sudo bash -c "echo 501000000 > /var/cgroups/cache-test/memory.memsw.limit_in_bytes"
-sudo bash -c "echo 500000000 > /var/cgroups/cache-test/memory.limit_in_bytes"
+sudo bash -c "echo 15000000000 > /var/cgroups/cache-test/memory.memsw.limit_in_bytes"
+sudo bash -c "echo 64000000 > /var/cgroups/cache-test/memory.limit_in_bytes"
 cat /var/cgroups/cache-test/memory.memsw.limit_in_bytes
 sudo cgexec -g memory:cache-test ./a.out nullbytes
 -------------------
 https://serverfault.com/questions/255661/linux-oom-disk-i-o-also-swap-what-is-it-good-for
+------
+sudo dd if=/dev/urandom of=null count=256 bs=1048576
+sar -A -o sar_256 1 >/dev/null 2>&1 &
+
+#03:01:11 AM       DEV       tps  rd_sec/s  wr_sec/s  avgrq-sz  avgqu-sz     await     svctm     %util

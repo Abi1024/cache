@@ -7,23 +7,23 @@
 #include<cstring>
 #include<fstream>
 #define TYPE int
-const int B = 64;
+
+const bool mem_profile = false;
+const int mem_profile_depth = 3;
+const int progress_depth = 4;
+
 std::ofstream out;
 std::clock_t start;
 double duration;
-
 unsigned long length = 0;
-const bool mem_profile = true;
-const int mem_profile_depth = 3;
-const int progress_depth = 4;
 char* cgroup_name;
-long starting_memory = -1;
+long long starting_memory = -1;
 std::vector<long> io_stats = {0,0};
 
 //x is output, y is auxiiliary memory, u and v are inputs
 void mm( TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n0, int n)
 {
-	if ( n <= B )
+	if ( n <= CacheHelper::MM_BASE_SIZE )
 	{
 		for ( int i = 0; i < n; i++ )
 		{
@@ -84,9 +84,9 @@ void mm( TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n0, int n)
         //std::cout << "Depth: " << limit << std::endl;
         duration = (int)(1000.0 * (std::clock() - start) / CLOCKS_PER_SEC);
         //std::cout << "Duration: " << duration << std::endl;
-        out << duration << " " << 3*n*n*4 << std::endl;
+        out << duration << " " << (long)3*n*n*4 << std::endl;
         //std::cout << "Writing the output \n";
-				CacheHelper::limit_memory(3*n*n*4+10000,cgroup_name);
+				CacheHelper::limit_memory((long)3*n*n*4+10000,cgroup_name);
         //std::cout << "Limited the memory" << std::endl;
 		}
 
@@ -111,14 +111,14 @@ void mm_root(TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n){
 	std::cout << "Start of root call\n";
   int extra_memory = 0;
   int n2 = n;
-  while (n2 > B){
+  while (n2 > CacheHelper::MM_BASE_SIZE){
     extra_memory += n2*n2;
     n2 >>= 1;
   }
   std::cout << "extra_memory " << extra_memory << "\n";
-  for (int i = 0; i < extra_memory; i++){
+  /*for (int i = 0; i < extra_memory; i++){
     y[i] = 0;
-  }
+  }*/
 	//MODIFY MEMORY WITH CGROUP
 	CacheHelper::limit_memory(starting_memory,cgroup_name);
   CacheHelper::print_io_data(io_stats, "Printing I/O statistics AFTER loading output matrix to cache @@@@@ \n");
@@ -171,9 +171,6 @@ int fdout;
 	}
 	std::cout << "\n";
 	*/
-  for (unsigned int i = 0 ; i < length*length; i++){
-    dst[i] = 0;
-  }
 
   double duration;
 	mm_root(dst,dst+length*length,dst+length*length*2,dst+length*length*3,length);
@@ -183,10 +180,13 @@ int fdout;
 	std::cout << "===========================================\n";
 	std::cout << "Total multiplication time: " << duration << "\n";
 	std::cout << "===========================================\n";
+
   std::cout << "Data: " << (unsigned int)dst[length*length/2/2+length] << std::endl;
 	std::cout << "===========================================\n";
 	std::cout << "===========================================\n";
+
   CacheHelper::print_io_data(io_stats, "Printing I/O statistics AFTER matrix multiplication @@@@@ \n");
+	std::cout << "Result memory profile stored in: " << mem_profile_filename << std::endl;
 	/*std::cout << "Result array\n";
   for (unsigned int i = 0 ; i < length*length; i++){
     std::cout << dst[i] << " ";

@@ -6,14 +6,13 @@
 #include<ctime>
 #define TYPE int
 
-const int B = 64;
 unsigned long length = 0;
-const int progress_depth = 3;
+const int progress_depth = 4;
 
 //x is the output, u and v are the two inputs
 void mm( TYPE* x, TYPE* u, TYPE* v, int n )
 {
-	if ( n <= B )
+	if ( n <= CacheHelper::MM_BASE_SIZE )
 	{
 		for ( int i = 0; i < n; i++ )
 		{
@@ -94,10 +93,6 @@ int main(int argc, char *argv[]){
 	}
 	std::cout << "\n";
 	*/
-  for (unsigned int i = 0 ; i < length*length; i++){
-    dst[i] = 0;
-  }
-
 	CacheHelper::print_io_data(io_stats, "Printing I/O statistics AFTER loading output matrix to cache @@@@@ \n");
 
 

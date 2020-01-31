@@ -37,11 +37,13 @@ case "$1" in
 		;;
 
 1)  ./build/mm_data $2
+		sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
 		cgexec -g memory:$4 ./build/cache_adaptive $2 $3 $4
 		echo "Done"
 		;;
 
 2)	./build/mm_data $2
+		sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
 		cgexec -g memory:$4 ./build/non_cache_adaptive $2 $3 $4
 		echo "Done"
 		;;
