@@ -1,0 +1,302 @@
++ '[' 4 -ne 4 ']'
++ cmake ./build
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/abiyaz/cache/build
++ make --directory=./build
+make: Entering directory '/home/abiyaz/cache/build'
+make[1]: Entering directory '/home/abiyaz/cache/build'
+make[2]: Entering directory '/home/abiyaz/cache/build'
+make[2]: Leaving directory '/home/abiyaz/cache/build'
+[ 16%] Built target cache_adaptive
+make[2]: Entering directory '/home/abiyaz/cache/build'
+make[2]: Leaving directory '/home/abiyaz/cache/build'
+[ 33%] Built target cgroup_test
+make[2]: Entering directory '/home/abiyaz/cache/build'
+make[2]: Leaving directory '/home/abiyaz/cache/build'
+[ 50%] Built target non_cache_adaptive
+make[2]: Entering directory '/home/abiyaz/cache/build'
+make[2]: Leaving directory '/home/abiyaz/cache/build'
+[ 66%] Built target mm_data
+make[2]: Entering directory '/home/abiyaz/cache/build'
+make[2]: Leaving directory '/home/abiyaz/cache/build'
+[ 83%] Built target funnel_sort
+make[2]: Entering directory '/home/abiyaz/cache/build'
+make[2]: Leaving directory '/home/abiyaz/cache/build'
+[100%] Built target merge_sort
+make[1]: Leaving directory '/home/abiyaz/cache/build'
+make: Leaving directory '/home/abiyaz/cache/build'
++ sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure'
++ '[' -d /var/cgroups/cache-test ']'
++ cgdelete memory:cache-test
++ cgcreate -g memory:cache-test -t abiyaz:abiyaz
++ sudo bash -c 'echo 1 > /var/cgroups/cache-test/memory.oom_control'
++ case "$1" in
++ ./build/mm_data 16384
+Generating matrices of size and converting to ZM: 16384x16384
+Second input array
++ sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure'
++ cgexec -g memory:cache-test ./build/cache_adaptive 16384 40 cache-test
+Running cache_adaptive matrix multiply with matrices of size: 16384x16384
+Printing I/O statistics at program start @@@@@ 
+Bytes read: 450560, Bytes written: 0
+
+Printing I/O statistics AFTER loading output matrix to cache @@@@@ 
+Bytes read: 0, Bytes written: 0
+
+===========================================
+Running matrix multiply with depth: 0 value of n: 16384
+ Running matrix multiply with depth: 1 value of n: 8192
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+ Running matrix multiply with depth: 1 value of n: 8192
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+ Running matrix multiply with depth: 1 value of n: 8192
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+ Running matrix multiply with depth: 1 value of n: 8192
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+  Running matrix multiply with depth: 2 value of n: 4096
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
+   Running matrix multiply with depth: 3 value of n: 2048
