@@ -1,0 +1,2 @@
+Cache-non-adaptive  RANDOM memory,125.108,135168,466350080
+Cache-adaptive  RANDOM memory,125.731,34336768,290811904

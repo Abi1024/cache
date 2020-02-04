@@ -5,11 +5,12 @@
 #include<fcntl.h>
 #include<ctime>
 #include<cstring>
+#include<cmath>
 #include<fstream>
 #define TYPE int
 
-const bool mem_profile = false;
-const int mem_profile_depth = 3;
+bool mem_profile = false;
+int mem_profile_depth = 3;
 const int progress_depth = 4;
 
 std::ofstream out;
@@ -130,29 +131,51 @@ void mm_root(TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n){
 
 int main(int argc, char *argv[]){
 
-  if (argc < 4){
-    std::cout << "Insufficient arguments! Usage: cgroup_cache_adaptive <matrix_width> <memory_limit> <cgroup_name>\n";
-    exit(1);
-  }
+	if (argc < 5){
+		std::cout << "Insufficient arguments! Usage: non_cache_adaptive <memory_profile> <matrix_width> <memory_limit> <cgroup_name>\n";
+		exit(1);
+	}
 
-  cgroup_name = new char[strlen(argv[3]) + 1]();
-  strncpy(cgroup_name,argv[3],strlen(argv[3]));
+  cgroup_name = new char[strlen(argv[4]) + 1]();
+  strncpy(cgroup_name,argv[4],strlen(argv[4]));
+	std::cout << "printing cgroup name " << cgroup_name << std::endl;
+  starting_memory = std::stol(argv[3])*1024*1024;
 
-  starting_memory = std::stol(argv[2])*1024*1024;
+  length = std::stol(argv[2]);
 
-  length = std::stol(argv[1]);
+	std::ofstream mm_out = std::ofstream("mm_out.txt",std::ofstream::out | std::ofstream::app);
 
-	std::string mem_profile_filename = "mem_profile" + std::to_string(length*length*4/1024/1024) + ".txt";
-	std::cout << "Memory profile filename: " << mem_profile_filename << std::endl;
-	out = std::ofstream(mem_profile_filename.c_str(),  std::ofstream::out);
-
+	std::string memory_profile = "";
+	std::string mem_profile_filename = "";
+	switch(std::stoi(argv[1])) {
+		case 0: //constant memory
+			memory_profile = " CONSTANT memory";
+			mem_profile = false;
+			break;
+		case 1: //worst case memory
+			memory_profile = " WORST-CASE memory";
+			mem_profile = true;
+			mem_profile_depth = std::ceil(log( length*length*4*3 / ((double)starting_memory) /10)/log(4));
+			std::cout << "MEMORY PROFILE DEPTH: " << mem_profile_depth << std::endl;
+			//mem_profile_depth = 3;
+		  mem_profile_filename = "mem_profile" + std::to_string(length) + ".txt";
+			std::cout << "Memory profile filename: " << mem_profile_filename << std::endl;
+			out = std::ofstream(mem_profile_filename.c_str(),  std::ofstream::out);
+			break;
+		case 2:
+			memory_profile = " RANDOM memory";
+			mem_profile = false;
+			break;
+		default:
+			break;
+	}
 	std::cout << "Running non-cache_adaptive matrix multiply with matrices of size: " << (int)length << "x" << (int)length << "\n";
   std::vector<long> io_stats = {0,0};
   CacheHelper::print_io_data(io_stats, "Printing I/O statistics at program start @@@@@ \n");
 
 
 
-int fdout;
+	int fdout;
 
   if ((fdout = open ("nullbytes", O_RDWR, 0x0777 )) < 0){
     printf ("can't create nullbytes for writing\n");
@@ -187,6 +210,7 @@ int fdout;
 
   CacheHelper::print_io_data(io_stats, "Printing I/O statistics AFTER matrix multiplication @@@@@ \n");
 	std::cout << "Result memory profile stored in: " << mem_profile_filename << std::endl;
+		mm_out << "Cache-non-adaptive " << memory_profile << "," << duration << "," << io_stats[0] << "," << io_stats[1] << std::endl;
 	/*std::cout << "Result array\n";
   for (unsigned int i = 0 ; i < length*length; i++){
     std::cout << dst[i] << " ";

@@ -4,6 +4,7 @@
 #include<sys/mman.h>
 #include<fcntl.h>
 #include<ctime>
+#include<fstream>
 #define TYPE int
 
 unsigned long length = 0;
@@ -65,11 +66,12 @@ void mm( TYPE* x, TYPE* u, TYPE* v, int n )
 
 int main(int argc, char *argv[]){
 
-  if (argc < 4){
-    std::cout << "Insufficient arguments! Usage: cgroup_cache_adaptive <matrix_width> <memory_limit> <cgroup_name>\n";
+  if (argc < 5){
+    std::cout << "Insufficient arguments! Usage: cgroup_cache_adaptive <memory_profile> <matrix_width> <memory_limit> <cgroup_name>\n";
     exit(1);
   }
-  length = std::stol(argv[1]);
+	std::ofstream mm_out = std::ofstream("mm_out.txt",std::ofstream::out | std::ofstream::app);
+  length = std::stol(argv[2]);
 	std::cout << "Running cache_adaptive matrix multiply with matrices of size: " << (int)length << "x" << (int)length << "\n";
   std::vector<long> io_stats = {0,0};
   CacheHelper::print_io_data(io_stats, "Printing I/O statistics at program start @@@@@ \n");
@@ -94,12 +96,10 @@ int main(int argc, char *argv[]){
 	std::cout << "\n";
 	*/
 	CacheHelper::print_io_data(io_stats, "Printing I/O statistics AFTER loading output matrix to cache @@@@@ \n");
-
-
 	std::cout << "===========================================\n";
 
   //MODIFY MEMORY WITH CGROUP
-  CacheHelper::limit_memory(std::stol(argv[2])*1024*1024,argv[3]);
+  CacheHelper::limit_memory(std::stol(argv[3])*1024*1024,argv[4]);
 
   std::clock_t start;
   double duration;
@@ -110,11 +110,29 @@ int main(int argc, char *argv[]){
 
 	std::cout << "===========================================\n";
 	std::cout << "Total multiplication time: " << duration << "\n";
+
+
 	std::cout << "===========================================\n";
   std::cout << "Data: " << (unsigned int)dst[length*length/2/2+length] << std::endl;
 	std::cout << "===========================================\n";
 	std::cout << "===========================================\n";
   CacheHelper::print_io_data(io_stats, "Printing I/O statistics AFTER matrix multiplication @@@@@ \n");
+
+	std::string memory_profile = "";
+		switch(std::stoi(argv[1])) {
+		case 0: //constant memory
+			memory_profile = " CONSTANT memory";
+			break;
+		case 1: //worst case memory
+			memory_profile = " WORST-CASE memory";
+			break;
+		case 2:
+			memory_profile = " RANDOM memory";
+			break;
+		default:
+			break;
+	}
+	mm_out << "Cache-adaptive " << memory_profile << "," << duration << "," << io_stats[0] << "," << io_stats[1] << std::endl;
 	/*std::cout << "Result array\n";
   for (unsigned int i = 0 ; i < length*length; i++){
     std::cout << dst[i] << " ";

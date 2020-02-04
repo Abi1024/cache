@@ -97,7 +97,7 @@ sudo cmake ./build && sudo make --directory=./build && sudo ./cache.sh 0 100 cac
 2048x2048: Data: 3578789888
 4096x4096: Data: 1430257664 (non-adaptive)
 8192*8192: Data: 1426063360 (adaptive)
-16384x16384: Data: 4259840000 (non-adaptive)
+16384x16384: Data: 1408237568 (non-adaptive)
 --------------------
 stxxk disk configuration direct = off/try/on
 --------------------
