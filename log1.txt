@@ -1,6 +1,6 @@
 Running cache_adaptive matrix multiply with matrices of size: 4096x4096
 Printing I/O statistics at program start @@@@@ 
-Bytes read: 90112, Bytes written: 0
+Bytes read: 282624, Bytes written: 0
 
 Printing I/O statistics AFTER loading output matrix to cache @@@@@ 
 Bytes read: 0, Bytes written: 0
@@ -592,11 +592,11 @@ Running matrix multiply with depth: 0 value of n: 4096
    Running matrix multiply with depth: 3 value of n: 512
    Running matrix multiply with depth: 3 value of n: 512
 ===========================================
-Total multiplication time: 125.731
+Total multiplication time: 131.737
 ===========================================
 Data: 1430257664
 ===========================================
 ===========================================
 Printing I/O statistics AFTER matrix multiplication @@@@@ 
-Bytes read: 34246656, Bytes written: 290811904
+Bytes read: 1264254976, Bytes written: 843886592
 

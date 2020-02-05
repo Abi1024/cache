@@ -3,8 +3,8 @@ set -ex
 
 NUMRUNS=1
 SLEEP=5
-declare -a matrixwidth=(4096)
-declare -a startingmemory=(10)
+declare -a matrixwidth=( 2048  4096  )
+declare -a startingmemory=( 10  10 )
 
 if [ $# -ne 1 ]
 then
@@ -26,7 +26,7 @@ fi
 
 cmake ./build && make --directory=./build
 
-for index in {0..0};
+for (( index=0; index<=${#matrixwidth[@]}-1; index++ ));
 do
   echo $index
   MATRIXWIDTH=${matrixwidth[$index]}
@@ -36,13 +36,14 @@ do
     #run non-cache-adaptive on random memory
     ./cgroups.sh $1
     ./build/mm_data $MATRIXWIDTH
+    sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
     cgexec -g memory:$1 ./build/non_cache_adaptive 2 $MATRIXWIDTH $STARTINGMEMORY $1 > log1.txt &
     PID=$!
     STATUS=$(ps ax|grep "$PID"|wc -l)
     CURRENT=($STARTINGMEMORY*1024*1024)
     while [ $STATUS -gt 1 ]; do
       sleep $SLEEP
-      if (( $CURRENT == $STARTINGMEMORY*1024*1024 )) || (( $RANDOM % 2 == 1 )) ;
+      if (( $RANDOM % 2 == 1 )) || (( $CURRENT == $STARTINGMEMORY*1024*1024 ));
       then
         echo "Increasing memory"
         let CURRENT=CURRENT+STARTINGMEMORY*1024*1024
@@ -59,13 +60,14 @@ do
     #run cache-adaptive on random memory
     ./cgroups.sh $1
     ./build/mm_data $MATRIXWIDTH
+    sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
     cgexec -g memory:$1 ./build/cache_adaptive 2 $MATRIXWIDTH $STARTINGMEMORY $1 > log1.txt &
     PID=$!
     STATUS=$(ps ax|grep "$PID"|wc -l)
     CURRENT=($STARTINGMEMORY*1024*1024)
     while [ $STATUS -gt 1 ]; do
       sleep $SLEEP
-      if (( $CURRENT == $STARTINGMEMORY*1024*1024 )) || (( $RANDOM % 2 == 1 )) ;
+      if (( $RANDOM % 2 == 1 )) || (( $CURRENT == $STARTINGMEMORY*1024*1024 ))  ;
       then
         echo "Increasing memory"
         let CURRENT=CURRENT+STARTINGMEMORY*1024*1024

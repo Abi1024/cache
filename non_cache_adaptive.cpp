@@ -155,7 +155,7 @@ int main(int argc, char *argv[]){
 		case 1: //worst case memory
 			memory_profile = " WORST-CASE memory";
 			mem_profile = true;
-			mem_profile_depth = std::ceil(log( length*length*4*3 / ((double)starting_memory) /10)/log(4));
+			mem_profile_depth = std::ceil(log( (long)length*length*4*3 / ((double)starting_memory))/log(4));
 			std::cout << "MEMORY PROFILE DEPTH: " << mem_profile_depth << std::endl;
 			//mem_profile_depth = 3;
 		  mem_profile_filename = "mem_profile" + std::to_string(length) + ".txt";
