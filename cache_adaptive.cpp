@@ -132,7 +132,7 @@ int main(int argc, char *argv[]){
 		default:
 			break;
 	}
-	mm_out << "Cache-adaptive " << memory_profile << "," << duration << "," << io_stats[0] << "," << io_stats[1] << std::endl;
+	mm_out << "Cache-adaptive " << memory_profile << "," << argv[3] << "," << length << "," << duration << "," << io_stats[0] << "," << io_stats[1] << std::endl;
 	/*std::cout << "Result array\n";
   for (unsigned int i = 0 ; i < length*length; i++){
     std::cout << dst[i] << " ";

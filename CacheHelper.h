@@ -68,8 +68,8 @@ namespace CacheHelper{
     int return_code = system(command.c_str());
     //std::cout << "Memory usage: " << exec(std::string("cat /var/cgroups/") + string2 + std::string("/memory.usage_in_bytes")) << std::endl;
     if (return_code != 0){
-      std::cout << "Error. Unable to set cgroup memory " << string << " Code: " << return_code << "\n";
-      std::cout << "Memory usage: " << exec(std::string("cat /var/cgroups/") + string2 + std::string("/memory.usage_in_bytes")) << std::endl;
+      std::cerr << "Error. Unable to set cgroup memory " << string << " Code: " << return_code << "\n";
+      std::cerr << "Memory usage: " << exec(std::string("cat /var/cgroups/") + string2 + std::string("/memory.usage_in_bytes")) << std::endl;
       //exit(1);
     }
     //std::cout << "Limiting cgroup memory: " << string << " bytes\n";

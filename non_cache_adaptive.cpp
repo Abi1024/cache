@@ -166,6 +166,10 @@ int main(int argc, char *argv[]){
 			memory_profile = " RANDOM memory";
 			mem_profile = false;
 			break;
+		case 3:
+			memory_profile = " WORST-CASE but replay";
+			mem_profile = false;
+			break;
 		default:
 			break;
 	}
@@ -210,7 +214,7 @@ int main(int argc, char *argv[]){
 
   CacheHelper::print_io_data(io_stats, "Printing I/O statistics AFTER matrix multiplication @@@@@ \n");
 	std::cout << "Result memory profile stored in: " << mem_profile_filename << std::endl;
-		mm_out << "Cache-non-adaptive " << memory_profile << "," << duration << "," << io_stats[0] << "," << io_stats[1] << std::endl;
+		mm_out << "Cache-non-adaptive " << memory_profile << "," << argv[3] << "," << length << "," << duration << "," << io_stats[0] << "," << io_stats[1] << std::endl;
 	/*std::cout << "Result array\n";
   for (unsigned int i = 0 ; i < length*length; i++){
     std::cout << dst[i] << " ";
