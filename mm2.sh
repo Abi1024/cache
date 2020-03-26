@@ -1,10 +1,11 @@
 #!/bin/bash
 set -x
 
+{
 NUMRUNS=3
 SLEEP=5
-declare -a matrixwidth=( 2048  4096 8192 )
-declare -a startingmemory=( 10  10 10 )
+declare -a matrixwidth=( 2000 3000 4000 5000 6000 7000 8000 9000 )
+declare -a startingmemory=( 10 10 10 10 10 10 10 10)
 
 if [ $# -ne 1 ]
 then
@@ -16,6 +17,12 @@ if [ -f "mm_out.txt" ]
 then
   echo "mm_out.txt already exists. Deleting it first."
   rm mm_out.txt
+fi
+
+if [ -f "err" ]
+then
+  echo "err already exists. Deleting it first."
+  rm err
 fi
 
 if [ ! -f "nullbytes" ]
@@ -75,6 +82,7 @@ do
       let X+=1
       STATUS=$(ps ax|grep "$PID"|wc -l)
     done
+		wait $PID
     echo "Done with non-cache-adaptive worst-case memory replay"
 
     #run cache-adaptive on worst-case memory
@@ -98,6 +106,8 @@ do
       let X+=1
       STATUS=$(ps ax|grep "$PID"|wc -l)
     done
+		wait $PID
     echo "Done with cache-adaptive worst-case memory"
   done
 done
+} 2>err

@@ -1,0 +1,24 @@
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;24r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[24;1H"nohup.out" 6891L, 386134C[1;1H[33m   1 [m+ NUMRUNS=1
+[33m   2 [m+ SLEEP=5
+[33m   3 [m+ matrixwidth=(2048 2048 4096 4096 4096 8192 8192 8192 16388[4;1H[33m     [m4 16384 16384)
+[33m   4 [m+ declare -a matrixwidth
+[33m   5 [m+ startingmemory=(4 8 8 16 32 32 64 128 128 256 512)
+[33m   6 [m+ declare -a startingmemory
+[33m   7 [m+ '[' 1 -ne 1 ']'
+[33m   8 [m+ '[' -f mm_out.txt ']'
+[33m   9 [m+ '[' '!' -f nullbytes ']'
+[33m  10 [m+ cmake ./build
+[33m  11 [m-- Configuring done
+[33m  12 [m-- Generating done
+[33m  13 [m-- Build files have been written to: /home/abiyaz/cache/buii[15;1H[33m     [mld
+[33m  14 [m+ make --directory=./build
+[33m  15 [mmake: Entering directory '/home/abiyaz/cache/build'
+[33m  16 [mmake[1]: Entering directory '/home/abiyaz/cache/build'
+[33m  17 [mmake[2]: Entering directory '/home/abiyaz/cache/build'
+[33m  18 [mmake[2]: Leaving directory '/home/abiyaz/cache/build'
+[33m  19 [m[ 16%] Built target cache_adaptive
+[33m  20 [mmake[2]: Entering directory '/home/abiyaz/cache/build'
+[33m  21 [mmake[2]: Leaving directory '/home/abiyaz/cache/build'[24;47H1,1[11CTop[1;6H[?25h[?25l[24;1HType  :qa!  and press... changes and exit Vim[24;47H[K[24;47H1,1[11CTop[1;6H[?25h[?25l[24;1H[K[24;1H:[?2004h[?25hq[?25l[?25h[?25l[24;1H[K[24;47H1,1[11CTop[1;6H[?25h[?25l[24;1HType  :qa!  and press... changes and exit Vim[24;47H[K[24;47H1,1[11CTop[1;6H[?25h[?25l[24;47H[K[24;47H1,1[11CTop[1;6H[?25h[?25l[24;1H[1m-- INSERT --[m[24;13H[K[24;47H1,1[11CTop[1;6H NUMRUNS=1[1;16H[K[1;6H[?25h[?25ls NUMRUNS=1[24;49H2[1;7H[?25h[?25l[24;1H[K[24;47H1,1[11CTop[1;6H[?25h[?25l[24;1HType  :qa!  and press... changes and exit Vim[24;47H[K[24;47H1,1[11CTop[1;6H[?25h[24;1H[?2004l[?2004l[?1l>[?1049l[23;0;0tVim: Error reading input, exiting...
+Vim: preserving files...
+Vim: Finished.
+[24;1H

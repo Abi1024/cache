@@ -3,7 +3,7 @@
 #include<sys/stat.h>
 #include<sys/mman.h>
 #include<fcntl.h>
-#include<ctime>
+#include<chrono>
 #include<fstream>
 #define TYPE int
 
@@ -101,16 +101,16 @@ int main(int argc, char *argv[]){
   //MODIFY MEMORY WITH CGROUP
   CacheHelper::limit_memory(std::stol(argv[3])*1024*1024,argv[4]);
 
-  std::clock_t start;
-  double duration;
-	start = std::clock();
+  std::chrono::system_clock::time_point t_start = std::chrono::system_clock::now();
+	std::clock_t start = std::clock();
 	mm(dst,dst+length*length,dst+length*length*2,length);
-
-	duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
+  std::chrono::system_clock::time_point t_end = std::chrono::system_clock::now();
+	double cpu_time = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
+	auto wall_time = std::chrono::duration<double, std::milli>(t_end-t_start).count();
 
 	std::cout << "===========================================\n";
-	std::cout << "Total multiplication time: " << duration << "\n";
-
+	std::cout << "Total wall time: " << wall_time << "\n";
+	std::cout << "Total CPU time: " << cpu_time << "\n";
 
 	std::cout << "===========================================\n";
   std::cout << "Data: " << (unsigned int)dst[length*length/2/2+length] << std::endl;
@@ -132,7 +132,7 @@ int main(int argc, char *argv[]){
 		default:
 			break;
 	}
-	mm_out << "Cache-adaptive " << memory_profile << "," << argv[3] << "," << length << "," << duration << "," << io_stats[0] << "," << io_stats[1] << std::endl;
+	mm_out << "Cache-adaptive " << memory_profile << "," << argv[3] << "," << length << "," << wall_time << "," << io_stats[0] << "," << io_stats[1] << "," << (io_stats[0] + io_stats[1]) << std::endl;
 	/*std::cout << "Result array\n";
   for (unsigned int i = 0 ; i < length*length; i++){
     std::cout << dst[i] << " ";

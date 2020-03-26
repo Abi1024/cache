@@ -3,7 +3,7 @@
 #include<sys/stat.h>
 #include<sys/mman.h>
 #include<fcntl.h>
-#include<ctime>
+#include<chrono>
 #include<cstring>
 #include<cmath>
 #include<fstream>
@@ -14,8 +14,7 @@ int mem_profile_depth = 3;
 const int progress_depth = 4;
 
 std::ofstream out;
-std::clock_t start;
-double duration;
+std::chrono::system_clock::time_point t_start = std::chrono::system_clock::now();
 unsigned long length = 0;
 char* cgroup_name;
 long long starting_memory = -1;
@@ -83,9 +82,9 @@ void mm( TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n0, int n)
 
 		if (mem_profile && limit < mem_profile_depth){
         //std::cout << "Depth: " << limit << std::endl;
-        duration = (int)(1000.0 * (std::clock() - start) / CLOCKS_PER_SEC);
+				auto wall_time = std::chrono::duration<double, std::milli>(std::chrono::system_clock::now()-t_start).count();
         //std::cout << "Duration: " << duration << std::endl;
-        out << duration << " " << (long)3*n*n*4 << std::endl;
+        out << wall_time << " " << (long)3*n*n*4 << std::endl;
         //std::cout << "Writing the output \n";
 				CacheHelper::limit_memory((long)3*n*n*4+10000,cgroup_name);
         //std::cout << "Limited the memory" << std::endl;
@@ -98,9 +97,9 @@ void mm( TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n0, int n)
 
     if (mem_profile && limit < mem_profile_depth){
         //std::cout << "Depth2: " << limit << std::endl;
-        duration = (int)(1000.0 * (std::clock() - start) / CLOCKS_PER_SEC);
+        auto wall_time = std::chrono::duration<double, std::milli>(std::chrono::system_clock::now()-t_start).count();
         //std::cout << "Duration: " << duration << std::endl;
-        out << duration << " " << starting_memory << std::endl;
+        out << wall_time << " " << (long)3*n*n*4 << std::endl;
 				CacheHelper::limit_memory(starting_memory,cgroup_name);
 		}
 
@@ -125,7 +124,7 @@ void mm_root(TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n){
   CacheHelper::print_io_data(io_stats, "Printing I/O statistics AFTER loading output matrix to cache @@@@@ \n");
 	std::cout << "===========================================\n";
 	std::cout << "About to multiply\n";
-	start = std::clock();
+	t_start = std::chrono::system_clock::now();
   mm(x, u, v, y, n, n);
 }
 
@@ -198,14 +197,13 @@ int main(int argc, char *argv[]){
 	}
 	std::cout << "\n";
 	*/
-
-  double duration;
+	std::clock_t start = std::clock();
 	mm_root(dst,dst+length*length,dst+length*length*2,dst+length*length*3,length);
-
-	duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
-
+	auto wall_time = std::chrono::duration<double, std::milli>( std::chrono::system_clock::now()-t_start).count();
+	double cpu_time = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
 	std::cout << "===========================================\n";
-	std::cout << "Total multiplication time: " << duration << "\n";
+	std::cout << "Total wall time: " << wall_time << "\n";
+	std::cout << "Total CPU time: " << cpu_time << "\n";
 	std::cout << "===========================================\n";
 
   std::cout << "Data: " << (unsigned int)dst[length*length/2/2+length] << std::endl;
@@ -214,7 +212,7 @@ int main(int argc, char *argv[]){
 
   CacheHelper::print_io_data(io_stats, "Printing I/O statistics AFTER matrix multiplication @@@@@ \n");
 	std::cout << "Result memory profile stored in: " << mem_profile_filename << std::endl;
-		mm_out << "Cache-non-adaptive " << memory_profile << "," << argv[3] << "," << length << "," << duration << "," << io_stats[0] << "," << io_stats[1] << std::endl;
+	mm_out << "Cache-non-adaptive " << memory_profile << "," << argv[3] << "," << length << "," << wall_time << "," << io_stats[0] << "," << io_stats[1] << "," << (io_stats[0] + io_stats[1]) << std::endl;
 	/*std::cout << "Result array\n";
   for (unsigned int i = 0 ; i < length*length; i++){
     std::cout << dst[i] << " ";

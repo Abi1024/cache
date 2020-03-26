@@ -3,8 +3,8 @@ set -x
 
 NUMRUNS=1
 SLEEP=5
-declare -a matrixwidth=( 2048 2048 4096 4096 4096  8192 8192 8192  16384 16384 16384 )
-declare -a startingmemory=( 4 8  8 16 32  32 64 128  128 256 512     )
+declare -a matrixwidth=( 4096 )
+declare -a startingmemory=( 32 )
 
 if [ $# -ne 1 ]
 then
@@ -37,7 +37,7 @@ do
     ./cgroups.sh $1
     ./build/mm_data $MATRIXWIDTH
     sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
-    cgexec -g memory:$1 ./build/cache_adaptive 0 $MATRIXWIDTH $STARTINGMEMORY $1
+    cgexec -g memory:$1 ./build/non_cache_adaptive 0 $MATRIXWIDTH $STARTINGMEMORY $1
     echo "Done with cache-adaptive constant memory"
-	done	
+	done
 done
