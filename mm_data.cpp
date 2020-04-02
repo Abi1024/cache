@@ -7,7 +7,6 @@
 #define TYPE int
 
 unsigned long length = 0;
-const int B = 2;
 
 /*
 This function converts a matrix in row major layout to Z-Morton row major layout.

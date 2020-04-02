@@ -11,9 +11,9 @@ every 5 seconds.
 #include<fcntl.h>
 #include<fstream>
 
-const unsigned long long MEMORY_VAL = 100*1024*1024;
-const unsigned long long MEMORY_VAL_2 = 50*1024*1024;
-unsigned long long MEMORY = MEMORY_VAL;
+const unsigned long long MEMORY_VAL = 500*1024*1024;
+const unsigned long long MEMORY_VAL_2 = 50;
+unsigned long long MEMORY = MEMORY_VAL_2;
 std::chrono::system_clock::time_point t_start;
 
 int main(){
@@ -21,7 +21,7 @@ int main(){
 
   int fdout;
 
-  if ((fdout = open ("nullbytes", O_RDWR, 0x0777 )) < 0){
+  if ((fdout = open ("balloon_data", O_RDWR, 0x0777 )) < 0){
     printf ("can't create nullbytes for writing\n");
     return 0;
   }
@@ -37,14 +37,11 @@ int main(){
   t_start = std::chrono::system_clock::now();
 
   while(flag){
-    if (i == 100*1024*1024){
-      i = 0;
-    }
-    *(dst + i) = *(dst + rand()%MEMORY) ;
+    *(dst + rand()%MEMORY) = 1;
 
     std::chrono::system_clock::time_point t_end = std::chrono::system_clock::now();
   	auto wall_time = std::chrono::duration<double, std::milli>(t_end-t_start).count();
-    if (wall_time > 5000){
+    if (wall_time > 60000){
       t_start = std::chrono::system_clock::now();
       std::cout << "Five seconds have passed. Changing memory." << std::endl;
       munmap(dst,MEMORY);
@@ -59,5 +56,5 @@ int main(){
       }
     }
   }
-
+  std::cout << "Balloon done executing." << std::endl;
 }

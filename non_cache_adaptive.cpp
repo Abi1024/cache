@@ -212,7 +212,7 @@ int main(int argc, char *argv[]){
 
   CacheHelper::print_io_data(io_stats, "Printing I/O statistics AFTER matrix multiplication @@@@@ \n");
 	std::cout << "Result memory profile stored in: " << mem_profile_filename << std::endl;
-	mm_out << "Cache-non-adaptive " << memory_profile << "," << argv[3] << "," << length << "," << wall_time << "," << io_stats[0] << "," << io_stats[1] << "," << (io_stats[0] + io_stats[1]) << std::endl;
+	mm_out << "Cache-non-adaptive " << memory_profile << "," << argv[3] << "," << length << "," << wall_time << "," << (float)io_stats[0]/1000000.0 << "," << (float)io_stats[1]/1000000.0 << "," << (float)(io_stats[0] + io_stats[1])/1000000.0 << std::endl;
 	/*std::cout << "Result array\n";
   for (unsigned int i = 0 ; i < length*length; i++){
     std::cout << dst[i] << " ";

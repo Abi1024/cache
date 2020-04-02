@@ -4,7 +4,7 @@ set -x
 {
 NUMRUNS=3
 SLEEP=5
-declare -a matrixwidth=( 2000 3000 4000 5000 6000 7000 8000 9000 )
+declare -a matrixwidth=( 2000 3000 4000 5000 6000 7000 8000)
 declare -a startingmemory=( 10 10 10 10 10 10 10 10)
 
 if [ $# -ne 1 ]

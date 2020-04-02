@@ -78,17 +78,6 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
-# Special rule for the target package_source
-package_source:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	/usr/bin/cpack --config ./CPackSourceConfig.cmake /home/abiyaz/cache/build/CPackSourceConfig.cmake
-.PHONY : package_source
-
-# Special rule for the target package_source
-package_source/fast: package_source
-
-.PHONY : package_source/fast
-
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
@@ -99,6 +88,17 @@ package: preinstall
 package/fast: package
 
 .PHONY : package/fast
+
+# Special rule for the target package_source
+package_source:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
+	/usr/bin/cpack --config ./CPackSourceConfig.cmake /home/abiyaz/cache/build/CPackSourceConfig.cmake
+.PHONY : package_source
+
+# Special rule for the target package_source
+package_source/fast: package_source
+
+.PHONY : package_source/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -131,6 +131,32 @@ preinstall/fast:
 depend:
 	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+#=============================================================================
+# Target rules for targets named cache_adaptive_balloon
+
+# Build rule for target.
+cache_adaptive_balloon: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cache_adaptive_balloon
+.PHONY : cache_adaptive_balloon
+
+# fast build rule for target.
+cache_adaptive_balloon/fast:
+	$(MAKE) -f CMakeFiles/cache_adaptive_balloon.dir/build.make CMakeFiles/cache_adaptive_balloon.dir/build
+.PHONY : cache_adaptive_balloon/fast
+
+#=============================================================================
+# Target rules for targets named balloon
+
+# Build rule for target.
+balloon: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 balloon
+.PHONY : balloon
+
+# fast build rule for target.
+balloon/fast:
+	$(MAKE) -f CMakeFiles/balloon.dir/build.make CMakeFiles/balloon.dir/build
+.PHONY : balloon/fast
 
 #=============================================================================
 # Target rules for targets named cache_adaptive
@@ -210,6 +236,33 @@ merge_sort/fast:
 	$(MAKE) -f CMakeFiles/merge_sort.dir/build.make CMakeFiles/merge_sort.dir/build
 .PHONY : merge_sort/fast
 
+balloon.o: balloon.cpp.o
+
+.PHONY : balloon.o
+
+# target to build an object file
+balloon.cpp.o:
+	$(MAKE) -f CMakeFiles/balloon.dir/build.make CMakeFiles/balloon.dir/balloon.cpp.o
+.PHONY : balloon.cpp.o
+
+balloon.i: balloon.cpp.i
+
+.PHONY : balloon.i
+
+# target to preprocess a source file
+balloon.cpp.i:
+	$(MAKE) -f CMakeFiles/balloon.dir/build.make CMakeFiles/balloon.dir/balloon.cpp.i
+.PHONY : balloon.cpp.i
+
+balloon.s: balloon.cpp.s
+
+.PHONY : balloon.s
+
+# target to generate assembly for a file
+balloon.cpp.s:
+	$(MAKE) -f CMakeFiles/balloon.dir/build.make CMakeFiles/balloon.dir/balloon.cpp.s
+.PHONY : balloon.cpp.s
+
 cache_adaptive.o: cache_adaptive.cpp.o
 
 .PHONY : cache_adaptive.o
@@ -236,6 +289,33 @@ cache_adaptive.s: cache_adaptive.cpp.s
 cache_adaptive.cpp.s:
 	$(MAKE) -f CMakeFiles/cache_adaptive.dir/build.make CMakeFiles/cache_adaptive.dir/cache_adaptive.cpp.s
 .PHONY : cache_adaptive.cpp.s
+
+cache_adaptive_balloon.o: cache_adaptive_balloon.cpp.o
+
+.PHONY : cache_adaptive_balloon.o
+
+# target to build an object file
+cache_adaptive_balloon.cpp.o:
+	$(MAKE) -f CMakeFiles/cache_adaptive_balloon.dir/build.make CMakeFiles/cache_adaptive_balloon.dir/cache_adaptive_balloon.cpp.o
+.PHONY : cache_adaptive_balloon.cpp.o
+
+cache_adaptive_balloon.i: cache_adaptive_balloon.cpp.i
+
+.PHONY : cache_adaptive_balloon.i
+
+# target to preprocess a source file
+cache_adaptive_balloon.cpp.i:
+	$(MAKE) -f CMakeFiles/cache_adaptive_balloon.dir/build.make CMakeFiles/cache_adaptive_balloon.dir/cache_adaptive_balloon.cpp.i
+.PHONY : cache_adaptive_balloon.cpp.i
+
+cache_adaptive_balloon.s: cache_adaptive_balloon.cpp.s
+
+.PHONY : cache_adaptive_balloon.s
+
+# target to generate assembly for a file
+cache_adaptive_balloon.cpp.s:
+	$(MAKE) -f CMakeFiles/cache_adaptive_balloon.dir/build.make CMakeFiles/cache_adaptive_balloon.dir/cache_adaptive_balloon.cpp.s
+.PHONY : cache_adaptive_balloon.cpp.s
 
 cgroup_test.o: cgroup_test.cpp.o
 
@@ -380,17 +460,25 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... package_source"
 	@echo "... package"
+	@echo "... package_source"
+	@echo "... cache_adaptive_balloon"
+	@echo "... balloon"
 	@echo "... cache_adaptive"
 	@echo "... cgroup_test"
 	@echo "... non_cache_adaptive"
 	@echo "... mm_data"
 	@echo "... funnel_sort"
 	@echo "... merge_sort"
+	@echo "... balloon.o"
+	@echo "... balloon.i"
+	@echo "... balloon.s"
 	@echo "... cache_adaptive.o"
 	@echo "... cache_adaptive.i"
 	@echo "... cache_adaptive.s"
+	@echo "... cache_adaptive_balloon.o"
+	@echo "... cache_adaptive_balloon.i"
+	@echo "... cache_adaptive_balloon.s"
 	@echo "... cgroup_test.o"
 	@echo "... cgroup_test.i"
 	@echo "... cgroup_test.s"
