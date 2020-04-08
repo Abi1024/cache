@@ -34,7 +34,7 @@ do
   for i in `seq 1 $NUMRUNS`;
   do
     #run non-cache-adaptive on constant memory
-    ./cgroups.sh $1
+    ./cgroups.sh $1W
     ./build/mm_data $MATRIXWIDTH
     sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
     cgexec -g memory:$1 ./build/non_cache_adaptive 0 $MATRIXWIDTH $STARTINGMEMORY $1

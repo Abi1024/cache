@@ -1,4 +1,4 @@
 data/*
 build/CMakeFiles/
-balloon_data
+balloon_data*
 nullbytes

@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+set -ex
 
 if [ $# -ne 1 ]
 then

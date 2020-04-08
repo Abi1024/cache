@@ -146,6 +146,19 @@ cache_adaptive_balloon/fast:
 .PHONY : cache_adaptive_balloon/fast
 
 #=============================================================================
+# Target rules for targets named balloon2
+
+# Build rule for target.
+balloon2: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 balloon2
+.PHONY : balloon2
+
+# fast build rule for target.
+balloon2/fast:
+	$(MAKE) -f CMakeFiles/balloon2.dir/build.make CMakeFiles/balloon2.dir/build
+.PHONY : balloon2/fast
+
+#=============================================================================
 # Target rules for targets named balloon
 
 # Build rule for target.
@@ -262,6 +275,33 @@ balloon.s: balloon.cpp.s
 balloon.cpp.s:
 	$(MAKE) -f CMakeFiles/balloon.dir/build.make CMakeFiles/balloon.dir/balloon.cpp.s
 .PHONY : balloon.cpp.s
+
+balloon2.o: balloon2.cpp.o
+
+.PHONY : balloon2.o
+
+# target to build an object file
+balloon2.cpp.o:
+	$(MAKE) -f CMakeFiles/balloon2.dir/build.make CMakeFiles/balloon2.dir/balloon2.cpp.o
+.PHONY : balloon2.cpp.o
+
+balloon2.i: balloon2.cpp.i
+
+.PHONY : balloon2.i
+
+# target to preprocess a source file
+balloon2.cpp.i:
+	$(MAKE) -f CMakeFiles/balloon2.dir/build.make CMakeFiles/balloon2.dir/balloon2.cpp.i
+.PHONY : balloon2.cpp.i
+
+balloon2.s: balloon2.cpp.s
+
+.PHONY : balloon2.s
+
+# target to generate assembly for a file
+balloon2.cpp.s:
+	$(MAKE) -f CMakeFiles/balloon2.dir/build.make CMakeFiles/balloon2.dir/balloon2.cpp.s
+.PHONY : balloon2.cpp.s
 
 cache_adaptive.o: cache_adaptive.cpp.o
 
@@ -463,6 +503,7 @@ help:
 	@echo "... package"
 	@echo "... package_source"
 	@echo "... cache_adaptive_balloon"
+	@echo "... balloon2"
 	@echo "... balloon"
 	@echo "... cache_adaptive"
 	@echo "... cgroup_test"
@@ -473,6 +514,9 @@ help:
 	@echo "... balloon.o"
 	@echo "... balloon.i"
 	@echo "... balloon.s"
+	@echo "... balloon2.o"
+	@echo "... balloon2.i"
+	@echo "... balloon2.s"
 	@echo "... cache_adaptive.o"
 	@echo "... cache_adaptive.i"
 	@echo "... cache_adaptive.s"

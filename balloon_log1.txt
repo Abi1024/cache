@@ -1,0 +1,4 @@
+Starting balloon program
+Each balloon is mmapping 12582912
+cgroup memory 104857600
+num balloons 5
