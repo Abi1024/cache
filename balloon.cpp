@@ -11,8 +11,8 @@
 #include<fcntl.h>
 #include<fstream>
 
-const unsigned long long MEMORY_VAL = 500*1024*1024;
-const unsigned long long MEMORY_VAL_2 = 50;
+const unsigned long long MEMORY_VAL = 100*1024*1024;
+const unsigned long long MEMORY_VAL_2 = 100*1024*1024;
 unsigned long long TARGET_MEMORY = 0;
 unsigned long long CGROUP_MEMORY = 0;
 int NUM_BALLOONS = 0;
@@ -48,6 +48,7 @@ int main(int argc, char *argv[]){
 
   int fdout;
 
+  BALLOON_ID = atoi(argv[5]);
   std::string filename = "balloon_data" + BALLOON_ID;
   if ((fdout = open (filename.c_str(), O_RDWR, 0x0777 )) < 0){
     printf ("can't create nullbytes for writing\n");
@@ -65,7 +66,6 @@ int main(int argc, char *argv[]){
 
   CGROUP_MEMORY = atol(argv[2])*1024*1024;
   NUM_BALLOONS = atoi(argv[4]);
-  BALLOON_ID = atoi(argv[5]);
   unsigned long long mmap_memory = set_memory_in_bytes(CGROUP_MEMORY, TARGET_MEMORY, NUM_BALLOONS);
   std::cout << "Each balloon is mmapping " << mmap_memory << std::endl;
   std::cout << "cgroup memory " << CGROUP_MEMORY  << std::endl;

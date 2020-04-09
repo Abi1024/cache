@@ -2,10 +2,11 @@
 set -ex
 
 NUMRUNS=3
-NUMBALLOONS=5
+NUMBALLOONS=9
 SLEEP=5
-TOTALMEMORY=102000000
-TOTALMEMORY_MB=$((TOTALMEMORY/(1024*1024) ))
+TOTALMEMORY_MB=100
+TOTALMEMORY=$((TOTALMEMORY_MB*1024*1024))
+
 
 if [ $# -ne 1 ]
 then
@@ -43,14 +44,10 @@ cmake ./build && make --directory=./build
 ./build/mm_data 8000
 sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
 echo $TOTALMEMORY > /var/cgroups/$1/memory.limit_in_bytes
-cgexec -g memory:$1 ./build/balloon2 > "balloon_log.txt" &
-cgexec -g memory:$1 ./build/balloon2 > "balloon_log2.txt" &
-cgexec -g memory:$1 ./build/balloon2 > "balloon_log3.txt" &
-cgexec -g memory:$1 ./build/balloon2 > "balloon_log4.txt" &
-cgexec -g memory:$1 ./build/balloon2 > "balloon_log5.txt" &
-cgexec -g memory:$1 ./build/balloon2 > "balloon_log6.txt" &
-cgexec -g memory:$1 ./build/balloon2 > "balloon_log7.txt" &
-cgexec -g memory:$1 ./build/balloon2 > "balloon_log8.txt" &
-cgexec -g memory:$1 ./build/cache_adaptive_balloon 0 16000 100 $1
+for j in `seq 1 $NUMBALLOONS`;
+do
+	cgexec -g memory:$1 ./build/balloon2 > "balloon_log.txt" $j &
+done
+cgexec -g memory:$1 ./build/cache_adaptive_balloon 0 8000 100 $1
 #pkill -f balloon
 #cgexec -g memory:$1 ./build/balloon2

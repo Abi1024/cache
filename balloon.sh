@@ -59,7 +59,7 @@ do
 			if [ ! -f "balloon_data$j" ]
 			then
 			  echo "First creating file for storing the balloon's data."
-			  dd if=/dev/urandom of="balloon_data$j" count="$TOTALMEMORY_MB" bs=1048576
+			  dd if=/dev/urandom of="balloon_data$j" count=1000 bs=1048576
 			fi
 
 		done

@@ -1,3 +1,1 @@
 Starting balloon program
-Changing memory to 50
-Done changing memory 50

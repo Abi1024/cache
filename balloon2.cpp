@@ -11,8 +11,9 @@
 #include<fcntl.h>
 #include<fstream>
 
-const unsigned long long MEMORY_VAL = 100*1024*1024;
-const unsigned long long MEMORY_VAL_2 = 50;
+const unsigned long long mem = 10*1024*1024;
+const unsigned long long MEMORY_VAL = mem;
+const unsigned long long MEMORY_VAL_2 = mem;
 unsigned long long MEMORY = MEMORY_VAL;
 std::chrono::system_clock::time_point t_start;
 
@@ -21,13 +22,18 @@ to use in our main program. Everything is in bytes.
 Note that at a minimum, the main algorithm will use at least C/(B+1) memory.
 
 */
-int main(){
+int main(int argc, char *argv[]){
   std::cout << "Starting balloon program" << std::endl;
+  if (argc < 2){
+    std::cout << "Insufficient arguments!\n";
+    exit(1);
+  }
 
+  int BALLOON_ID = atoi(argv[1]);
   int fdout;
-
-  if ((fdout = open ("balloon_data", O_RDWR, 0x0777 )) < 0){
-    printf ("can't create file for writing\n");
+  std::string filename = "balloon_data" + std::to_string(BALLOON_ID);
+  if ((fdout = open (filename.c_str(), O_RDWR, 0x0777 )) < 0){
+    printf ("can't create nullbytes for writing\n");
     return 0;
   }
 
@@ -39,11 +45,18 @@ int main(){
 
   t_start = std::chrono::system_clock::now();
 
+  unsigned long long i = 0;
   while(true){
     *(dst + rand()%MEMORY) = 1;
+    *(dst + i) = 1;
+
+    i += 1000;
+    i %= (MEMORY-1);
+    /*
     std::chrono::system_clock::time_point t_end = std::chrono::system_clock::now();
   	auto wall_time = std::chrono::duration<double, std::milli>(t_end-t_start).count();
-    if (wall_time > 120000){
+
+    if (wall_time > 3600000){
       t_start = std::chrono::system_clock::now();
       munmap(dst,MEMORY);
       if (MEMORY == MEMORY_VAL){
@@ -58,6 +71,7 @@ int main(){
       }
       std::cout << "Done changing memory " << MEMORY << std::endl;
     }
+    */
   }
   std::cout << "Balloon done executing." << std::endl;
 }

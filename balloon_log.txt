@@ -1,3 +1,13 @@
 Starting balloon program
-Changing memory to 50
-Done changing memory 50
+Changing memory to 10485760
+Done changing memory 10485760
+Changing memory to 10485760
+Done changing memory 10485760
+Changing memory to 10485760
+Done changing memory 10485760
+Changing memory to 10485760
+Done changing memory 10485760
+Changing memory to 10485760
+Done changing memory 10485760
+Changing memory to 10485760
+Done changing memory 10485760
