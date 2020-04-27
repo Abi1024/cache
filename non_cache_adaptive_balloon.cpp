@@ -7,6 +7,7 @@
 #include<cstring>
 #include<cmath>
 #include<fstream>
+#include<map>
 #define TYPE int
 
 bool mem_profile = false;
@@ -14,11 +15,15 @@ int mem_profile_depth = 3;
 const int progress_depth = 4;
 
 std::ofstream out;
+std::ofstream effect_out;
+std::ofstream ipc;
 std::chrono::system_clock::time_point t_start = std::chrono::system_clock::now();
 unsigned long length = 0;
 char* cgroup_name;
 long long starting_memory = -1;
 std::vector<long> io_stats = {0,0};
+std::map<int,int> stats;
+unsigned long* dst2;
 
 //x is output, y is auxiiliary memory, u and v are inputs
 void mm( TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n0, int n)
@@ -80,27 +85,43 @@ void mm( TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n0, int n)
 		mm( y2 + m21, u + m22, v + m21, y, n0, nn );
 		mm( y2 + m22, u + m22, v + m22, y, n0, nn );
 
-		if (mem_profile && limit < mem_profile_depth){
+		if (mem_profile){
         //std::cout << "Depth: " << limit << std::endl;
 				auto wall_time = std::chrono::duration<double, std::milli>(std::chrono::system_clock::now()-t_start).count();
         //std::cout << "Duration: " << duration << std::endl;
-        out << wall_time << " " << (long)3*n*n*4 << std::endl;
+  			//out << wall_time << " " << (long)3*n*n*4 << std::endl
+				unsigned long memory_val = 40*1024*1024;
+				out << wall_time << " " << memory_val << std::endl;
+				dst2[0] = memory_val;
+				std::cout << "Changing memory to: " << memory_val << std::endl;
+				std::cout << "Current memory: " << CacheHelper::print_rss_value() << std::endl;
         //std::cout << "Writing the output \n";
-				CacheHelper::limit_memory((long)3*n*n*4+10000,cgroup_name);
+				//CacheHelper::limit_memory((long)3*n*n*4+10000,cgroup_name);
         //std::cout << "Limited the memory" << std::endl;
 		}
+
+		std::chrono::system_clock::time_point temp = std::chrono::system_clock::now();
+
+
 
     for (int i = 0; i < n*n; i++){
       x[i] += y2[i];
 			y2[i] = 0;
     }
 
-    if (mem_profile && limit < mem_profile_depth){
+		auto time_spent_doing_addition = std::chrono::duration<double, std::milli>(std::chrono::system_clock::now()-temp).count();
+		stats[limit] += time_spent_doing_addition;
+
+    if (mem_profile){
         //std::cout << "Depth2: " << limit << std::endl;
         auto wall_time = std::chrono::duration<double, std::milli>(std::chrono::system_clock::now()-t_start).count();
         //std::cout << "Duration: " << duration << std::endl;
-        out << wall_time << " " << starting_memory << std::endl;
-				CacheHelper::limit_memory(starting_memory,cgroup_name);
+				unsigned long memory_val = 10*1024*1024;
+				out << wall_time << " " << memory_val << std::endl;
+				dst2[0] = memory_val;
+				std::cout << "Changing memory to: " << memory_val << std::endl;
+				std::cout << "Current memory: " << CacheHelper::print_rss_value() << std::endl;
+				//CacheHelper::limit_memory(starting_memory,cgroup_name);
 		}
 
 	}
@@ -120,7 +141,7 @@ void mm_root(TYPE* x, TYPE* u, TYPE* v, TYPE* y, int n){
     y[i] = 0;
   }*/
 	//MODIFY MEMORY WITH CGROUP
-	CacheHelper::limit_memory(starting_memory,cgroup_name);
+	//CacheHelper::limit_memory(starting_memory,cgroup_name);
   CacheHelper::print_io_data(io_stats, "Printing I/O statistics AFTER loading output matrix to cache @@@@@ \n");
 	std::cout << "===========================================\n";
 	std::cout << "About to multiply\n";
@@ -143,7 +164,7 @@ int main(int argc, char *argv[]){
   length = std::stol(argv[2]);
 
 	std::ofstream mm_out = std::ofstream("mm_out.txt",std::ofstream::out | std::ofstream::app);
-
+	std::ofstream effect_out = std::ofstream("effect.txt",std::ofstream::out | std::ofstream::app);
 	std::string memory_profile = "";
 	std::string mem_profile_filename = "";
 	switch(std::stoi(argv[1])) {
@@ -176,17 +197,26 @@ int main(int argc, char *argv[]){
   std::vector<long> io_stats = {0,0};
   CacheHelper::print_io_data(io_stats, "Printing I/O statistics at program start @@@@@ \n");
 
-
-
 	int fdout;
 
   if ((fdout = open ("nullbytes", O_RDWR, 0x0777 )) < 0){
-    printf ("can't create nullbytes for writing\n");
+    printf ("can't create file for writing\n");
     return 0;
   }
 
   TYPE* dst;
   if (((dst = (TYPE*) mmap(0, sizeof(TYPE)*length*length*5, PROT_READ | PROT_WRITE, MAP_SHARED , fdout, 0)) == (TYPE*)MAP_FAILED)){
+       printf ("mmap error for output with code");
+       return 0;
+  }
+
+	int ipcfd;
+	if ((ipcfd = open ("IPCTEST", O_RDWR, 0x0777 )) < 0){
+    printf ("can't create file for writing\n");
+    return 0;
+  }
+
+  if (((dst2 = (unsigned long*) mmap(0, 10 , PROT_READ | PROT_WRITE, MAP_SHARED , ipcfd, 0)) == (unsigned long*)MAP_FAILED)){
        printf ("mmap error for output with code");
        return 0;
   }
@@ -213,6 +243,11 @@ int main(int argc, char *argv[]){
   CacheHelper::print_io_data(io_stats, "Printing I/O statistics AFTER matrix multiplication @@@@@ \n");
 	std::cout << "Result memory profile stored in: " << mem_profile_filename << std::endl;
 	mm_out << "Cache-non-adaptive " << memory_profile << "," << argv[3] << "," << length << "," << wall_time << "," << (float)io_stats[0]/1000000.0 << "," << (float)io_stats[1]/1000000.0 << "," << (float)(io_stats[0] + io_stats[1])/1000000.0 << std::endl;
+	effect_out << "Cache-non-adaptive " << memory_profile << "," << argv[3] << "," << length << "," << wall_time;
+	for (int j = 0; stats[j] > 0; j++){
+		effect_out << "," << (float)(stats[j]*100)/(wall_time);
+	}
+	effect_out << std::endl;
 	/*std::cout << "Result array\n";
   for (unsigned int i = 0 ; i < length*length; i++){
     std::cout << dst[i] << " ";

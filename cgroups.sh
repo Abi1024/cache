@@ -9,6 +9,7 @@ fi
 
 if [ -d  "/var/cgroups/$1" ]
 then
+	sudo cat "/var/cgroups/$1/tasks"
 	cgdelete memory:$1
 fi
 

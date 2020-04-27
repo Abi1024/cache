@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/abiyaz/cache/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -88,6 +77,17 @@ package: preinstall
 package/fast: package
 
 .PHONY : package/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # Special rule for the target package_source
 package_source:
@@ -133,6 +133,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named non_cache_adaptive_balloon
+
+# Build rule for target.
+non_cache_adaptive_balloon: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 non_cache_adaptive_balloon
+.PHONY : non_cache_adaptive_balloon
+
+# fast build rule for target.
+non_cache_adaptive_balloon/fast:
+	$(MAKE) -f CMakeFiles/non_cache_adaptive_balloon.dir/build.make CMakeFiles/non_cache_adaptive_balloon.dir/build
+.PHONY : non_cache_adaptive_balloon/fast
+
+#=============================================================================
 # Target rules for targets named cache_adaptive_balloon
 
 # Build rule for target.
@@ -144,6 +157,19 @@ cache_adaptive_balloon: cmake_check_build_system
 cache_adaptive_balloon/fast:
 	$(MAKE) -f CMakeFiles/cache_adaptive_balloon.dir/build.make CMakeFiles/cache_adaptive_balloon.dir/build
 .PHONY : cache_adaptive_balloon/fast
+
+#=============================================================================
+# Target rules for targets named balloon3
+
+# Build rule for target.
+balloon3: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 balloon3
+.PHONY : balloon3
+
+# fast build rule for target.
+balloon3/fast:
+	$(MAKE) -f CMakeFiles/balloon3.dir/build.make CMakeFiles/balloon3.dir/build
+.PHONY : balloon3/fast
 
 #=============================================================================
 # Target rules for targets named balloon2
@@ -302,6 +328,33 @@ balloon2.s: balloon2.cpp.s
 balloon2.cpp.s:
 	$(MAKE) -f CMakeFiles/balloon2.dir/build.make CMakeFiles/balloon2.dir/balloon2.cpp.s
 .PHONY : balloon2.cpp.s
+
+balloon3.o: balloon3.cpp.o
+
+.PHONY : balloon3.o
+
+# target to build an object file
+balloon3.cpp.o:
+	$(MAKE) -f CMakeFiles/balloon3.dir/build.make CMakeFiles/balloon3.dir/balloon3.cpp.o
+.PHONY : balloon3.cpp.o
+
+balloon3.i: balloon3.cpp.i
+
+.PHONY : balloon3.i
+
+# target to preprocess a source file
+balloon3.cpp.i:
+	$(MAKE) -f CMakeFiles/balloon3.dir/build.make CMakeFiles/balloon3.dir/balloon3.cpp.i
+.PHONY : balloon3.cpp.i
+
+balloon3.s: balloon3.cpp.s
+
+.PHONY : balloon3.s
+
+# target to generate assembly for a file
+balloon3.cpp.s:
+	$(MAKE) -f CMakeFiles/balloon3.dir/build.make CMakeFiles/balloon3.dir/balloon3.cpp.s
+.PHONY : balloon3.cpp.s
 
 cache_adaptive.o: cache_adaptive.cpp.o
 
@@ -492,17 +545,46 @@ non_cache_adaptive.cpp.s:
 	$(MAKE) -f CMakeFiles/non_cache_adaptive.dir/build.make CMakeFiles/non_cache_adaptive.dir/non_cache_adaptive.cpp.s
 .PHONY : non_cache_adaptive.cpp.s
 
+non_cache_adaptive_balloon.o: non_cache_adaptive_balloon.cpp.o
+
+.PHONY : non_cache_adaptive_balloon.o
+
+# target to build an object file
+non_cache_adaptive_balloon.cpp.o:
+	$(MAKE) -f CMakeFiles/non_cache_adaptive_balloon.dir/build.make CMakeFiles/non_cache_adaptive_balloon.dir/non_cache_adaptive_balloon.cpp.o
+.PHONY : non_cache_adaptive_balloon.cpp.o
+
+non_cache_adaptive_balloon.i: non_cache_adaptive_balloon.cpp.i
+
+.PHONY : non_cache_adaptive_balloon.i
+
+# target to preprocess a source file
+non_cache_adaptive_balloon.cpp.i:
+	$(MAKE) -f CMakeFiles/non_cache_adaptive_balloon.dir/build.make CMakeFiles/non_cache_adaptive_balloon.dir/non_cache_adaptive_balloon.cpp.i
+.PHONY : non_cache_adaptive_balloon.cpp.i
+
+non_cache_adaptive_balloon.s: non_cache_adaptive_balloon.cpp.s
+
+.PHONY : non_cache_adaptive_balloon.s
+
+# target to generate assembly for a file
+non_cache_adaptive_balloon.cpp.s:
+	$(MAKE) -f CMakeFiles/non_cache_adaptive_balloon.dir/build.make CMakeFiles/non_cache_adaptive_balloon.dir/non_cache_adaptive_balloon.cpp.s
+.PHONY : non_cache_adaptive_balloon.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... package"
+	@echo "... rebuild_cache"
+	@echo "... non_cache_adaptive_balloon"
 	@echo "... package_source"
 	@echo "... cache_adaptive_balloon"
+	@echo "... balloon3"
 	@echo "... balloon2"
 	@echo "... balloon"
 	@echo "... cache_adaptive"
@@ -517,6 +599,9 @@ help:
 	@echo "... balloon2.o"
 	@echo "... balloon2.i"
 	@echo "... balloon2.s"
+	@echo "... balloon3.o"
+	@echo "... balloon3.i"
+	@echo "... balloon3.s"
 	@echo "... cache_adaptive.o"
 	@echo "... cache_adaptive.i"
 	@echo "... cache_adaptive.s"
@@ -538,6 +623,9 @@ help:
 	@echo "... non_cache_adaptive.o"
 	@echo "... non_cache_adaptive.i"
 	@echo "... non_cache_adaptive.s"
+	@echo "... non_cache_adaptive_balloon.o"
+	@echo "... non_cache_adaptive_balloon.i"
+	@echo "... non_cache_adaptive_balloon.s"
 .PHONY : help
 
 

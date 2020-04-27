@@ -2,12 +2,13 @@
 set -ex
 
 NUMRUNS=3
-NUMBALLOONS=5
+NUMBALLOONS=9
 SLEEP=5
-TOTALMEMORY=102000000
-TOTALMEMORY_MB=$((TOTALMEMORY/(1024*1024) ))
-declare -a matrixwidth=( 4000)
-declare -a startingmemory=( 10 )
+declare -a matrixwidth=( 1024 2048 3072 4096 5120 6144 7168 8192)
+declare -a startingmemory=( 10 10 10 10 10 10 10 10)
+TOTALMEMORY_MB=100
+TOTALMEMORY=$((TOTALMEMORY_MB*1024*1024))
+MATRIXWIDTH=2048
 
 if [ $# -ne 1 ]
 then
@@ -44,34 +45,62 @@ cmake ./build && make --directory=./build
 
 for (( index=0; index<=${#matrixwidth[@]}-1; index++ ));
 do
-  echo $index
+	echo $index
   MATRIXWIDTH=${matrixwidth[$index]}
-  STARTINGMEMORY=${startingmemory[$index]}
-  for i in `seq 1 $NUMRUNS`;
-  do
-    #run non-cache-adaptive on constant memory
-    ./cgroups.sh $1
-    ./build/mm_data $MATRIXWIDTH
-    sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
-		echo $TOTALMEMORY > /var/cgroups/$1/memory.limit_in_bytes
-		for j in `seq 1 $NUMBALLOONS`;
-		do
-			if [ ! -f "balloon_data$j" ]
-			then
-			  echo "First creating file for storing the balloon's data."
-			  dd if=/dev/urandom of="balloon_data$j" count=1000 bs=1048576
-			fi
+  STARTINGMEMORY_MB=${startingmemory[$index]}
+	#run cache-adaptive on constant memory
+	echo "Running cache adaptive on constant memory"
+	./cgroups.sh $1
+	./build/mm_data $MATRIXWIDTH
+	sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
+	echo $TOTALMEMORY > /var/cgroups/$1/memory.limit_in_bytes
+	for j in `seq 1 $NUMBALLOONS`;
+	do
+		cgexec -g memory:$1 ./build/balloon2 > "balloon_log.txt" 0 $TOTALMEMORY_MB $STARTINGMEMORY_MB 9 $j $MATRIXWIDTH &
+		#cgexec -g memory:$1 ./build/balloon3 > "balloon_log.txt" $j &
+	done
+	cgexec -g memory:$1 ./build/cache_adaptive_balloon 0 $MATRIXWIDTH $STARTINGMEMORY_MB $1
+	pkill -f balloon2
 
-		done
+	#run non-cache-adaptive on constant memory
+	echo "Running non cache adaptive on constant memory"
+	./cgroups.sh $1
+	./build/mm_data $MATRIXWIDTH
+	sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
+	echo $TOTALMEMORY > /var/cgroups/$1/memory.limit_in_bytes
+	for j in `seq 1 $NUMBALLOONS`;
+	do
+		cgexec -g memory:$1 ./build/balloon2 > "balloon_log.txt" 0 $TOTALMEMORY_MB $STARTINGMEMORY_MB 9 $j $MATRIXWIDTH &
+		#cgexec -g memory:$1 ./build/balloon3 > "balloon_log.txt" $j &
+	done
+	cgexec -g memory:$1 ./build/non_cache_adaptive_balloon 1 $MATRIXWIDTH $STARTINGMEMORY_MB $1
+	pkill -f balloon2
 
-		for j in `seq 1 $NUMBALLOONS`;
-		do
-			cgexec -g memory:$1 ./build/balloon > "balloon_log$j.txt" 0 100 30 $NUMBALLOONS $j  &
-		done
-    cgexec -g memory:$1 ./build/cache_adaptive_balloon 0 $MATRIXWIDTH $TOTALMEMORY $1
-    echo "Done with cache-adaptive constant memory"
-		pkill -f balloon
+	#run cache-adaptive on worst-case memory
+	echo "Running cache adaptive on worst-case memory"
+	./cgroups.sh $1
+	./build/mm_data $MATRIXWIDTH
+	sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
+	echo $TOTALMEMORY > /var/cgroups/$1/memory.limit_in_bytes
+	for j in `seq 1 $NUMBALLOONS`;
+	do
+		cgexec -g memory:$1 ./build/balloon2 > "balloon_log.txt" 1 $TOTALMEMORY_MB $STARTINGMEMORY_MB 9 $j $MATRIXWIDTH &
+		#cgexec -g memory:$1 ./build/balloon3 > "balloon_log.txt" $j &
+	done
+	cgexec -g memory:$1 ./build/cache_adaptive_balloon 1 $MATRIXWIDTH $STARTINGMEMORY_MB $1
+	pkill -f balloon2
 
-
-  done
+	#run non-cache-adaptive on worst-case memory
+	echo "Running non cache adaptive on worst-case memory"
+	./cgroups.sh $1
+	./build/mm_data $MATRIXWIDTH
+	sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches; echo 0 > /proc/sys/vm/vfs_cache_pressure"
+	echo $TOTALMEMORY > /var/cgroups/$1/memory.limit_in_bytes
+	for j in `seq 1 $NUMBALLOONS`;
+	do
+		cgexec -g memory:$1 ./build/balloon2 > "balloon_log.txt" 1 $TOTALMEMORY_MB $STARTINGMEMORY_MB 9 $j $MATRIXWIDTH &
+		#cgexec -g memory:$1 ./build/balloon3 > "balloon_log.txt" $j &
+	done
+	cgexec -g memory:$1 ./build/non_cache_adaptive_balloon 3 $MATRIXWIDTH $STARTINGMEMORY_MB $1
+	pkill -f balloon2
 done

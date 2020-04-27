@@ -59,7 +59,15 @@ namespace CacheHelper{
     }
   }
 
+  unsigned long print_rss_value(){
+    std::string command = std::string("cat /proc/") + std::to_string(getpid()) + std::string("/stat");
+    std::string command_output = exec(command);
+    std::vector<std::string> splitted_output = split(command_output, " ");
+    return std::stol(splitted_output[23])*4096;
+  }
+
   //limits the memory, memory in bytes and
+
   void limit_memory(unsigned long long memory_in_bytes, const char* string2){
     //std::cout << "Entering limit memory function\n";
     std::string string = std::to_string(memory_in_bytes);
@@ -74,6 +82,7 @@ namespace CacheHelper{
     }
     //std::cout << "Limiting cgroup memory: " << string << " bytes\n";
   }
+
 
 
 
