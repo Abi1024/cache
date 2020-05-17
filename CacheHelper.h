@@ -8,7 +8,7 @@
 
 
 namespace CacheHelper{
-  int MM_BASE_SIZE = 128;
+  int MM_BASE_SIZE = 4;
   std::string exec(std::string cmd) {
       std::array<char, 128> buffer;
       std::string result;
